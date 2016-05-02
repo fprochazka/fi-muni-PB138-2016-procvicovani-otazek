@@ -16,7 +16,7 @@ HOST: https://drill.fprochazka.com/
             }
         ]
 
-### Create a New Question [POST]
+### Create a New Drill [POST]
 
 
 + Request (application/json)
@@ -36,4 +36,27 @@ HOST: https://drill.fprochazka.com/
             {
                 "id": "123",
                 "name": "PB138"
+            }
+            
+## Question Collection [/drill/{drill_id}/question]
+
+### Add New Qustion to Drill [POST]
+
++ Request (application/json)
+
+        {
+            "text": "Ako sa mas??"
+            "answers": [ { "text": "Super!", "correct": true }, 
+                         { "text": "Fakt naprd...", "correct": false } ]
+        }
+        
++ Response 201 (application/json)
+
+    + Body
+        
+            {
+                "id": 44,
+                "text": "Ako sa mas??"
+                "answers": [ { "text": "Super!", "correct": true }, 
+                             { "text": "Fakt naprd...", "correct": false } ]
             }
