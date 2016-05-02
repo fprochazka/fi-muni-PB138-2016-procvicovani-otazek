@@ -5,7 +5,7 @@ HOST: https://drill.fprochazka.com/
 
 ## Drills Collection [/drill]
 
-### List All Drills [GET]
+### List all drills [GET]
 
 + Response 200 (application/json)
 
@@ -16,7 +16,7 @@ HOST: https://drill.fprochazka.com/
             }
         ]
 
-### Create a New Drill [POST]
+### Create new drill [POST]
 
 
 + Request (application/json)
@@ -38,12 +38,81 @@ HOST: https://drill.fprochazka.com/
                 "name": "PB138"
             }
             
-## Question Collection [/drill/{drill_id}/question]
+## Questions Collection [/drill/{drill_id}/question]
 
 + Parameters
     + drill_id (number) - ID of the relevant drill
 
-### Add New Question to Drill [POST]
+### List questions in drill [GET]
+
++ Response 200 (application/json)
+
+    + Body
+        
+            [
+                {
+                    "id": 44,
+                    "text": "Ako sa mas??"
+                    "answers": [
+                        { "text": "Super!", "correct": true },
+                        { "text": "Fakt naprd...", "correct": false }
+                    ]
+                }
+            ]
+
+### Add new question to drill [POST]
+
++ Request (application/json)
+            
+    + Body
+
+            {
+                "text": "Ako sa mas??"
+                "answers": [
+                    { "text": "Super!", "correct": true },
+                    { "text": "Fakt naprd...", "correct": false }
+                ]
+            }
+        
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /drill/123/question/44
+
+    + Body
+        
+            {
+                "id": 44,
+                "text": "Ako sa mas??"
+                "answers": [
+                    { "text": "Super!", "correct": true },
+                    { "text": "Fakt naprd...", "correct": false }
+                ]
+            }
+
+## Question [/drill/{drill_id}/question/{question_id}]
+
++ Parameters
+    + drill_id (number) - ID of the relevant drill
+    + question_id (number) - ID of the question
+
+### Read question [GET]
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": 44,
+                "text": "Ako sa mas??"
+                "answers": [
+                    { "text": "Super!", "correct": true },
+                    { "text": "Fakt naprd...", "correct": false }
+                ]
+            }
+
+### Update question [PUT]
 
 + Request (application/json)
 
@@ -54,8 +123,8 @@ HOST: https://drill.fprochazka.com/
                 { "text": "Fakt naprd...", "correct": false }
             ]
         }
-        
-+ Response 201 (application/json)
+
++ Response 200 (application/json)
 
     + Body
         
