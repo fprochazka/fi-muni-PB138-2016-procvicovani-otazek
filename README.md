@@ -1,6 +1,7 @@
 # Projekt PB138: Procvičování otázek
 
 * [Wiki/Dokumentace](https://github.com/fprochazka/fi-muni-PB138-2016/wiki)
+* [API dokumentace](http://docs.fimunipb1382016.apiary.io/#)
 * [Důležité informace z organizace](https://github.com/fprochazka/fi-muni-PB138-2016/wiki/D%C5%AFle%C5%BEit%C3%A9-body-z-Organizace-p%C5%99edm%C4%9Btu-PB138)
 * __Vedení:__
   * RNDr. Adam Rambousek, Ph.D., učo 60380
