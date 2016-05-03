@@ -4,7 +4,7 @@ import del from 'del';
 import gulp from 'gulp';
 import webpackBuild from './src/webpack/build';
 
-gulp.task('clean', () => del('static/*'));
+gulp.task('clean', () => del('dist/*'));
 
 gulp.task('build-webpack', ['clean'], webpackBuild);
 

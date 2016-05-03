@@ -15,7 +15,7 @@ app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.
 app.use(webpackHotMiddleware(compiler));
 
 app.use(function (req, res) {
-	res.sendFile(constants.ABSOLUTE_BASE + '/index.html')
+	res.sendFile(constants.OUTPUT_DIR + '/index.html')
 });
 
 app.listen(port, function (error) {

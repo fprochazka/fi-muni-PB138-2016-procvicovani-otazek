@@ -1,6 +1,8 @@
 import autoprefixer from 'autoprefixer';
 import constants from './constants';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
@@ -28,18 +30,19 @@ export default function makeConfig(isDevelopment) {
 		cache: isDevelopment,
 		debug: isDevelopment,
 		devtool: isDevelopment ? devtools : '',
+		stats: {children: false},
 		entry: {
 			app: isDevelopment ? [
 				'webpack-hot-middleware/client',
-				'./index'
+				path.join(constants.SRC_DIR, 'index.js')
 			] : [
-				'./index'
+				path.join(constants.SRC_DIR, 'index.js')
 			]
 		},
 		output: {
-			path: path.join(constants.ABSOLUTE_BASE, 'static'),
-			filename: 'bundle.js',
-			publicPath: '/static/'
+			path: constants.OUTPUT_DIR,
+			filename: 'static/bundle.js',
+			publicPath: '/'
 		},
 		plugins: (() => {
 			const plugins = [
@@ -50,7 +53,16 @@ export default function makeConfig(isDevelopment) {
 						NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
 						SERVER_URL: JSON.stringify(process.env.SERVER_URL || '')
 					}
-				})
+				}),
+				new HtmlWebpackPlugin({
+					filename: 'index.html',
+					template: 'src/index.html',
+					inject: true,
+					hash: true
+				}),
+				new CopyWebpackPlugin([
+					{from: 'src/style/favicon', to: 'favicon'},
+				]),
 			];
 
 			if (isDevelopment) {
@@ -64,7 +76,7 @@ export default function makeConfig(isDevelopment) {
 				plugins.push(
 					// Render styles into separate cacheable file to prevent FOUC and
 					// optimize for critical rendering path.
-					new ExtractTextPlugin('style.css', {
+					new ExtractTextPlugin('static/style.css', {
 						allChunks: true
 					}),
 					new webpack.optimize.DedupePlugin(),
