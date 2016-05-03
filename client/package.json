@@ -48,6 +48,7 @@
     "babel-preset-stage-1": "^6.3.13",
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
+    "bootstrap": "^4.0.0-alpha.2",
     "concurrently": "^0.1.1",
     "css-loader": "^0.23.0",
     "del": "^2.1.0",
