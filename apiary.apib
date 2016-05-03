@@ -119,8 +119,9 @@ HOST: https://drill.fprochazka.com/
         {
             "text": "Ako sa mas??"
             "answers": [
-                { "text": "Super!", "correct": true },
-                { "text": "Fakt naprd...", "correct": false }
+                { "text": "Super!", "correct": false },
+                { "text": "Fakt naprd...", "correct": true },
+                { "text": "Idem na pivo.", "correct": true }
             ]
         }
 
@@ -132,7 +133,95 @@ HOST: https://drill.fprochazka.com/
                 "id": 44,
                 "text": "Ako sa mas??"
                 "answers": [
-                    { "text": "Super!", "correct": true },
-                    { "text": "Fakt naprd...", "correct": false }
+                    { "text": "Super!", "correct": false },
+                    { "text": "Fakt naprd...", "correct": true },
+                    { "text": "Idem na pivo.", "correct": true }
                 ]
             }
+            
+## Exam Collection [/user/{user_id}/exam]
+
++ Parameters
+
+    + user_id (number) - ID of relevant user
+    
+### Create new exam [POST]
+
++ Request (application/json)
+
+            {
+                "drill_id": "123"
+            }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /user/{user_id}/exam/1
+
+    + Body
+    
+            {
+                "id": 1,
+                "drill_id": 123,
+                "answers": [ 
+                    { "question_id": 44, "correct": 0, "incorrect": 0 }
+                ]
+            }
+            
+## Exam [/user/{user_id}/exam/{exam_id}]
+
++ Parameters
+
+    + user_id (number) - ID of relevant user
+    + exam_id (number) - ID of relevant exam
+
+### Get exam details [GET]
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": 1,
+                "drill_id": 123,
+                "answers": [ 
+                    { "question_id": 44, "correct": 0, "incorrect": 0 }
+                ]
+            }
+
+## Answering question [/user/{user_id}/exam/{exam_id}/question/{question_id}]
+
++ Parameters
+
+    + user_id (number) - ID of relevant user
+    + exam_id (number) - ID of relevant exam
+    + question_id (number) - ID of relevant question
+
+### Get question in exam [GET]
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": 44,
+                "text": "Ako sa mas??"
+                "answers": [
+                    { "text": "Super!", "correct": false },
+                    { "text": "Fakt naprd...", "correct": true },
+                    { "text": "Idem na pivo.", "correct": true }
+                ]
+            }
+            
+### Answer question in exam [POST]
+
++ Request (application/json)
+
+            [
+                { "checked": true },
+                { "checked": false },
+                { "checked": false }
+            ]
+
++ Response 201 (application/json)
