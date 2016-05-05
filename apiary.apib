@@ -18,7 +18,6 @@ HOST: https://drill.fprochazka.com/
 
 ### Create new drill [POST]
 
-
 + Request (application/json)
 
         {
@@ -37,7 +36,7 @@ HOST: https://drill.fprochazka.com/
                 "id": "123",
                 "name": "PB138"
             }
-            
+
 ## Questions Collection [/drill/{drill_id}/question]
 
 + Parameters
@@ -169,6 +168,24 @@ HOST: https://drill.fprochazka.com/
                 ]
             }
             
+### List all exams [GET]
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "id": 1,
+                    "drill_id": 123,
+                    "answers": [ 
+                        { "question_id": 44, "correct": 0, "incorrect": 0 }
+                    ]
+                }
+            ]
+
+
+            
 ## Exam [/user/{user_id}/exam/{exam_id}]
 
 + Parameters
@@ -189,6 +206,23 @@ HOST: https://drill.fprochazka.com/
                     { "question_id": 44, "correct": 0, "incorrect": 0 }
                 ]
             }
+            
+### Update exam with answers [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "question_id": 44,
+                "correct": true
+            }, 
+            {
+                "question_id": 12,
+                "correct": false
+            }
+        ]
+        
++ Response 200 (application/json)
 
 ## Answering question [/user/{user_id}/exam/{exam_id}/question/{question_id}]
 
@@ -213,15 +247,3 @@ HOST: https://drill.fprochazka.com/
                     { "text": "Idem na pivo.", "correct": true }
                 ]
             }
-            
-### Answer question in exam [POST]
-
-+ Request (application/json)
-
-            [
-                { "checked": true },
-                { "checked": false },
-                { "checked": false }
-            ]
-
-+ Response 201 (application/json)
