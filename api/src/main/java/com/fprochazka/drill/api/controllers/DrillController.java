@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.fprochazka.drill.api.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
