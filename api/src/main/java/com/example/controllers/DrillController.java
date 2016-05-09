@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by viki on 05.05.16.
@@ -35,7 +36,7 @@ public class DrillController {
      * @return drill - object of type Drill with given id, null if drill with the id does not exist
      */
     @RequestMapping(value="/drill", method= RequestMethod.POST)
-    public Object getDrillById(@RequestParam(value="drill_id") Long drillId ) {
+    public Object getDrillById(@RequestParam(value="drill_id") UUID drillId ) {
         // call model layer to get drill with given layer, do not check if drillId is null
         // if returned drill is null, give proper response to client, otherwise return given drill
         return null;
