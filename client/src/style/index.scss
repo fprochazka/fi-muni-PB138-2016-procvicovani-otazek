@@ -50,3 +50,6 @@ $enable-flex: true;
 @import "~bootstrap/scss/utilities-background";
 @import "~bootstrap/scss/utilities-spacing";
 @import "~bootstrap/scss/utilities-responsive";
+
+$fa-font-path: "~font-awesome/fonts/";
+@import "~font-awesome/scss/font-awesome.scss";

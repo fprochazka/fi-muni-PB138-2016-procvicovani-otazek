@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.5.0",
+    "font-awesome": "^4.6.1",
     "humps": "^0.6.0",
     "isomorphic-fetch": "^2.1.1",
     "lodash": "^4.0.0",
