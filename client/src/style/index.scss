@@ -53,3 +53,360 @@ $enable-flex: true;
 
 $fa-font-path: "~font-awesome/fonts/";
 @import "~font-awesome/scss/font-awesome.scss";
+
+/**
+ * Custom styles
+ */
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	&.drill {
+		margin-bottom: 60px;
+		background-color: #efeff4 !important;
+	}
+
+	&.main,
+	&.editor {
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+	}
+}
+
+/*!* Everything but the jumbotron gets side spacing for mobile first views *!*/
+.header,
+.drills,
+.footer {
+	padding-right: 1rem;
+	padding-left: 1rem;
+
+	@media screen and (min-width: 48em) {
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+
+/*!* Custom page footer *!*/
+.footer {
+	padding-top: 1.5rem;
+	color: #777;
+	border-top: .05rem solid #e5e5e5;
+}
+
+/*!* Custom page header *!*/
+.header {
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+	border-bottom: .05rem solid #e5e5e5;
+
+	/*!* Make the masthead heading the same height as the navigation *!*/
+	h3 {
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: 3rem;
+
+		&.text-muted a {
+			color: #818a91
+		}
+	}
+
+	@media screen and (min-width: 48em) {
+		margin-bottom: 2rem;
+	}
+}
+
+/*!* Supporting marketing content *!*/
+.drills-overview {
+	margin: 3rem 0;
+	/*column-gap: 20px;*/
+
+	.drill-columns {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-flow: row wrap;
+		align-content: stretch;
+
+		.card {
+			width: 100%;
+			margin: 0 5px 10px 5px;
+
+			.open,
+			.edit {
+				float: right;
+				margin-top: -6px;
+				margin-left: 5px;
+			}
+		}
+
+		@media (min-width: 768px) {
+			.card {
+				width: 48%;
+			}
+		}
+
+		@media (min-width: 992px) {
+			.card {
+				width: 31%;
+			}
+		}
+	}
+
+	p + h4 {
+		margin-top: 1.5rem;
+	}
+}
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 40px auto 60px auto;
+
+	.form-signin-heading {
+		margin-bottom: 10px;
+	}
+
+	.form-control {
+		position: relative;
+		height: auto;
+		box-sizing: border-box;
+		padding: 10px;
+		font-size: 16px;
+	}
+
+	.form-control:focus {
+		z-index: 2;
+	}
+
+	input[type="email"] {
+		margin-bottom: -1px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	input[type="password"] {
+		margin-bottom: 10px;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+
+.form-register {
+	max-width: 440px;
+	padding: 15px;
+	margin: 40px auto 60px auto;
+
+	.form-register-heading {
+		margin-bottom: 15px;
+	}
+}
+
+.footer-fixed-fluid {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	line-height: 60px; /* Vertically center the text there */
+	background-color: #f7f7f8;
+	border-top: 1px solid #c4c4c4;
+}
+
+.drill {
+	.question {
+		margin: 20px 15px 10px;
+		flex-grow: 1;
+	}
+
+	ul.answers {
+		flex-grow: 1;
+		background: white;
+		border-top: 1px solid #c4c4c4;
+		border-bottom: 1px solid #c4c4c4;
+		margin: 0 0 10px 0;
+		padding: 0;
+
+		li {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			label {
+				box-sizing: border-box;
+				display: flex;
+				cursor: pointer;
+				min-height: 44px;
+				padding: 0;
+				margin: 0;
+				align-items: center;
+				position: relative;
+
+				user-select: none;
+
+				&:active {
+					transition-duration: 0ms;
+					background-color: #d9d9d9;
+				}
+
+				.icon-checkbox {
+					width: 22px;
+					height: 22px;
+					position: relative;
+					border-radius: 22px;
+					border: 1px solid #c7c7cc;
+					box-sizing: border-box;
+					display: inline-block;
+					vertical-align: middle;
+					background-size: 100% auto;
+					background-position: center;
+					background-repeat: no-repeat;
+					font-style: normal;
+					cursor: pointer;
+					margin-left: 12px;
+
+					&:after {
+						content: ' ';
+						position: absolute;
+						left: 50%;
+						margin-left: -6px;
+						top: 50%;
+						margin-top: -4px;
+						width: 12px;
+						height: 9px;
+					}
+				}
+
+				input[type=checkbox]:checked + .icon-checkbox {
+					border: none;
+					background-color: #007aff;
+				}
+
+				input[type=checkbox]:checked + .icon-checkbox:after {
+					background: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 12 9' xml:space='preserve'><polygon fill='%23ffffff' points='12,0.7 11.3,0 3.9,7.4 0.7,4.2 0,4.9 3.9,8.8 3.9,8.8 3.9,8.8 '/></svg>") no-repeat center;
+					background-size: 12px 9px;
+				}
+			}
+
+			.text {
+				display: block;
+				width: 100%;
+				min-height: 44px;
+				font-size: 15px;
+				line-height: 21px;
+				padding: 12px 0 0 3px;
+				margin-left: 12px;
+				border-bottom: 1px solid #c8c7cc;
+			}
+
+			&:last-child .text {
+				border-bottom: none;
+			}
+
+			input[type=checkbox] {
+				display: none;
+			}
+		}
+	}
+
+	.controls {
+		flex-grow: 1;
+		text-align: center;
+		margin: 15px 0;
+
+		.btn {
+			width: 46%;
+			margin: 0 5px;
+		}
+	}
+}
+
+.editor {
+	.bottom-actions {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+	}
+}
+
+#questions {
+	.panel-heading {
+		display: block;
+		width: 100%;
+		max-width: 100%;
+
+		.panel-title {
+			display: flex;
+			max-width: 100%;
+
+			a:link,
+			a:hover,
+			a:active,
+			a:visited {
+				outline: none;
+				text-decoration: none;
+			}
+
+			a {
+				flex-shrink: 1;
+				flex-grow: 1;
+				max-width: 100%;
+				box-sizing: border-box;
+				padding: 7px 20px 6px 10px;
+				border-left: 4px solid darkgreen;
+				background-color: #eceeef;
+				color: black;
+			}
+
+			a:hover {
+				background-color: #dddfe0;
+			}
+		}
+	}
+
+	.panel-collapse {
+		padding: 0 10px;
+	}
+
+	form {
+		position: relative;
+
+		.question {
+			padding-top: 25px;
+		}
+	}
+
+	.question-actions {
+		position: absolute;
+		right: 0;
+		top: 2px;
+	}
+
+	.answers {
+		margin-bottom: 25px;
+
+		.row {
+			margin-bottom: 15px;
+		}
+
+		.is-correct-checkbox {
+			text-align: right;
+			padding-top: 6px;
+
+			-webkit-user-select: none;
+			user-select: none;
+		}
+
+		.delete-answer a {
+			color: darkred;
+			display: inline-block;
+			padding-top: 3px;
+		}
+
+		.add-answer a {
+			color: #5cb85c;
+		}
+	}
+}
