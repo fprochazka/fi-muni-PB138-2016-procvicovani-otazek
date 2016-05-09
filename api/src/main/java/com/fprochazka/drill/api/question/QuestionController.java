@@ -1,9 +1,7 @@
 package com.fprochazka.drill.api.question;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +49,8 @@ public class QuestionController {
      * @param question - JSON object parsed to suitable Java object, preferably Question
      */
     @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.PUT)
-    public void updateQuestion(Model question) {
+    public @ResponseBody QuestionRequest updateQuestion(@RequestBody QuestionRequest question) {
         // find question with given ID and update it
+        return question;
     }
 }
