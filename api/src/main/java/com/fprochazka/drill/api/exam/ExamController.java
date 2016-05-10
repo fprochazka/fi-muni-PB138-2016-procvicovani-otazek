@@ -1,9 +1,7 @@
 package com.fprochazka.drill.api.exam;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -17,7 +15,7 @@ public class ExamController {
      * @param drillId - ID of drill we want to create exam for
      */
     @RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
-    public void createExam(UUID drillId) {
+    public void createExam(@RequestBody UUID drillId) {
 
     }
 
@@ -27,7 +25,7 @@ public class ExamController {
      * @return exams - ArrayList of all exams of given user.
      */
     @RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.GET)
-    public Collection<Object> getAllExams() {
+    public @ResponseBody Collection<Object> getAllExams() {
         return null;
     }
 
@@ -37,7 +35,7 @@ public class ExamController {
      * @return exam - of type StudentExam, identified by examId
      */
     @RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
-    public Object getExam() {
+    public @ResponseBody Object getExam() {
         return null;
     }
 
@@ -47,7 +45,7 @@ public class ExamController {
      * @param answers - list of JSON objects, saying wheter user's answer was correct
      */
     @RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.PUT)
-    public void updateExam(Collection<Model> answers) {
+    public void updateExam(@RequestBody Collection<Object> answers) {
         // Find exam in database, then for each answer in list add counter whether the answer was correct or not
     }
 }
