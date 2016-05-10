@@ -23,7 +23,7 @@ public class XStreamConverter {
 		System.out.println(question.toString());
 	}
 
-	void DTOToXml() {
+	void DTOToJSON() {
 		XStream xstream = new XStream(new JsonHierarchicalStreamDriver() {
 
 			public HierarchicalStreamWriter createWriter(Writer writer) {
