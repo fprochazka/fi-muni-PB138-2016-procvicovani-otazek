@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="drill" type="drillType"/>
+
+	<xs:complexType name="drillType">
+		<xs:sequence>
+			<xs:element type="xs:string" name="subject"/>
+			<xs:element type="xs:string" name="description"/>
+			<xs:element type="questionsType" name="questions"/>
+		</xs:sequence>
+		<xs:attribute type="uuid" name="id"/>
+	</xs:complexType>
+
+	<xs:complexType name="questionsType">
+		<xs:sequence>
+			<xs:element type="questionType" name="question"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="questionType">
+		<xs:sequence>
+			<xs:element type="xs:string" name="title"/>
+			<xs:element type="answersType" name="answers"/>
+		</xs:sequence>
+		<xs:attribute type="uuid" name="id"/>
+	</xs:complexType>
+
+	<xs:complexType name="answersType">
+		<xs:sequence>
+			<xs:element type="answerType" name="answer" maxOccurs="unbounded" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="answerType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute type="xs:boolean" name="correct" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="uuid">
+		<xs:restriction base="xs:string">
+			<xs:length value="36"/>
+			<xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

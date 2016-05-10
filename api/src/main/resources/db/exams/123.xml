@@ -1,0 +1,12 @@
+<studentExam id="123">
+    <drills>
+        <drill id="1">
+            <questions>
+                <question id="1">
+                    <correct>10</correct>
+                    <wrong>10</wrong>
+                </question>
+            </questions>
+        </drill>
+    </drills>
+</studentExam>

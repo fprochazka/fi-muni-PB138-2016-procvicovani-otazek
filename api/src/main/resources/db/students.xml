@@ -1,0 +1,7 @@
+<students>
+	<student id="">
+		<uco>123</uco>
+		<email>student@gmail.com</email>
+		<passwordHash>df654s5b4</passwordHash>
+	</student>
+</students>

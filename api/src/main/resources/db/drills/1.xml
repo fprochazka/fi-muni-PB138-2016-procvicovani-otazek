@@ -1,0 +1,15 @@
+<drill id="1">
+	<subject>PB138</subject>
+	<description>Drill k predmetu PB138</description>
+	<questions>
+		<question id="1">
+			<title>otazka1?</title>
+			<answers>
+				<answer correct="true">aaa</answer>
+				<answer correct="false">bbb</answer>
+				<answer correct="false">ccc</answer>
+				<answer correct="false">ddd</answer>
+			</answers>
+		</question>
+	</questions>
+</drill>
