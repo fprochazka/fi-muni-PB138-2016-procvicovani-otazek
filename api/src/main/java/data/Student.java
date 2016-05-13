@@ -1,5 +1,9 @@
 package data;
 
+import data.Exams.Exam;
+
+import java.util.List;
+
 /**
  * Created by Michaela Bamburová on 13.05.2016.
  */
@@ -9,19 +13,22 @@ public class Student {
 	private final int uco;
 	private final String email;
 	private final String passwordHash;
-	private final String studentExamId;
+	private final List<Exam> exams;
 
-
-	public Student(String studentId, int uco, String email, String passwordHash, String studentExamId) {
+	public Student(String studentId, int uco, String email, String passwordHash, List<Exam> exams) {
 		this.studentId = studentId;
 		this.uco = uco;
 		this.email = email;
 		this.passwordHash = passwordHash;
-		this.studentExamId = studentExamId;
+		this.exams = exams;
 	}
 
 	public String getStudentId() {
 		return studentId;
+	}
+
+	public int getUco() {
+		return uco;
 	}
 
 	public String getEmail() {
@@ -32,12 +39,8 @@ public class Student {
 		return passwordHash;
 	}
 
-	public int getUco() {
-		return uco;
-	}
-
-	public String getStudentExamId() {
-		return studentExamId;
+	public List<Exam> getExams() {
+		return exams;
 	}
 
 	@Override
@@ -47,7 +50,7 @@ public class Student {
 			", uco=" + uco +
 			", email='" + email + '\'' +
 			", passwordHash='" + passwordHash + '\'' +
-			", studentExamId='" + studentExamId + '\'' +
+			", exams=" + exams +
 			'}';
 	}
 
@@ -58,22 +61,12 @@ public class Student {
 
 		Student student = (Student) o;
 
-		if (uco != student.uco) return false;
-		if (studentId != null ? !studentId.equals(student.studentId) : student.studentId != null) return false;
-		if (email != null ? !email.equals(student.email) : student.email != null) return false;
-		if (passwordHash != null ? !passwordHash.equals(student.passwordHash) : student.passwordHash != null)
-			return false;
-		return studentExamId != null ? studentExamId.equals(student.studentExamId) : student.studentExamId == null;
+		return studentId != null ? studentId.equals(student.studentId) : student.studentId == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = studentId != null ? studentId.hashCode() : 0;
-		result = 31 * result + uco;
-		result = 31 * result + (email != null ? email.hashCode() : 0);
-		result = 31 * result + (passwordHash != null ? passwordHash.hashCode() : 0);
-		result = 31 * result + (studentExamId != null ? studentExamId.hashCode() : 0);
-		return result;
+		return studentId != null ? studentId.hashCode() : 0;
 	}
 }

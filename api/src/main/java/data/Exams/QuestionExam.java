@@ -6,11 +6,13 @@ package data.Exams;
 public class QuestionExam {
 
 	private final String questionExamId;
+	private final String questionId;
 	private final int numCorrect;
 	private final int numWrong;
 
-	public QuestionExam(String questionExamId, int numCorrect, int numWrong) {
+	public QuestionExam(String questionExamId, String questionId, int numCorrect, int numWrong) {
 		this.questionExamId = questionExamId;
+		this.questionId = questionId;
 		this.numCorrect = numCorrect;
 		this.numWrong = numWrong;
 	}
@@ -19,18 +21,23 @@ public class QuestionExam {
 		return questionExamId;
 	}
 
+	public int getNumWrong() {
+		return numWrong;
+	}
+
 	public int getNumCorrect() {
 		return numCorrect;
 	}
 
-	public int getNumWrong() {
-		return numWrong;
+	public String getQuestionId() {
+		return questionId;
 	}
 
 	@Override
 	public String toString() {
 		return "QuestionExam{" +
 			"questionExamId='" + questionExamId + '\'' +
+			", questionId='" + questionId + '\'' +
 			", numCorrect=" + numCorrect +
 			", numWrong=" + numWrong +
 			'}';
@@ -43,17 +50,12 @@ public class QuestionExam {
 
 		QuestionExam that = (QuestionExam) o;
 
-		if (numCorrect != that.numCorrect) return false;
-		if (numWrong != that.numWrong) return false;
 		return questionExamId != null ? questionExamId.equals(that.questionExamId) : that.questionExamId == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = questionExamId != null ? questionExamId.hashCode() : 0;
-		result = 31 * result + numCorrect;
-		result = 31 * result + numWrong;
-		return result;
+		return questionExamId != null ? questionExamId.hashCode() : 0;
 	}
 }
