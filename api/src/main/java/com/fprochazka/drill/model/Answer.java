@@ -1,4 +1,4 @@
-package data.Drills;
+package com.fprochazka.drill.model;
 
 /**
  * Created by Michaela Bamburová on 13.05.2016.

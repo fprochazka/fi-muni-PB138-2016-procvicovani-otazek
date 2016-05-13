@@ -1,4 +1,4 @@
-package data.Exams;
+package com.fprochazka.drill.model;
 
 import java.util.UUID;
 
