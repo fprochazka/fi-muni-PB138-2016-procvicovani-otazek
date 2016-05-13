@@ -1,23 +1,25 @@
 package data.Exams;
 
+import java.util.UUID;
+
 /**
  * Created by Michaela Bamburová on 13.05.2016.
  */
 public class QuestionExam {
 
-	private final String questionExamId;
-	private final String questionId;
+	private final UUID questionExamId;
+	private final UUID questionId;
 	private final int numCorrect;
 	private final int numWrong;
 
-	public QuestionExam(String questionExamId, String questionId, int numCorrect, int numWrong) {
-		this.questionExamId = questionExamId;
+	public QuestionExam(UUID questionId, int numCorrect, int numWrong) {
+		this.questionExamId = UUID.randomUUID();
 		this.questionId = questionId;
 		this.numCorrect = numCorrect;
 		this.numWrong = numWrong;
 	}
 
-	public String getQuestionExamId() {
+	public UUID getQuestionExamId() {
 		return questionExamId;
 	}
 
@@ -29,7 +31,7 @@ public class QuestionExam {
 		return numCorrect;
 	}
 
-	public String getQuestionId() {
+	public UUID getQuestionId() {
 		return questionId;
 	}
 

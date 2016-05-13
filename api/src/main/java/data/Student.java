@@ -3,27 +3,28 @@ package data;
 import data.Exams.Exam;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Michaela Bamburová on 13.05.2016.
  */
 public class Student {
 
-	private final String studentId;
+	private final UUID studentId;
 	private final int uco;
 	private final String email;
 	private final String passwordHash;
 	private final List<Exam> exams;
 
-	public Student(String studentId, int uco, String email, String passwordHash, List<Exam> exams) {
-		this.studentId = studentId;
+	public Student(int uco, String email, String passwordHash, List<Exam> exams) {
+		this.studentId = UUID.randomUUID();
 		this.uco = uco;
 		this.email = email;
 		this.passwordHash = passwordHash;
 		this.exams = exams;
 	}
 
-	public String getStudentId() {
+	public UUID getStudentId() {
 		return studentId;
 	}
 

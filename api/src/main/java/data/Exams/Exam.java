@@ -1,24 +1,25 @@
 package data.Exams;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Michaela Bamburová on 13.05.2016.
  */
 public class Exam {
 
-	private final String examId;
-	private final String drillId;
+	private final UUID examId;
+	private final UUID drillId;
 	private final List<QuestionExam> questionExams;
 
 
-	public Exam(String examId, String drillId, List<QuestionExam> questionExams) {
-		this.examId = examId;
+	public Exam(UUID drillId, List<QuestionExam> questionExams) {
+		this.examId = UUID.randomUUID();
 		this.drillId = drillId;
 		this.questionExams = questionExams;
 	}
 
-	public String getDrillId() {
+	public UUID getDrillId() {
 		return drillId;
 	}
 
@@ -26,7 +27,7 @@ public class Exam {
 		return questionExams;
 	}
 
-	public String getExamId() {
+	public UUID getExamId() {
 		return examId;
 	}
 

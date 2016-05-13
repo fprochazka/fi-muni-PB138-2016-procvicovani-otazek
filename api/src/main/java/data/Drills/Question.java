@@ -1,23 +1,24 @@
 package data.Drills;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Michaela Bamburová on 13.05.2016.
  */
 public class Question {
 
-	private final String questionId;
+	private final UUID questionId;
 	private final String title;
 	private final List<Answer> answers;
 
-	public Question(String questionId, String title, List<Answer> answers) {
-		this.questionId = questionId;
+	public Question(String title, List<Answer> answers) {
+		this.questionId = UUID.randomUUID();
 		this.title = title;
 		this.answers = answers;
 	}
 
-	public String getQuestionId() {
+	public UUID getQuestionId() {
 		return questionId;
 	}
 
