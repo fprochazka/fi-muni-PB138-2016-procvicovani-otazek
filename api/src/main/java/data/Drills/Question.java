@@ -45,17 +45,12 @@ public class Question {
 
 		Question question = (Question) o;
 
-		if (questionId != null ? !questionId.equals(question.questionId) : question.questionId != null) return false;
-		if (title != null ? !title.equals(question.title) : question.title != null) return false;
-		return answers != null ? answers.equals(question.answers) : question.answers == null;
+		return questionId != null ? questionId.equals(question.questionId) : question.questionId == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = questionId != null ? questionId.hashCode() : 0;
-		result = 31 * result + (title != null ? title.hashCode() : 0);
-		result = 31 * result + (answers != null ? answers.hashCode() : 0);
-		return result;
+		return questionId != null ? questionId.hashCode() : 0;
 	}
 }
