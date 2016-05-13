@@ -53,19 +53,12 @@ public class Drill {
 
 		Drill drill = (Drill) o;
 
-		if (drillId != null ? !drillId.equals(drill.drillId) : drill.drillId != null) return false;
-		if (subject != null ? !subject.equals(drill.subject) : drill.subject != null) return false;
-		if (description != null ? !description.equals(drill.description) : drill.description != null) return false;
-		return questions != null ? questions.equals(drill.questions) : drill.questions == null;
+		return drillId != null ? drillId.equals(drill.drillId) : drill.drillId == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = drillId != null ? drillId.hashCode() : 0;
-		result = 31 * result + (subject != null ? subject.hashCode() : 0);
-		result = 31 * result + (description != null ? description.hashCode() : 0);
-		result = 31 * result + (questions != null ? questions.hashCode() : 0);
-		return result;
+		return drillId != null ? drillId.hashCode() : 0;
 	}
 }
