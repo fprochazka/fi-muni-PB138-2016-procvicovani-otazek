@@ -8,18 +8,18 @@ import java.util.UUID;
  */
 public class Question {
 
-	private final UUID questionId;
+	private final UUID id;
 	private final String title;
 	private final List<Answer> answers;
 
 	public Question(String title, List<Answer> answers) {
-		this.questionId = UUID.randomUUID();
+		this.id = UUID.randomUUID();
 		this.title = title;
 		this.answers = answers;
 	}
 
-	public UUID getQuestionId() {
-		return questionId;
+	public UUID getId() {
+		return id;
 	}
 
 	public String getTitle() {
@@ -33,7 +33,7 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question{" +
-			"questionId='" + questionId + '\'' +
+			"id='" + id + '\'' +
 			", title='" + title + '\'' +
 			", answers=" + answers +
 			'}';
@@ -46,12 +46,12 @@ public class Question {
 
 		Question question = (Question) o;
 
-		return questionId != null ? questionId.equals(question.questionId) : question.questionId == null;
+		return id != null ? id.equals(question.id) : question.id == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		return questionId != null ? questionId.hashCode() : 0;
+		return id != null ? id.hashCode() : 0;
 	}
 }

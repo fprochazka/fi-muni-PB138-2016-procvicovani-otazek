@@ -8,13 +8,13 @@ import java.util.UUID;
  */
 public class Exam {
 
-	private final UUID examId;
+	private final UUID id;
 	private final UUID drillId;
 	private final List<QuestionExam> questionExams;
 
 
 	public Exam(UUID drillId, List<QuestionExam> questionExams) {
-		this.examId = UUID.randomUUID();
+		this.id = UUID.randomUUID();
 		this.drillId = drillId;
 		this.questionExams = questionExams;
 	}
@@ -27,14 +27,14 @@ public class Exam {
 		return questionExams;
 	}
 
-	public UUID getExamId() {
-		return examId;
+	public UUID getId() {
+		return id;
 	}
 
 	@Override
 	public String toString() {
 		return "Exam{" +
-			"examId='" + examId + '\'' +
+			"id='" + id + '\'' +
 			", drillId='" + drillId + '\'' +
 			", questionExams=" + questionExams +
 			'}';
@@ -47,12 +47,12 @@ public class Exam {
 
 		Exam exam = (Exam) o;
 
-		return examId != null ? examId.equals(exam.examId) : exam.examId == null;
+		return id != null ? id.equals(exam.id) : exam.id == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		return examId != null ? examId.hashCode() : 0;
+		return id != null ? id.hashCode() : 0;
 	}
 }

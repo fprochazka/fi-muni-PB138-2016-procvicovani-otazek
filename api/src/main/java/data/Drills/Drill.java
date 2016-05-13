@@ -8,13 +8,13 @@ import java.util.UUID;
  */
 public class Drill {
 
-	private final UUID drillId;
+	private final UUID id;
 	private final String subject;
 	private final String description;
 	private final List<Question> questions;
 
 	public Drill(String subject, String description, List<Question> questions) {
-		this.drillId = UUID.randomUUID();
+		this.id = UUID.randomUUID();
 		this.subject = subject;
 		this.description = description;
 		this.questions = questions;
@@ -32,14 +32,14 @@ public class Drill {
 		return subject;
 	}
 
-	public UUID getDrillId() {
-		return drillId;
+	public UUID getId() {
+		return id;
 	}
 
 	@Override
 	public String toString() {
 		return "Drill{" +
-			"drillId=" + drillId +
+			"id=" + id +
 			", subject='" + subject + '\'' +
 			", description='" + description + '\'' +
 			", questions=" + questions +
@@ -53,12 +53,12 @@ public class Drill {
 
 		Drill drill = (Drill) o;
 
-		return drillId != null ? drillId.equals(drill.drillId) : drill.drillId == null;
+		return id != null ? id.equals(drill.id) : drill.id == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		return drillId != null ? drillId.hashCode() : 0;
+		return id != null ? id.hashCode() : 0;
 	}
 }

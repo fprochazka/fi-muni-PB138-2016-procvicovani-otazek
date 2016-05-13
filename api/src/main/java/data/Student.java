@@ -10,22 +10,22 @@ import java.util.UUID;
  */
 public class Student {
 
-	private final UUID studentId;
+	private final UUID id;
 	private final int uco;
 	private final String email;
 	private final String passwordHash;
 	private final List<Exam> exams;
 
 	public Student(int uco, String email, String passwordHash, List<Exam> exams) {
-		this.studentId = UUID.randomUUID();
+		this.id = UUID.randomUUID();
 		this.uco = uco;
 		this.email = email;
 		this.passwordHash = passwordHash;
 		this.exams = exams;
 	}
 
-	public UUID getStudentId() {
-		return studentId;
+	public UUID getId() {
+		return id;
 	}
 
 	public int getUco() {
@@ -47,7 +47,7 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student{" +
-			"studentId='" + studentId + '\'' +
+			"id='" + id + '\'' +
 			", uco=" + uco +
 			", email='" + email + '\'' +
 			", passwordHash='" + passwordHash + '\'' +
@@ -62,12 +62,12 @@ public class Student {
 
 		Student student = (Student) o;
 
-		return studentId != null ? studentId.equals(student.studentId) : student.studentId == null;
+		return id != null ? id.equals(student.id) : student.id == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		return studentId != null ? studentId.hashCode() : 0;
+		return id != null ? id.hashCode() : 0;
 	}
 }

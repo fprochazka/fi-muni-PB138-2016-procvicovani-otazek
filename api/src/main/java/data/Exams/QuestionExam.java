@@ -7,20 +7,20 @@ import java.util.UUID;
  */
 public class QuestionExam {
 
-	private final UUID questionExamId;
+	private final UUID id;
 	private final UUID questionId;
 	private final int numCorrect;
 	private final int numWrong;
 
 	public QuestionExam(UUID questionId, int numCorrect, int numWrong) {
-		this.questionExamId = UUID.randomUUID();
+		this.id = UUID.randomUUID();
 		this.questionId = questionId;
 		this.numCorrect = numCorrect;
 		this.numWrong = numWrong;
 	}
 
-	public UUID getQuestionExamId() {
-		return questionExamId;
+	public UUID getId() {
+		return id;
 	}
 
 	public int getNumWrong() {
@@ -38,7 +38,7 @@ public class QuestionExam {
 	@Override
 	public String toString() {
 		return "QuestionExam{" +
-			"questionExamId='" + questionExamId + '\'' +
+			"id='" + id + '\'' +
 			", questionId='" + questionId + '\'' +
 			", numCorrect=" + numCorrect +
 			", numWrong=" + numWrong +
@@ -52,12 +52,12 @@ public class QuestionExam {
 
 		QuestionExam that = (QuestionExam) o;
 
-		return questionExamId != null ? questionExamId.equals(that.questionExamId) : that.questionExamId == null;
+		return id != null ? id.equals(that.id) : that.id == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		return questionExamId != null ? questionExamId.hashCode() : 0;
+		return id != null ? id.hashCode() : 0;
 	}
 }
