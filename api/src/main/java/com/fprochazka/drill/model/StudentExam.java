@@ -5,52 +5,38 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * Created by Michaela Bamburová on 13.05.2016.
  */
 @Document
-public class Student {
+public class StudentExam {
 
 	@Id
 	@Field(value = "_id")
 	private final UUID id;
-	private final int uco;
-	private final String email;
-	private final String passwordHash;
+	private final Drill drill;
+	private final Student student;
 
-	public Student(int uco, String email, String passwordHash) {
+	public StudentExam(Drill drill, Student student) {
 		this.id = UUID.randomUUID();
-		this.uco = uco;
-		this.email = email;
-		this.passwordHash = passwordHash;
+		this.drill = drill;
+		this.student = student;
 	}
 
 	public UUID getId() {
 		return id;
 	}
 
-	public int getUco() {
-		return uco;
+	public Drill getDrill() {
+		return drill;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	@Override
-	public String toString() {
-		return "Student{" +
-			"id='" + id + '\'' +
-			", uco=" + uco +
-			", email='" + email + '\'' +
-			", passwordHash='" + passwordHash + '\'' +
-			'}';
+	public Student getStudent() {
+		return student;
 	}
 
 	@Override
@@ -58,9 +44,9 @@ public class Student {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		Student student = (Student) o;
+		StudentExam exam = (StudentExam) o;
 
-		return id != null ? id.equals(student.id) : student.id == null;
+		return id != null ? id.equals(exam.id) : exam.id == null;
 
 	}
 

@@ -38,7 +38,7 @@ public class ExamController {
     /**
      * Function finds in DB exam object corresponding to given ID. If doesn't exist, return null.
      *
-     * @return exam - of type Exam, identified by examId
+     * @return exam - of type StudentExam, identified by examId
      */
     @RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
     public Object getExam() {
