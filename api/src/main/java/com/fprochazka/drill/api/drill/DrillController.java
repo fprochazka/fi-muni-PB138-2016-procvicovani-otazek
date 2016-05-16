@@ -26,9 +26,9 @@ public class DrillController {
 	}
 
 	/**
-     *  Function, that gives list of all drills in database.
+     *  Function, that gives response object of all drills in the database.
      *
-     *  @return drills - ArrayList of type Drill
+     *  @return response for all found drills
      */
     @RequestMapping(value="/drill", method= RequestMethod.GET)
     public @ResponseBody Collection<DrillResponse> getAllDrills() {
@@ -37,7 +37,8 @@ public class DrillController {
     }
 
     /**
-     * Function, that returns drill in database with given ID. If the ID is not given or do not corrspond to any drill in database, function returns null.
+     * Function, that returns the drill in database with given ID.
+	 * If the ID is not given or do not correponds to any drill in database, function throws exception.
      *
      * @return drill - object of type Drill with given id, null if drill with the id does not exist
      */
@@ -52,6 +53,13 @@ public class DrillController {
         return drillResponseFactory.createDrillResponse(drill);
     }
 
+	/**
+	 * Function creates new drill, based on the create drill request,
+	 * and saves it to the database.
+	 *
+	 * @param createDrillRequest
+	 * @return drill response of the new drill
+     */
 	@RequestMapping(value="/drill", method= RequestMethod.POST)
     public DrillResponse createDrill(
 		@RequestBody CreateDrillRequest createDrillRequest
