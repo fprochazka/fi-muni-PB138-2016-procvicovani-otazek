@@ -1,0 +1,18 @@
+Optimální algoritmus, který pro livovolnou (neorientovanou) kružnici na <I>n</I> uzlech s kladně ohodnocenými hranami a její uzel <I>r</I> vypočte vzdálenost z uzlu <I>r</I> do všech ostatních uzlů, má složitost ležící v:
+
+ :c1 <M>o (n)</M>
+ :c2 <M>\Omega (n\cdot \log\ n)</M>
+ :c3 <M>\Omega (n)</M>
+ :c4 <M>\omega (\log\ n)</M>
+ :c5 <M>o (n^{2})</M>
+:c3:c4:c5 ok ex 3
+--
+Máme libovolnou neorientovanou kružnici s kladně ohodnocenými hranami a <I>n</I> uzly. Optimální algoritmus řešící výpočet matice vzdáleností mezi jejími uzly, má složitost v: 
+
+ :c1 <M>O (n)</M>
+ :c2 <M>\omega (n^{2})</M>
+ :c3 <M>O (n^{2}\cdot \log\ n)</M>
+ :c4 <M>o (n^{2})</M>
+ :c5 <M>\Theta (n^{3})</M>
+ :c6 <M>\omega (n\cdot \log\ n)</M>
+:c3:c6 ok ex 3
