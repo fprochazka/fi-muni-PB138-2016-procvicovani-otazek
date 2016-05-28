@@ -1,56 +1,54 @@
 package com.fprochazka.drill.model.exam;
 
+import com.fprochazka.drill.model.Identified;
 import com.fprochazka.drill.model.drill.Question;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.UUID;
-
-@Document
+@Document(collection = "student_exam_questions")
 @TypeAlias("student_exam_question")
-public class StudentExamQuestion {
+public class StudentExamQuestion extends Identified
+{
 
-	@Id
-	private final UUID id;
 	private final Question question;
 	private final StudentExam exam;
 	private final int correct;
 	private final int wrong;
 
-	public StudentExamQuestion(Question question, StudentExam exam, int correct, int wrong) {
-		this.id = UUID.randomUUID();
+	public StudentExamQuestion(Question question, StudentExam exam, int correct, int wrong)
+	{
+		super();
 		this.question = question;
 		this.exam = exam;
 		this.correct = correct;
 		this.wrong = wrong;
 	}
 
-	public UUID getId() {
-		return id;
-	}
-
-	public Question getQuestion() {
+	public Question getQuestion()
+	{
 		return question;
 	}
 
-	public StudentExam getExam() {
+	public StudentExam getExam()
+	{
 		return exam;
 	}
 
-	public int getCorrect() {
+	public int getCorrect()
+	{
 		return correct;
 	}
 
-	public int getWrong() {
+	public int getWrong()
+	{
 		return wrong;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "StudentExamQuestion{" +
-			"id=" + id +
+			"id=" + getId() +
 			", question=" + question +
 			", exam=" + exam +
 			", correct=" + correct +
@@ -58,19 +56,4 @@ public class StudentExamQuestion {
 			'}';
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		StudentExamQuestion that = (StudentExamQuestion) o;
-
-		return id != null ? id.equals(that.id) : that.id == null;
-
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
 }

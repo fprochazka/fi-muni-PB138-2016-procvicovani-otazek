@@ -1,80 +1,55 @@
 package com.fprochazka.drill.model.drill;
 
-import org.springframework.data.annotation.Id;
+import com.fprochazka.drill.model.Identified;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
-@Document
+@Document(collection = "questions")
 @TypeAlias("question")
-public class Question {
+public class Question extends Identified
+{
 
-	@Id
-	private final UUID id;
 	private final String title;
 
-	//@DBRef is used to relate an existing entity to the current entity.
-	// However, unlike the case with Relational Databases,
-	// if we save the host entity it does not save the related entity. It has to be persisted separately.
-	//@DBRef(db="answer")
 	private final List<Answer> answers;
 
-//	@RelatedDocument
 	private final Drill drill;
 
-
-	//@PersistenceConstructor is used to mark the constructor
-	// which is to be used for creating entities when fetching data from the Mongo Server.
-	public Question(String title, List<Answer> answers, Drill drill) {
-		this.id = UUID.randomUUID();
+	public Question(String title, List<Answer> answers, Drill drill)
+	{
+		super();
 		this.title = title;
 		this.answers = answers;
 		this.drill = drill;
 	}
 
-	public UUID getId() {
-		return id;
-	}
-
-	public String getTitle() {
+	public String getTitle()
+	{
 		return title;
 	}
 
-	public List<Answer> getAnswers() {
+	public List<Answer> getAnswers()
+	{
 		return Collections.unmodifiableList(answers);
 	}
 
-	public Drill getDrill() {
+	public Drill getDrill()
+	{
 		return drill;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Question{" +
-			"id=" + id +
+			"id=" + getId() +
 			", title='" + title + '\'' +
 			", answers=" + answers +
 			", drill=" + drill +
 			'}';
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Question question = (Question) o;
-
-		return id != null ? id.equals(question.id) : question.id == null;
-
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
-	}
 }

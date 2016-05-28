@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan(basePackages = "com.fprochazka.drill")
 @ImportResource(locations = "application-context.xml")
 @ServletComponentScan
+@EnableMongoRepositories(basePackages = "com.fprochazka.drill")
 public class ApplicationConfig
 {
 
@@ -26,7 +28,9 @@ public class ApplicationConfig
 			@Override
 			public void addCorsMappings(CorsRegistry registry)
 			{
-				registry.addMapping("/**").allowedOrigins("http://localhost:9000");
+				registry
+					.addMapping("/**")
+					.allowedOrigins("http://localhost:9000", "chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm");
 			}
 		};
 	}
