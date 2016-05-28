@@ -1,27 +1,25 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.drill;
 
-import java.util.List;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 13.05.2016.
- */
+@Document
+@TypeAlias("drill")
 public class Drill {
 
+	@Id
 	private final UUID id;
 	private final String subject;
 	private final String description;
-	private final List<Question> questions;
 
-	public Drill(String subject, String description, List<Question> questions) {
+	public Drill(String subject, String description) {
 		this.id = UUID.randomUUID();
 		this.subject = subject;
 		this.description = description;
-		this.questions = questions;
-	}
-
-	public List<Question> getQuestions() {
-		return questions;
 	}
 
 	public String getDescription() {
@@ -42,7 +40,6 @@ public class Drill {
 			"id=" + id +
 			", subject='" + subject + '\'' +
 			", description='" + description + '\'' +
-			", questions=" + questions +
 			'}';
 	}
 

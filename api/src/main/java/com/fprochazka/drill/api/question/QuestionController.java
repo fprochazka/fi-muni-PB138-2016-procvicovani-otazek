@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.controllers;
+package com.fprochazka.drill.api.question;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-/**
- * Created by viki on 05.05.16.
- */
 
 @RestController
 public class QuestionController {

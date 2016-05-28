@@ -1,25 +1,27 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.student;
 
-import java.util.List;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 13.05.2016.
- */
+@Document
+@TypeAlias("student")
 public class Student {
 
+	@Id
 	private final UUID id;
 	private final int uco;
 	private final String email;
 	private final String passwordHash;
-	private final List<Exam> exams;
 
-	public Student(int uco, String email, String passwordHash, List<Exam> exams) {
+	public Student(int uco, String email, String passwordHash) {
 		this.id = UUID.randomUUID();
 		this.uco = uco;
 		this.email = email;
 		this.passwordHash = passwordHash;
-		this.exams = exams;
 	}
 
 	public UUID getId() {
@@ -34,14 +36,6 @@ public class Student {
 		return email;
 	}
 
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public List<Exam> getExams() {
-		return exams;
-	}
-
 	@Override
 	public String toString() {
 		return "Student{" +
@@ -49,7 +43,6 @@ public class Student {
 			", uco=" + uco +
 			", email='" + email + '\'' +
 			", passwordHash='" + passwordHash + '\'' +
-			", exams=" + exams +
 			'}';
 	}
 
