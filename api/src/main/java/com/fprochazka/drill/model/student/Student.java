@@ -1,20 +1,17 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.student;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 13.05.2016.
- */
 @Document
+@TypeAlias("student")
 public class Student {
 
 	@Id
-	@Field(value = "_id")
 	private final UUID id;
 	private final int uco;
 	private final String email;
@@ -37,10 +34,6 @@ public class Student {
 
 	public String getEmail() {
 		return email;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
 	}
 
 	@Override

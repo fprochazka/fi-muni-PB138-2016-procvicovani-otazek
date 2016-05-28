@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.controllers;
+package com.fprochazka.drill.api.drill;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-
-/**
- * Created by viki on 05.05.16.
- */
 
 @RestController
 public class DrillController {

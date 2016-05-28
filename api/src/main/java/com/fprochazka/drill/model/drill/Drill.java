@@ -1,23 +1,17 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.drill;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.annotation.Reference;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 13.05.2016.
- */
 @Document
+@TypeAlias("drill")
 public class Drill {
 
 	@Id
-	@Field(value = "_id")
 	private final UUID id;
 	private final String subject;
 	private final String description;
@@ -27,7 +21,6 @@ public class Drill {
 		this.subject = subject;
 		this.description = description;
 	}
-
 
 	public String getDescription() {
 		return description;

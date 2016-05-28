@@ -1,22 +1,19 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.exam;
 
+import com.fprochazka.drill.model.drill.Drill;
+import com.fprochazka.drill.model.student.Student;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 13.05.2016.
- */
 @Document
+@TypeAlias("student_exam")
 public class StudentExam {
 
 	@Id
-	@Field(value = "_id")
 	private final UUID id;
 	private final Drill drill;
 	private final Student student;

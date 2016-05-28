@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.drill;
 
 
 import org.springframework.data.annotation.Id;

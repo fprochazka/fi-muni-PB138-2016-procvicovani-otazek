@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.controllers;
+package com.fprochazka.drill.api.exam;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.UUID;
-
-/**
- * Created by viki on 09.05.16.
- */
 
 @RestController
 public class ExamController {

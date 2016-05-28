@@ -1,6 +1,7 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.drill;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -8,14 +9,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 13.05.2016.
- */
 @Document
+@TypeAlias("question")
 public class Question {
 
 	@Id
-	@Field(value = "_id")
 	private final UUID id;
 	private final String title;
 
@@ -24,6 +22,8 @@ public class Question {
 	// if we save the host entity it does not save the related entity. It has to be persisted separately.
 	//@DBRef(db="answer")
 	private final List<Answer> answers;
+
+//	@RelatedDocument
 	private final Drill drill;
 
 

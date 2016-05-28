@@ -1,12 +1,12 @@
-package com.fprochazka.drill.model;
+package com.fprochazka.drill.model.drill;
 
+import com.fprochazka.drill.model.drill.Drill;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-/**
- * Created by Michaela Bamburová on 15.05.2016.
- */
+@Repository
 public interface DrillRepository extends CrudRepository<Drill, UUID> {
 
 	/*
