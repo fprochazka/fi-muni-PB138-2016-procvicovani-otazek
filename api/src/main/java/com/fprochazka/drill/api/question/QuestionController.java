@@ -1,9 +1,7 @@
 package com.fprochazka.drill.api.question;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +16,7 @@ public class QuestionController {
      * @return ArrayList of type Question, all question of the drill in database
      */
     @RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.GET)
-    public Collection<Object> getAllQuestionsInDrill() {
+    public @ResponseBody Collection<Object> getAllQuestionsInDrill() {
         List<Object> questions = new ArrayList<>();
         // get all questions of the drill with given ID
         return questions;
@@ -30,7 +28,7 @@ public class QuestionController {
      * @param question - JSON object parsed to suitable Java object, preferably Question
      */
     @RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.POST)
-    public void createQuestion(Model question) {
+    public void createQuestion(@RequestBody QuestionRequest question) {
         // parse Model to Question, then save it to database
     }
 
@@ -40,7 +38,7 @@ public class QuestionController {
      * @return model of question with given ID
      */
     @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.GET)
-    public Model getQuestion() {
+    public @ResponseBody QuestionRequest getQuestion() {
         // find question in database by given ID and return it
         return null;
     }
@@ -51,7 +49,8 @@ public class QuestionController {
      * @param question - JSON object parsed to suitable Java object, preferably Question
      */
     @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.PUT)
-    public void updateQuestion(Model question) {
+    public @ResponseBody QuestionRequest updateQuestion(@RequestBody QuestionRequest question) {
         // find question with given ID and update it
+        return question;
     }
 }
