@@ -1,7 +1,8 @@
-package com.fprochazka.drill.model.exam;
+package com.fprochazka.drill.model.exam.question;
 
 import com.fprochazka.drill.model.Identified;
-import com.fprochazka.drill.model.drill.Question;
+import com.fprochazka.drill.model.exam.StudentExam;
+import com.fprochazka.drill.model.drill.question.Question;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,10 +11,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class StudentExamQuestion extends Identified
 {
 
-	private final Question question;
-	private final StudentExam exam;
-	private final int correct;
-	private final int wrong;
+	private Question question;
+	private StudentExam exam;
+	private int correct;
+	private int wrong;
 
 	public StudentExamQuestion(Question question, StudentExam exam, int correct, int wrong)
 	{
@@ -42,6 +43,16 @@ public class StudentExamQuestion extends Identified
 	public int getWrong()
 	{
 		return wrong;
+	}
+
+	public void setCorrect(int correct)
+	{
+		this.correct = correct;
+	}
+
+	public void setWrong(int wrong)
+	{
+		this.wrong = wrong;
 	}
 
 	@Override
