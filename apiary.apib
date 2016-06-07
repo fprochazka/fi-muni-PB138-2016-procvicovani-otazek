@@ -9,12 +9,14 @@ HOST: https://drill.fprochazka.com/
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": "123",
-                "name": "PB138"
-            }
-        ]
+        {
+            "drills": [
+                {
+                    "id": "123",
+                    "name": "PB138"
+                }
+            ]
+        }
 
 ### Create new drill [POST]
 
@@ -48,16 +50,18 @@ HOST: https://drill.fprochazka.com/
 
     + Body
         
-            [
-                {
-                    "id": 44,
-                    "text": "Ako sa mas??"
-                    "answers": [
-                        { "text": "Super!", "correct": true },
-                        { "text": "Fakt naprd...", "correct": false }
-                    ]
-                }
-            ]
+            {
+                "questions": [
+                    {
+                        "id": 44,
+                        "text": "Ako sa mas??"
+                        "answers": [
+                            { "text": "Super!", "correct": true },
+                            { "text": "Fakt naprd...", "correct": false }
+                        ]
+                    }
+                ]
+            }
 
 ### Add new question to drill [POST]
 
@@ -174,15 +178,17 @@ HOST: https://drill.fprochazka.com/
 
     + Body
     
-            [
-                {
-                    "id": 1,
-                    "drill_id": 123,
-                    "answers": [ 
-                        { "question_id": 44, "correct": 0, "incorrect": 0 }
-                    ]
-                }
-            ]
+            {
+                "exams": [
+                    {
+                        "id": 1,
+                        "drill_id": 123,
+                        "answers": [ 
+                            { "question_id": 44, "correct": 0, "incorrect": 0 }
+                        ]
+                    }
+                ]
+            }
 
 
             
@@ -211,16 +217,18 @@ HOST: https://drill.fprochazka.com/
 
 + Request (application/json)
 
-        [
-            {
-                "question_id": 44,
-                "correct": true
-            }, 
-            {
-                "question_id": 12,
-                "correct": false
-            }
-        ]
+        {
+            "answers": [
+                {
+                    "question_id": 44,
+                    "correct": true
+                }, 
+                {
+                    "question_id": 12,
+                    "correct": false
+                }
+            ]
+        }
         
 + Response 200 (application/json)
 
