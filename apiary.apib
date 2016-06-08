@@ -12,9 +12,24 @@ HOST: https://drill.fprochazka.com/
         {
             "drills": [
                 {
-                    "id": "123",
+                    "id": "5df783c6-0b09-4f1f-9db3-b22c5c9d003a",
                     "code": "PB138",
                     "name": "English II"
+                },
+                {
+                    "id": "49643939-182d-499e-8988-8be6606d41e1",
+                    "code": "MB102",
+                    "name": "Diferenciální a integrální počet"
+                },
+                {
+                    "id": "e5ccce88-3bd1-4955-b128-b88dd8d4eb60",
+                    "code": "MB103",
+                    "name": "Spojité modely a statistika"
+                },
+                {
+                    "id": "c84fa430-0555-4198-a501-c3fee7ae4877",
+                    "code": "MB104",
+                    "name": "Diskrétní matematika"
                 }
             ]
         }
@@ -32,12 +47,12 @@ HOST: https://drill.fprochazka.com/
 
     + Headers
 
-            Location: /drill/123
+            Location: /drill/e5ccce88-3bd1-4955-b128-b88dd8d4eb60
 
     + Body
 
             {
-                "id": "123",
+                "id": "e5ccce88-3bd1-4955-b128-b88dd8d4eb60",
                 "code": "PB138",
                 "name": "English II"
             }
@@ -56,7 +71,7 @@ HOST: https://drill.fprochazka.com/
             {
                 "questions": [
                     {
-                        "id": 44,
+                        "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                         "text": "Ako sa mas??"
                         "answers": [
                             { "text": "Super!", "correct": true },
@@ -84,12 +99,12 @@ HOST: https://drill.fprochazka.com/
 
     + Headers
 
-            Location: /drill/123/question/44
+            Location: /drill/e5ccce88-3bd1-4955-b128-b88dd8d4eb60/question/0d58d80d-5616-4242-acd5-e75ede8cc0de
 
     + Body
         
             {
-                "id": 44,
+                "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": true },
@@ -110,7 +125,7 @@ HOST: https://drill.fprochazka.com/
     + Body
         
             {
-                "id": 44,
+                "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": true },
@@ -136,7 +151,7 @@ HOST: https://drill.fprochazka.com/
     + Body
         
             {
-                "id": 44,
+                "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": false },
@@ -156,7 +171,7 @@ HOST: https://drill.fprochazka.com/
 + Request (application/json)
 
             {
-                "drill_id": "123"
+                "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
             }
 
 + Response 201 (application/json)
@@ -169,9 +184,13 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": 1,
-                "drill_id": 123,
+                "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "answers": [ 
-                    { "question_id": 44, "correct": 0, "incorrect": 0 }
+                    {
+                        "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                        "correct": 0,
+                        "incorrect": 0
+                    }
                 ]
             }
             
@@ -184,10 +203,14 @@ HOST: https://drill.fprochazka.com/
             {
                 "exams": [
                     {
-                        "id": 1,
-                        "drill_id": 123,
+                        "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
+                        "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                         "answers": [ 
-                            { "question_id": 44, "correct": 0, "incorrect": 0 }
+                            {
+                                "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                                "correct": 0,
+                                "incorrect": 0
+                            }
                         ]
                     }
                 ]
@@ -209,10 +232,14 @@ HOST: https://drill.fprochazka.com/
     + Body
     
             {
-                "id": 1,
-                "drill_id": 123,
+                "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
+                "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "answers": [ 
-                    { "question_id": 44, "correct": 0, "incorrect": 0 }
+                    {
+                        "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                        "correct": 0,
+                        "incorrect": 0
+                    }
                 ]
             }
             
@@ -223,11 +250,11 @@ HOST: https://drill.fprochazka.com/
         {
             "answers": [
                 {
-                    "question_id": 44,
+                    "question_id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
                     "correct": true
                 }, 
                 {
-                    "question_id": 12,
+                    "question_id": "05017834-6be7-4046-a351-7d22d577efb3",
                     "correct": false
                 }
             ]
@@ -250,7 +277,7 @@ HOST: https://drill.fprochazka.com/
     + Body
     
             {
-                "id": 44,
+                "id": "05017834-6be7-4046-a351-7d22d577efb3",
                 "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": false },
