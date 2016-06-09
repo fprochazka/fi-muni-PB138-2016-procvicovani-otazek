@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface StudentExamQuestionRepository extends CrudRepository<StudentExamQuestion, UUID>
+public interface ExamQuestionRepository extends CrudRepository<ExamQuestion, UUID>
 {
 
 }

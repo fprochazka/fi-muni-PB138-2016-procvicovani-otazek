@@ -1,22 +1,22 @@
 package com.fprochazka.drill.model.exam.question;
 
 import com.fprochazka.drill.model.Identified;
-import com.fprochazka.drill.model.exam.StudentExam;
+import com.fprochazka.drill.model.exam.Exam;
 import com.fprochazka.drill.model.drill.question.Question;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "student_exam_questions")
 @TypeAlias("student_exam_question")
-public class StudentExamQuestion extends Identified
+public class ExamQuestion extends Identified
 {
 
 	private Question question;
-	private StudentExam exam;
+	private Exam exam;
 	private int correct;
 	private int wrong;
 
-	public StudentExamQuestion(Question question, StudentExam exam, int correct, int wrong)
+	public ExamQuestion(Question question, Exam exam, int correct, int wrong)
 	{
 		super();
 		this.question = question;
@@ -30,7 +30,7 @@ public class StudentExamQuestion extends Identified
 		return question;
 	}
 
-	public StudentExam getExam()
+	public Exam getExam()
 	{
 		return exam;
 	}
@@ -45,20 +45,20 @@ public class StudentExamQuestion extends Identified
 		return wrong;
 	}
 
-	public void setCorrect(int correct)
+	public void increaseCorrect(int newCorrect)
 	{
-		this.correct = correct;
+		this.correct += newCorrect;
 	}
 
-	public void setWrong(int wrong)
+	public void increaseWrong(int newWrong)
 	{
-		this.wrong = wrong;
+		this.wrong += newWrong;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "StudentExamQuestion{" +
+		return "ExamQuestion{" +
 			"id=" + getId() +
 			", question=" + question +
 			", exam=" + exam +
