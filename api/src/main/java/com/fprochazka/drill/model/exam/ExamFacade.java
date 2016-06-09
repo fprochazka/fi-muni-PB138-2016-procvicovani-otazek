@@ -7,6 +7,7 @@ import com.fprochazka.drill.model.student.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,6 +35,9 @@ public class ExamFacade
 		return studentExam;
 	}
 
-
+	public List<Exam> getExamsByStudent(UUID studentId) {
+		List<Exam> exams = examRepository.getExamsByStudent(studentId);
+		return exams;
+	}
 
 }
