@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface StudentExamRepository extends CrudRepository<StudentExam, UUID>
+public interface ExamRepository extends CrudRepository<Exam, UUID>
 {
 
-	StudentExam getStudentExamById(UUID examId);
+	Exam getExamById(UUID examId);
 
 }

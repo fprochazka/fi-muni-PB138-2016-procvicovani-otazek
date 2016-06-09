@@ -8,13 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "student_exams")
 @TypeAlias("student_exam")
-public class StudentExam extends Identified
+public class Exam extends Identified
 {
 
 	private final Drill drill;
 	private final Student student;
 
-	public StudentExam(Drill drill, Student student)
+	public Exam(Drill drill, Student student)
 	{
 		super();
 		this.drill = drill;

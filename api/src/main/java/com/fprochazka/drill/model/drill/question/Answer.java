@@ -1,8 +1,6 @@
-package com.fprochazka.drill.model.drill.answer;
+package com.fprochazka.drill.model.drill.question;
 
-import com.fprochazka.drill.model.Identified;
-
-public class Answer extends Identified
+public class Answer
 {
 	private boolean correct;
 	private String text;
@@ -33,13 +31,11 @@ public class Answer extends Identified
 	}
 
 	@Override
-	public String toString()
-	{
-		return String.format(
-			"Answer[id=%s, firstName='%s', lastName='%s']",
-			getId(), correct, text
-		);
+	public String toString() {
+		return "Answer{" +
+			"correct=" + correct +
+			", text='" + text + '\'' +
+			'}';
 	}
-
 }
 

@@ -1,7 +1,6 @@
 package com.fprochazka.drill.model.drill.question;
 
 import com.fprochazka.drill.model.Identified;
-import com.fprochazka.drill.model.drill.answer.Answer;
 import com.fprochazka.drill.model.drill.Drill;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;

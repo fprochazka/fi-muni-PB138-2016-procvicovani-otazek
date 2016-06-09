@@ -1,6 +1,5 @@
 package com.fprochazka.drill.api.exam;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -32,7 +31,7 @@ public class ExamController {
     /**
      * Function finds in DB exam object corresponding to given ID. If doesn't exist, return null.
      *
-     * @return exam - of type StudentExam, identified by examId
+     * @return exam - of type Exam, identified by examId
      */
     @RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
     public @ResponseBody Object getExam() {
