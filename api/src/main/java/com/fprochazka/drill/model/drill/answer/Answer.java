@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model.drill;
+package com.fprochazka.drill.model.drill.answer;
 
 import com.fprochazka.drill.model.Identified;
 
@@ -19,9 +19,17 @@ public class Answer extends Identified
 		return correct;
 	}
 
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+
 	public String getText()
 	{
 		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	@Override
