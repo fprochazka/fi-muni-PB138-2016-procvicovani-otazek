@@ -29,8 +29,19 @@ public class ExamQuestionFacade
 	/*
 	public ExamQuestion getExamQuestionByExamAndQuestion(UUID questionId, UUID examId) {
 		//TODO
+
+
+
 		return
-	}*/
+	}
+
+	public ExamQuestion getExamQuestionByQuestion(UUID questionId) {
+		ExamQuestion examQuestion = examQuestionRepository.getExamQuestionByQuestion(questionId);
+		return examQuestion;
+	}
+
+
+
 	/*
 	public ExamQuestion updateExamQuestion
 	 */

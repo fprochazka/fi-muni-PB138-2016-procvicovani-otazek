@@ -47,6 +47,10 @@ public class Question extends Identified
 		this.title = title;
 	}
 
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
 	@Override
 	public String toString()
 	{
