@@ -21,8 +21,7 @@ public class DrillFacade
 		Drill drill = new Drill(code, name);
 		if (drillRepository.getDrillByCode(code) != null) {
 			throw new DrillCodeNotUniqueException();
-		}
-		else {
+		} else {
 			drillRepository.save(drill);
 		}
 		return drill;

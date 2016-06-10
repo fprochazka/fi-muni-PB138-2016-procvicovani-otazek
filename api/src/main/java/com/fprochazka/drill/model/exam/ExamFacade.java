@@ -34,8 +34,7 @@ public class ExamFacade
 
 		if (examRepository.getExamByDrillAndStudent(studentExam.getDrill().getId(), studentExam.getStudent().getId()) != null) {
 			throw new ExamAlreadyExistsException();
-		}
-		else {
+		} else {
 			examRepository.save(studentExam);
 		}
 		return studentExam;

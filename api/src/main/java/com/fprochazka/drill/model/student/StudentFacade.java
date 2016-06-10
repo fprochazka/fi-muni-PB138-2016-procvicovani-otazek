@@ -22,8 +22,7 @@ public class StudentFacade
 
 		if (studentRepository.getStudentByUco(student.getUco()) != null) {
 			throw new UcoNotUniqueException();
-		}
-		else {
+		} else {
 			studentRepository.save(student);
 		}
 
