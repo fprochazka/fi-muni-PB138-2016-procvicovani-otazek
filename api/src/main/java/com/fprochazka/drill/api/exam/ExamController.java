@@ -5,7 +5,6 @@ import com.fprochazka.drill.model.exam.ExamFacade;
 import com.fprochazka.drill.model.exam.ExamRepository;
 import com.fprochazka.drill.model.exam.question.ExamQuestion;
 import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
-import com.fprochazka.drill.model.exceptions.ExamAlreadyExistsException;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,7 @@ public class ExamController
 	 *
 	 * @param request - ID of drill we want to create exam for
 	 */
-	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
 	public void createExam(@PathVariable("userId") UUID userId, @RequestBody CreateExamRequest request)
 	{
 		try {
@@ -48,7 +47,7 @@ public class ExamController
 			e.printStackTrace();
 		}
 	}
-
+*/
 	/**
 	 * Find all exams in database of given user.
 	 *
@@ -65,16 +64,16 @@ public class ExamController
 	 *
 	 * @return response object for found exam
 	 */
-	@RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
 	public @ResponseBody ExamResponse getExam(
 		@PathVariable UUID examId)
 	{
 		Exam exam = examRepository.getExamById(examId);
 
-		List<ExamQuestion> answers = examQuestionFacade.getByExamId(examId);
+		List<ExamQuestion> answers = examRepository.getByExamId(examId);
 
 		return examFactory.createExamResponse(exam, examFactory.createQuestionsStatistics(answers));
-	}
+	}*/
 
 	/**
 	 * Update questions of given exam with given answers.

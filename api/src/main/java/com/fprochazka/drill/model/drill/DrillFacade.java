@@ -1,6 +1,6 @@
 package com.fprochazka.drill.model.drill;
 
-import com.fprochazka.drill.model.exceptions.DrillCodeNotUniqueException;
+import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +16,14 @@ public class DrillFacade
 		this.drillRepository = drillRepository;
 	}
 
-	public Drill createDrill(String code, String name) throws DrillCodeNotUniqueException
+	public Drill createDrill(String code, String name) throws NotUniqueException
 	{
 		Drill drill = new Drill(code, name);
 		if (drillRepository.getDrillByCode(code) != null) {
-			throw new DrillCodeNotUniqueException();
-		} else {
-			drillRepository.save(drill);
+			throw new NotUniqueException();
 		}
+		drillRepository.save(drill);
+
 		return drill;
 	}
 }

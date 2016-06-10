@@ -3,7 +3,6 @@ package com.fprochazka.drill.model.drill;
 import com.fprochazka.drill.IntegrationTestCase;
 import com.fprochazka.drill.config.ApplicationConfig;
 import com.fprochazka.drill.fixtures.DrillTestFixtures;
-import com.fprochazka.drill.model.exceptions.DrillCodeNotUniqueException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
