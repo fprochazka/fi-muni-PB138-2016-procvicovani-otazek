@@ -5,25 +5,30 @@ import java.util.UUID;
 /**
  * Created by viki on 09.06.16.
  */
-public class UpdateExamRequest {
+public class UpdateExamRequest
+{
 
 	private UUID questionId;
 	private Boolean correct;
 
 
-	public UpdateExamRequest(UUID questionId, Boolean correct) {
+	public UpdateExamRequest(UUID questionId, Boolean correct)
+	{
 		this.questionId = questionId;
 		this.correct = correct;
 	}
 
-	public UpdateExamRequest() {
+	public UpdateExamRequest()
+	{
 	}
 
-	public UUID getQuestionId() {
+	public UUID getQuestionId()
+	{
 		return questionId;
 	}
 
-	public Boolean getCorrect() {
+	public Boolean getCorrect()
+	{
 		return correct;
 	}
 }

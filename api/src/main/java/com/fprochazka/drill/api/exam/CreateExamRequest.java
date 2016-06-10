@@ -5,18 +5,22 @@ import java.util.UUID;
 /**
  * Created by viki on 10.06.16.
  */
-public class CreateExamRequest {
+public class CreateExamRequest
+{
 
 	private UUID drillId;
 
-	public CreateExamRequest(UUID drillId) {
+	public CreateExamRequest(UUID drillId)
+	{
 		this.drillId = drillId;
 	}
 
-	public CreateExamRequest() {
+	public CreateExamRequest()
+	{
 	}
 
-	public UUID getDrillId() {
+	public UUID getDrillId()
+	{
 		return drillId;
 	}
 }

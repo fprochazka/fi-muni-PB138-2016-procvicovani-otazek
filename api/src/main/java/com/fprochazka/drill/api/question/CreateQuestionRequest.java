@@ -8,21 +8,28 @@ import java.util.Collection;
 /**
  * Created by viki on 09.06.16.
  */
-public class CreateQuestionRequest {
+public class CreateQuestionRequest
+{
 	private String title;
 	private Collection<CreateAnswerRequest> answers;
 
-	public CreateQuestionRequest(String title, Collection<CreateAnswerRequest> answers ) {
+	public CreateQuestionRequest(String title, Collection<CreateAnswerRequest> answers)
+	{
 		this.title = title;
 		this.answers = answers;
 	}
-	public CreateQuestionRequest() {}
 
-	public String getTitle() {
+	public CreateQuestionRequest()
+	{
+	}
+
+	public String getTitle()
+	{
 		return title;
 	}
 
-	public Collection<CreateAnswerRequest> getAnswers() {
+	public Collection<CreateAnswerRequest> getAnswers()
+	{
 		return answers;
 	}
 }

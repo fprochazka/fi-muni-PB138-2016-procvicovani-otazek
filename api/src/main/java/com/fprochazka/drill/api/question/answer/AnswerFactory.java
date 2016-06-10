@@ -12,7 +12,8 @@ import java.util.stream.StreamSupport;
  */
 
 @Service
-public class AnswerFactory {
+public class AnswerFactory
+{
 
 	/**
 	 * Create response object of given answer.
@@ -20,8 +21,9 @@ public class AnswerFactory {
 	 * @param answer
 	 * @return response object of the answer
 	 */
-	public AnswerResponse createAnswerResponse( Answer answer ) {
-		return new AnswerResponse( answer.getText(), answer.isCorrect() );
+	public AnswerResponse createAnswerResponse(Answer answer)
+	{
+		return new AnswerResponse(answer.getText(), answer.isCorrect());
 	}
 
 	/**
@@ -30,7 +32,8 @@ public class AnswerFactory {
 	 * @param answers
 	 * @return coolection of response objects for answers
 	 */
-	public List<AnswerResponse> createAnswersResponse(Iterable<Answer> answers) {
+	public List<AnswerResponse> createAnswersResponse(Iterable<Answer> answers)
+	{
 		return StreamSupport
 			.stream(answers.spliterator(), false)
 			.map(this::createAnswerResponse)
@@ -38,22 +41,26 @@ public class AnswerFactory {
 	}
 
 
-	public Answer createAnswerFromCreateRequest( CreateAnswerRequest answer) {
-		return new Answer(  answer.isCorrect(), answer.getText() );
+	public Answer createAnswerFromCreateRequest(CreateAnswerRequest answer)
+	{
+		return new Answer(answer.isCorrect(), answer.getText());
 	}
 
-	public List<Answer> createAnswersFromCreateRequest(Iterable<CreateAnswerRequest> answers) {
+	public List<Answer> createAnswersFromCreateRequest(Iterable<CreateAnswerRequest> answers)
+	{
 		return StreamSupport
 			.stream(answers.spliterator(), false)
 			.map(this::createAnswerFromCreateRequest)
 			.collect(Collectors.toList());
 	}
 
-	public Answer createAnswerFromUpdateRequest( UpdateAnswerRequest answer) {
-		return new Answer(  answer.isCorrect(), answer.getText() );
+	public Answer createAnswerFromUpdateRequest(UpdateAnswerRequest answer)
+	{
+		return new Answer(answer.isCorrect(), answer.getText());
 	}
 
-	public List<Answer> createAnswersFromUpdateRequest(Iterable<UpdateAnswerRequest> answers) {
+	public List<Answer> createAnswersFromUpdateRequest(Iterable<UpdateAnswerRequest> answers)
+	{
 		return StreamSupport
 			.stream(answers.spliterator(), false)
 			.map(this::createAnswerFromUpdateRequest)

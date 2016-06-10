@@ -14,17 +14,21 @@ import java.util.stream.StreamSupport;
  */
 
 @Service
-public class ExamFactory {
+public class ExamFactory
+{
 
-	public ExamResponse createExamResponse(Exam exam, List<QuestionStatistics> statistics) {
-		return new ExamResponse( exam.getDrill().getId(), exam.getStudent().getId(), statistics );
+	public ExamResponse createExamResponse(Exam exam, List<QuestionStatistics> statistics)
+	{
+		return new ExamResponse(exam.getDrill().getId(), exam.getStudent().getId(), statistics);
 	}
 
-	public QuestionStatistics createQuestionStatistics( ExamQuestion question ) {
-		return new QuestionStatistics( question.getQuestion().getId(), question.getCorrect(), question.getWrong() );
+	public QuestionStatistics createQuestionStatistics(ExamQuestion question)
+	{
+		return new QuestionStatistics(question.getQuestion().getId(), question.getCorrect(), question.getWrong());
 	}
 
-	public List<QuestionStatistics> createQuestionsStatistics(Iterable<ExamQuestion> questions ) {
+	public List<QuestionStatistics> createQuestionsStatistics(Iterable<ExamQuestion> questions)
+	{
 		return StreamSupport
 			.stream(questions.spliterator(), false)
 			.map(this::createQuestionStatistics)

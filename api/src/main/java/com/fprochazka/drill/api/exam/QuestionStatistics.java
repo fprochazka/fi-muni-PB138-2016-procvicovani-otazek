@@ -7,31 +7,37 @@ import java.util.UUID;
 /**
  * Created by viki on 10.06.16.
  */
-public class QuestionStatistics {
+public class QuestionStatistics
+{
 
 	private UUID questionId;
 	private int correct;
 	private int wrong;
 
-	public QuestionStatistics() {
+	public QuestionStatistics()
+	{
 	}
 
-	public QuestionStatistics(UUID questionId, int correct, int wrong) {
+	public QuestionStatistics(UUID questionId, int correct, int wrong)
+	{
 
 		this.questionId = questionId;
 		this.correct = correct;
 		this.wrong = wrong;
 	}
 
-	public UUID getQuestionId() {
+	public UUID getQuestionId()
+	{
 		return questionId;
 	}
 
-	public int getCorrect() {
+	public int getCorrect()
+	{
 		return correct;
 	}
 
-	public int getWrong() {
+	public int getWrong()
+	{
 		return wrong;
 	}
 }

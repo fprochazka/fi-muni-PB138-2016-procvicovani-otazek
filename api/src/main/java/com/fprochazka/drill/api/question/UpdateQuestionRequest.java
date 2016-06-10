@@ -7,22 +7,29 @@ import java.util.Collection;
 /**
  * Created by viki on 09.06.16.
  */
-public class UpdateQuestionRequest {
+public class UpdateQuestionRequest
+{
 
 	private String title;
 	private Collection<UpdateAnswerRequest> answers;
 
-	public UpdateQuestionRequest(String title, Collection<UpdateAnswerRequest> answers ) {
+	public UpdateQuestionRequest(String title, Collection<UpdateAnswerRequest> answers)
+	{
 		this.title = title;
 		this.answers = answers;
 	}
-	public UpdateQuestionRequest() {}
 
-	public String getTitle() {
+	public UpdateQuestionRequest()
+	{
+	}
+
+	public String getTitle()
+	{
 		return title;
 	}
 
-	public Collection<UpdateAnswerRequest> getAnswers() {
+	public Collection<UpdateAnswerRequest> getAnswers()
+	{
 		return answers;
 	}
 }

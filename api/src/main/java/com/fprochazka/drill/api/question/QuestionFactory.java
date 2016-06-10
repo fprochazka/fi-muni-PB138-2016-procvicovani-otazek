@@ -17,12 +17,14 @@ import java.util.stream.StreamSupport;
  */
 
 @Service
-public class QuestionFactory {
+public class QuestionFactory
+{
 
 	private AnswerFactory answerFactory;
 
 	@Autowired
-	public QuestionFactory(AnswerFactory answerFactory) {
+	public QuestionFactory(AnswerFactory answerFactory)
+	{
 		this.answerFactory = answerFactory;
 	}
 
@@ -32,10 +34,11 @@ public class QuestionFactory {
 	 *
 	 * @param question
 	 * @return response object of the question
-     */
-	public QuestionResponse createQuestionResponse( Question question ) {
-		Collection<AnswerResponse> answers = answerFactory.createAnswersResponse( question.getAnswers() );
-		return new QuestionResponse( question.getId(), question.getTitle(), answers );
+	 */
+	public QuestionResponse createQuestionResponse(Question question)
+	{
+		Collection<AnswerResponse> answers = answerFactory.createAnswersResponse(question.getAnswers());
+		return new QuestionResponse(question.getId(), question.getTitle(), answers);
 	}
 
 	/**
@@ -43,8 +46,9 @@ public class QuestionFactory {
 	 *
 	 * @param questions
 	 * @return collection of response objects of given questions
-     */
-	public List<QuestionResponse> createQuestionsResponse(Iterable<Question> questions ) {
+	 */
+	public List<QuestionResponse> createQuestionsResponse(Iterable<Question> questions)
+	{
 		return StreamSupport
 			.stream(questions.spliterator(), false)
 			.map(this::createQuestionResponse)
