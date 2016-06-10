@@ -1,0 +1,23 @@
+Po provedení příkazů
+<PRE> $ echo 'mravenec' > a; ls -l a
+ -rw-r--r--  1 brandejs staff 9 dub  8 23:23 a
+ $ echo ferda >> a</PRE>
+bude mít soubor 'a' velikost
+ :r1 5
+ :r2 6
+ :r3 13
+ :r4 14
+ :r5 15
+:r5 ok
+--
+Posloupnost příkazů
+<PRE>cat &lt;&lt;ukazka
+ls -l ukazka
+ukazka</PRE>
+předá na standardní výstup
+ :r1 obsah souboru 'ukazka', výstup příkazu 'ls -l ukazka', spustí se program 'ukazka' z běžného adresáře
+ :r2 text 'ls -l ukazka'
+ :r3 text 'ukazka'
+ :r4 nepředá se nic
+ :r5 předá se výstup programu 'ukazka'
+:r2 ok

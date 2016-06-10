@@ -1,0 +1,20 @@
+První verze UNIXu byla vytvořena v
+ :r1 Bell Laboratories
+ :r2 University of Berkeley
+ :r3 Microsoftu
+ :r4 Novellu
+ :r5 USL (UNIX System Laboratories)
+:r1 ok
+--
+Co vzniklo dříve? MS-DOS (předchůdce MS-Windows) nebo UNIX?
+ :r1 MS-DOS
+ :r2 UNIX
+ :r3 Obojí je zhruba stejně staré.
+:r2 ok
+--
+Kdo jsou autoři prvních verzí UNIXu?
+ :r1 Steeve Jobs, Tim O'Reilly, Andrew Tanenbaum
+ :r2 Larry Ellison, Scott McNealy, Michael Tiemann
+ :r3 Brian Kernighan, Dennis Ritchie, Ken Thompson
+ :r4 Eric Raymond, Richard Stallman, Linus Torvalds
+:r3 ok
