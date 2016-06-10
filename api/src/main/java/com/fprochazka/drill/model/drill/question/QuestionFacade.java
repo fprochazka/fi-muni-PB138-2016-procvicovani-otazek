@@ -27,6 +27,7 @@ public class QuestionFacade
 	{
 		Drill drill = drillRepository.findOne(drillId);
 		Question question = new Question(title, answers, drill);
+
 		questionRepository.save(question);
 
 		return question;
@@ -34,8 +35,7 @@ public class QuestionFacade
 
 	public List<Question> getAllQuestionsInDrill(UUID drillId)
 	{
-		//TODO ???????
-		List<Question> questions = (List<Question>) questionRepository.findAll();
+		List<Question> questions = questionRepository.getQuestionsByDrill(drillId);
 
 		return Collections.unmodifiableList(questions);
 	}
@@ -44,6 +44,7 @@ public class QuestionFacade
 	{
 		Question question = questionRepository.getQuestionById(questionId);
 		question.setTitle(title);
+		question.setAnswers(answers);
 
 		questionRepository.save(question);
 		return question;

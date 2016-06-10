@@ -9,11 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Drill extends Identified
 {
 
+	private final String code;
 	private final String name;
 
-	public Drill(String name)
+	public Drill(String code, String name)
 	{
 		super();
+		this.code = code;
 		this.name = name;
 	}
 
@@ -22,4 +24,7 @@ public class Drill extends Identified
 		return name;
 	}
 
+	public String getCode() {
+		return code;
+	}
 }

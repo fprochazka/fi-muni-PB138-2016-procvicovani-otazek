@@ -10,4 +10,10 @@ public interface StudentRepository extends CrudRepository<Student, UUID>
 {
 
 	Student getStudentById(UUID studentId);
+
+	Student getStudentByUco(int uco);
+
+	Student getStudentByEmail(String email);
+
+	Student getByUcoAndPasswordHash(int uco, String passwordHash);
 }

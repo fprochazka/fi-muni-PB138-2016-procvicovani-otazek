@@ -11,4 +11,6 @@ public interface DrillRepository extends CrudRepository<Drill, UUID>
 
 	Drill getDrillById(UUID drillId);
 
+	Drill getDrillByCode(String code);
+
 }
