@@ -8,13 +8,13 @@ import java.util.UUID;
 public class QuestionResponse
 {
 	private UUID id;
-	private String text;
+	private String title;
 	private Collection<AnswerResponse> answers;
 
-	public QuestionResponse( UUID id, String text, Collection<AnswerResponse> answers )
+	public QuestionResponse( UUID id, String title, Collection<AnswerResponse> answers )
 	{
 		this.id = id;
-		this.text = text;
+		this.title = title;
 		this.answers = answers;
 	}
 
@@ -22,9 +22,9 @@ public class QuestionResponse
 
 	public UUID getId() { return id; }
 
-	public String getText()
+	public String getTitle()
 	{
-		return text;
+		return title;
 	}
 
 	public Collection<AnswerResponse> getAnswers()
