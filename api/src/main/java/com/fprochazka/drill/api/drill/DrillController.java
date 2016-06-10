@@ -18,8 +18,11 @@ public class DrillController {
 	private DrillResponseFactory drillResponseFactory;
 
 	@Autowired
-	public DrillController(DrillFacade drillFacade, DrillRepository drillRepository, DrillResponseFactory drillResponseFactory)
-	{
+	public DrillController(
+		DrillFacade drillFacade,
+		DrillRepository drillRepository,
+		DrillResponseFactory drillResponseFactory
+	) {
 		this.drillFacade = drillFacade;
 		this.drillRepository = drillRepository;
 		this.drillResponseFactory = drillResponseFactory;
@@ -30,7 +33,7 @@ public class DrillController {
      *
      *  @return response for all found drills
      */
-    @RequestMapping(value="/drill", method= RequestMethod.GET)
+    @RequestMapping(value = "/drill", method = RequestMethod.GET)
     public @ResponseBody Collection<DrillResponse> getAllDrills() {
         Iterable<Drill> drills = drillRepository.findAll();
         return drillResponseFactory.createDrillsResponse(drills);
@@ -38,11 +41,11 @@ public class DrillController {
 
     /**
      * Function, that returns the drill in database with given ID.
-	 * If the ID is not given or do not correponds to any drill in database, function throws exception.
+	 * If the ID is not given or do not corresponds to any drill in database, function throws exception.
      *
      * @return drill - object of type Drill with given id, null if drill with the id does not exist
      */
-    @RequestMapping(value="/drill/{drillId}", method= RequestMethod.GET)
+    @RequestMapping(value = "/drill/{drillId}", method = RequestMethod.GET)
     public @ResponseBody DrillResponse getDrillById(
 		@PathVariable("drillId") UUID drillId
 	) {
@@ -54,13 +57,13 @@ public class DrillController {
     }
 
 	/**
-	 * Function creates new drill, based on the create drill request,
-	 * and saves it to the database.
+	 * Create new drill based on the create drill request
+	 * and save it to the database.
 	 *
 	 * @param createDrillRequest
 	 * @return drill response of the new drill
      */
-	@RequestMapping(value="/drill", method= RequestMethod.POST)
+	@RequestMapping(value = "/drill", method = RequestMethod.POST)
     public DrillResponse createDrill(
 		@RequestBody CreateDrillRequest createDrillRequest
 	) throws DrillCodeNotUniqueException {

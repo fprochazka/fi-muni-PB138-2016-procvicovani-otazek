@@ -40,7 +40,7 @@ public class QuestionController {
     @RequestMapping(
 		value = "/drill/{drillId}/question",
 		method = RequestMethod.GET,
-		headers = "content-type=application/json"
+		headers = { "content-type=application/json", "accept=application/json" }
 	)
     public @ResponseBody Collection<QuestionResponse> getAllQuestionsInDrill(
 		@PathVariable UUID drillId
@@ -90,14 +90,16 @@ public class QuestionController {
 	 * @param questionId - ID of the question we want to update
      * @param questionRequest - updated question
      */
-    @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.POST)
     public @ResponseBody
 	QuestionResponse updateQuestion(
+		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
 		@RequestBody UpdateQuestionRequest questionRequest
 	) {
 		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest( questionRequest.getAnswers() );
 		Question question = questionFacade.updateQuestion( questionId, questionRequest.getTitle(), answers );
         return questionFactory.createQuestionResponse( question );
+		//return null;
     }
 }
