@@ -4,6 +4,10 @@ import com.fprochazka.drill.model.drill.question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class ExamQuestionFacade
 {
@@ -25,6 +29,12 @@ public class ExamQuestionFacade
 
 		examQuestionRepository.save(ExamQuestion);
 		return ExamQuestion;
+	}
+
+	public List<ExamQuestion> getByExamId(UUID examId)
+	{
+		List<ExamQuestion> q = new ArrayList<>();
+		return q;
 	}
 	/*
 	public ExamQuestion getExamQuestionByExamAndQuestion(UUID questionId, UUID examId) {

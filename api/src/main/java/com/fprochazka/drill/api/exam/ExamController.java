@@ -5,6 +5,7 @@ import com.fprochazka.drill.model.exam.ExamFacade;
 import com.fprochazka.drill.model.exam.ExamRepository;
 import com.fprochazka.drill.model.exam.question.ExamQuestion;
 import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
+import com.fprochazka.drill.model.exceptions.ExamAlreadyExistsException;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,11 @@ public class ExamController
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
 	public void createExam(@PathVariable("userId") UUID userId, @RequestBody CreateExamRequest request)
 	{
-		examFacade.createExam(request.getDrillId(), userId);
+		try {
+			examFacade.createExam(request.getDrillId(), userId);
+		} catch (ExamAlreadyExistsException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
