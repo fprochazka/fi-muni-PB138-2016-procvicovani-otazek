@@ -6,9 +6,7 @@ import com.fprochazka.drill.model.drill.DrillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -57,7 +55,7 @@ public class DrillController {
     public DrillResponse createDrill(
 		@RequestBody CreateDrillRequest createDrillRequest
 	) {
-		Drill drill = drillFacade.createDrill(createDrillRequest.getName());
+		Drill drill = drillFacade.createDrill("", createDrillRequest.getName());
 		return drillResponseFactory.createDrillResponse(drill);
     }
 }

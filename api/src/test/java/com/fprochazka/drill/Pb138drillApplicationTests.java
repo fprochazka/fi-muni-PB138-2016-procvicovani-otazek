@@ -85,7 +85,7 @@ public class Pb138drillApplicationTests
 		Student student = new Student(123456, "mail@mail.com", "hash");
 		studentRepository.save(student);
 
-		Drill drill = new Drill("drill 1");
+		Drill drill = new Drill("PB138", "Znackovacie");
 		drillRepository.save(drill);
 
 		Question question1 = createQuestion(drill, "Question 1");
