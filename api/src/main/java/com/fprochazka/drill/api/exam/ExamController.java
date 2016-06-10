@@ -3,29 +3,31 @@ package com.fprochazka.drill.api.exam;
 import com.fprochazka.drill.model.exam.Exam;
 import com.fprochazka.drill.model.exam.ExamFacade;
 import com.fprochazka.drill.model.exam.ExamRepository;
+import com.fprochazka.drill.model.exam.question.ExamQuestion;
+import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class ExamController {
 
 	private ExamFactory examFactory;
 	private ExamFacade examFacade;
+	private ExamQuestionFacade examQuestionFacade;
 	private ExamRepository examRepository;
 
 	@Autowired
 	public ExamController(
 		ExamFactory examFactory,
 		ExamFacade examFacade,
+		ExamQuestionFacade examQuestionFacade,
 		ExamRepository examRepository) {
 		this.examFactory = examFactory;
 		this.examFacade = examFacade;
+		this.examQuestionFacade = examQuestionFacade;
 		this.examRepository = examRepository;
 	}
 
@@ -58,7 +60,10 @@ public class ExamController {
     public @ResponseBody ExamResponse getExam(
 		@PathVariable UUID examId) {
         Exam exam = examRepository.getExamById( examId );
-		return examFactory.createExamResponse( exam );
+
+		List<ExamQuestion> answers = examQuestionFacade.getByExamId( examId );
+
+		return examFactory.createExamResponse( exam, examFactory.createQuestionsStatistics( answers ) );
     }
 
     /**
