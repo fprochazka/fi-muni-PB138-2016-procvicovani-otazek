@@ -15,9 +15,9 @@ public class DrillFacade
 		this.drillRepository = drillRepository;
 	}
 
-	public Drill createDrill(String name)
+	public Drill createDrill(String code, String name)
 	{
-		Drill drill = new Drill(name);
+		Drill drill = new Drill(code, name);
 		drillRepository.save(drill);
 		return drill;
 	}

@@ -15,10 +15,16 @@ public class StudentFacade
 		this.studentRepository = studentRepository;
 	}
 
-	public Student createStudent(int uco, String email, String passwordHash)
+	public Student createStudent(int uco, String email, String passwordHash) throws IllegalArgumentException
 	{
 		Student student = new Student(uco, email, passwordHash);
-		studentRepository.save(student);
+
+		if (studentRepository.findOne(student.getId()) != null) {
+			throw new IllegalArgumentException("");
+		}
+		else {
+			studentRepository.save(student);
+		}
 
 		return student;
 	}
