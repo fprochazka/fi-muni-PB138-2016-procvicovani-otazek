@@ -4,4 +4,7 @@ jdk:
 
 services: mongodb
 
-script: cd api/ && mvn test
+install:
+  - cd $TRAVIS_BUILD_DIR/api && mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script: cd $TRAVIS_BUILD_DIR/api && mvn test
