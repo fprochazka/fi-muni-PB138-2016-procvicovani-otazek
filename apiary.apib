@@ -72,7 +72,7 @@ HOST: https://drill.fprochazka.com/
                 "questions": [
                     {
                         "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                        "text": "Ako sa mas??"
+                        "title": "Ako sa mas??"
                         "answers": [
                             { "text": "Super!", "correct": true },
                             { "text": "Fakt naprd...", "correct": false }
@@ -88,7 +88,7 @@ HOST: https://drill.fprochazka.com/
     + Body
 
             {
-                "text": "Ako sa mas??"
+                "title": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": true },
                     { "text": "Fakt naprd...", "correct": false }
@@ -105,7 +105,7 @@ HOST: https://drill.fprochazka.com/
         
             {
                 "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                "text": "Ako sa mas??"
+                "title": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": true },
                     { "text": "Fakt naprd...", "correct": false }
@@ -138,7 +138,7 @@ HOST: https://drill.fprochazka.com/
 + Request (application/json)
 
         {
-            "text": "Ako sa mas??"
+            "title": "Ako sa mas??"
             "answers": [
                 { "text": "Super!", "correct": false },
                 { "text": "Fakt naprd...", "correct": true },
@@ -152,7 +152,7 @@ HOST: https://drill.fprochazka.com/
         
             {
                 "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                "text": "Ako sa mas??"
+                "title": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": false },
                     { "text": "Fakt naprd...", "correct": true },
@@ -171,7 +171,7 @@ HOST: https://drill.fprochazka.com/
 + Request (application/json)
 
             {
-                "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
             }
 
 + Response 201 (application/json)
@@ -184,7 +184,7 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": 1,
-                "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "answers": [ 
                     {
                         "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
@@ -204,10 +204,10 @@ HOST: https://drill.fprochazka.com/
                 "exams": [
                     {
                         "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
-                        "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                        "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                         "answers": [ 
                             {
-                                "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                                "questionId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                                 "correct": 0,
                                 "incorrect": 0
                             }
@@ -218,12 +218,12 @@ HOST: https://drill.fprochazka.com/
 
 
             
-## Exam [/user/{user_id}/exam/{exam_id}]
+## Exam [/user/{userId}/exam/{examId}]
 
 + Parameters
 
-    + user_id (number) - ID of relevant user
-    + exam_id (number) - ID of relevant exam
+    + userId (number) - ID of relevant user
+    + examId (number) - ID of relevant exam
 
 ### Get exam details [GET]
 
@@ -233,10 +233,10 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
-                "drill_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "answers": [ 
                     {
-                        "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                        "questionId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                         "correct": 0,
                         "incorrect": 0
                     }
@@ -250,11 +250,11 @@ HOST: https://drill.fprochazka.com/
         {
             "answers": [
                 {
-                    "question_id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
+                    "questionId": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
                     "correct": true
                 }, 
                 {
-                    "question_id": "05017834-6be7-4046-a351-7d22d577efb3",
+                    "questionId": "05017834-6be7-4046-a351-7d22d577efb3",
                     "correct": false
                 }
             ]
@@ -262,13 +262,13 @@ HOST: https://drill.fprochazka.com/
         
 + Response 200 (application/json)
 
-## Answering question [/user/{user_id}/exam/{exam_id}/question/{question_id}]
+## Answering question [/user/{userId}/exam/{examId}/question/{questionId}]
 
 + Parameters
 
-    + user_id (number) - ID of relevant user
-    + exam_id (number) - ID of relevant exam
-    + question_id (number) - ID of relevant question
+    + userId (number) - ID of relevant user
+    + examId (number) - ID of relevant exam
+    + questionId (number) - ID of relevant question
 
 ### Get question in exam [GET]
 
