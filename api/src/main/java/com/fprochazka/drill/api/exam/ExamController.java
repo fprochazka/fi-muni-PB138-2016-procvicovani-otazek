@@ -5,7 +5,6 @@ import com.fprochazka.drill.model.exam.ExamFacade;
 import com.fprochazka.drill.model.exam.ExamRepository;
 import com.fprochazka.drill.model.exam.question.ExamQuestion;
 import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
-import com.fprochazka.drill.model.exceptions.ExamAlreadyExistsException;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
