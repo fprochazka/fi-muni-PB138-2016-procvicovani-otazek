@@ -1,3 +1,6 @@
 language: java
 services: mongodb
-script: cd api/ && mvn test
+
+install:
+  - cd $TRAVIS_BUILD_DIR/api/ && nvm install
+script: cd $TRAVIS_BUILD_DIR/api/ && mvn test
