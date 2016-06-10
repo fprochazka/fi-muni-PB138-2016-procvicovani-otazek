@@ -7,6 +7,7 @@ import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -69,11 +70,19 @@ public class DrillController
 	 */
 	@RequestMapping(value = "/drill", method = RequestMethod.POST)
 	public DrillResponse createDrill(
-		@RequestBody CreateDrillRequest createDrillRequest
-	) throws NotUniqueException
+		@RequestBody CreateDrillRequest createDrillRequest,
+		HttpServletResponse response
+	)
 	{
-		Drill drill = drillFacade.createDrill("nemam", createDrillRequest.getName());
+		try {
+			Drill drill = drillFacade.createDrill("nemam", createDrillRequest.getName());
+			return drillResponseFactory.createDrillResponse(drill);
+		}
+		catch( NotUniqueException ex )
+		{
+			//response.setStatus();
+		}
 
-		return drillResponseFactory.createDrillResponse(drill);
+		return null;
 	}
 }

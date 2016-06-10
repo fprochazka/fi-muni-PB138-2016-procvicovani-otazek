@@ -14,7 +14,7 @@ public class DrillResponseFactory
 
 	public DrillResponse createDrillResponse(Drill drill)
 	{
-		return new DrillResponse(drill.getId(), drill.getName());
+		return new DrillResponse(drill.getId(), drill.getCode(), drill.getName());
 	}
 
 	public Collection<DrillResponse> createDrillsResponse(Iterable<Drill> drills)
