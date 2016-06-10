@@ -27,6 +27,7 @@ public class QuestionFacade
 	{
 		Drill drill = drillRepository.findOne(drillId);
 		Question question = new Question(title, answers, drill);
+
 		questionRepository.save(question);
 
 		return question;

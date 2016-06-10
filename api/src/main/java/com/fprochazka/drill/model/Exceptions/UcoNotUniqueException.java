@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model.Exceptions;
+package com.fprochazka.drill.model.exceptions;
 
 /**
  * Created by Michaela Bamburová on 10.06.2016.

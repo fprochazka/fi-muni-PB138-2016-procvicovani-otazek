@@ -10,6 +10,7 @@ import com.fprochazka.drill.model.exam.Exam;
 import com.fprochazka.drill.model.exam.ExamRepository;
 import com.fprochazka.drill.model.exam.question.ExamQuestion;
 import com.fprochazka.drill.model.exam.question.ExamQuestionRepository;
+import com.fprochazka.drill.model.exceptions.DrillCodeNotUniqueException;
 import com.fprochazka.drill.model.student.Student;
 import com.fprochazka.drill.model.student.StudentRepository;
 import com.mongodb.DB;
@@ -83,6 +84,26 @@ public class Pb138drillApplicationTests
 		List<Question> drillQuestions = questionRepository.getQuestionsByDrill(drill.getId());
 		assertEquals(3, drillQuestions.size());
 	}
+
+	@Test
+	public void testFindDrillById() {
+		Drill drill = createAndPersistFixtures();
+		Drill drill2 = createAndPersistFixtures();
+
+		assertEquals(drill2, drillRepository.getDrillById(drill2.getId()));
+	}
+
+	@Test (expected = DrillCodeNotUniqueException.class)
+	public void testFindDrillByCode() {
+		Drill drill = createAndPersistFixtures();
+		Drill drill2 = createAndPersistFixtures();
+
+		drillRepository.getDrillByCode(drill2.getCode());
+		//assertEquals(drill2, drillRepository.getDrillByCode(drill2.getCode()));
+	}
+
+
+
 
 	private Drill createAndPersistFixtures()
 	{

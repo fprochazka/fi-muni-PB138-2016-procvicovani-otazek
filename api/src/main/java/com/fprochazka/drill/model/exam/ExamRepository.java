@@ -14,4 +14,6 @@ public interface ExamRepository extends CrudRepository<Exam, UUID>
 
 	List<Exam> getExamsByStudent(UUID studentId);
 
+	Exam getExamByDrillAndStudent(UUID drillId, UUID studentId);
+
 }
