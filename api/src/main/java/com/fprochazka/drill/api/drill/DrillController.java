@@ -7,6 +7,8 @@ import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -50,12 +52,13 @@ public class DrillController
 	 */
 	@RequestMapping(value = "/drill/{drillId}", method = RequestMethod.GET)
 	public @ResponseBody DrillResponse getDrillById(
-		@PathVariable("drillId") UUID drillId
+		@PathVariable("drillId") UUID drillId,
+		HttpServletResponse response
 	)
 	{
 		Drill drill = drillRepository.getDrillById(drillId);
 		if (drill == null) {
-			// todo: error
+			response.setStatus( 404 );
 		}
 		return drillResponseFactory.createDrillResponse(drill);
 	}
@@ -69,11 +72,19 @@ public class DrillController
 	 */
 	@RequestMapping(value = "/drill", method = RequestMethod.POST)
 	public DrillResponse createDrill(
-		@RequestBody CreateDrillRequest createDrillRequest
-	) throws NotUniqueException
+		@Valid @RequestBody CreateDrillRequest createDrillRequest,
+		HttpServletResponse response
+	)
 	{
-		Drill drill = drillFacade.createDrill("nemam", createDrillRequest.getName());
+		try {
+			Drill drill = drillFacade.createDrill( createDrillRequest.getCode(), createDrillRequest.getName());
+			return drillResponseFactory.createDrillResponse(drill);
+		}
+		catch( NotUniqueException ex )
+		{
+			response.setStatus( 400 );
+		}
 
-		return drillResponseFactory.createDrillResponse(drill);
+		return null;
 	}
 }

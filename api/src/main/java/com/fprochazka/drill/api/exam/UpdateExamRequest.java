@@ -1,5 +1,7 @@
 package com.fprochazka.drill.api.exam;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.UUID;
 
 /**
@@ -7,8 +9,10 @@ import java.util.UUID;
  */
 public class UpdateExamRequest
 {
-
+	@NotEmpty
 	private UUID questionId;
+
+	@NotEmpty
 	private Boolean correct;
 
 
