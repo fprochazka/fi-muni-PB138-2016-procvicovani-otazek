@@ -75,9 +75,13 @@ public class Pb138drillApplicationTests
 	public void testFindDrill()
 	{
 		Drill drill = createAndPersistFixtures();
+		Drill drill2 = createAndPersistFixtures();
 
-		List<Question> questions = (List<Question>) questionRepository.findAll();
-		assertEquals(questions, questionRepository.getQuestionsByDrill(drill.getId()));
+		List<Question> allQuestions = (List<Question>) questionRepository.findAll();
+		assertEquals(6, allQuestions.size());
+
+		List<Question> drillQuestions = questionRepository.getQuestionsByDrill(drill.getId());
+		assertEquals(3, drillQuestions.size());
 	}
 
 	private Drill createAndPersistFixtures()
