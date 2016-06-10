@@ -1,3 +1,7 @@
 language: java
+jdk:
+  - oraclejdk8
+
 services: mongodb
+
 script: cd api/ && mvn test
