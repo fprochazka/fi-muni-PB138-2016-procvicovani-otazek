@@ -14,25 +14,17 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ApplicationConfig.class)
-public class DrillRepositoryTests extends IntegrationTestCase
+public class DrillFacadeTests extends IntegrationTestCase
 {
 
 	@Autowired
-	private DrillRepository drillRepository;
+	private DrillFacade drillFacade;
 
-	@Test //(expected = com.fprochazka.drill.model.exceptions.DrillCodeNotUniqueException.class)
-	public void testFindDrillByCode()
+	@Test(expected = DrillCodeNotUniqueException.class)
+	public void testCreateDrillWithNoneUniqueIdThrowsException() throws DrillCodeNotUniqueException
 	{
-		// drillRepository.getDrillByCode(DrillTestFixtures.drillMB104.getCode());
-		assertEquals(DrillTestFixtures.drillMB104, drillRepository.getDrillByCode(DrillTestFixtures.drillMB104.getCode()));
+		drillFacade.createDrill("PB138", "Znacky");
 	}
-
-	@Test
-	public void testFindDrillById()
-	{
-		assertEquals(DrillTestFixtures.drillPB138, drillRepository.getDrillById(DrillTestFixtures.drillPB138.getId()));
-	}
-
 
 
 }
