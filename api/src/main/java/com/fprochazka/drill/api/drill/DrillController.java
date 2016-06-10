@@ -3,7 +3,7 @@ package com.fprochazka.drill.api.drill;
 import com.fprochazka.drill.model.drill.Drill;
 import com.fprochazka.drill.model.drill.DrillFacade;
 import com.fprochazka.drill.model.drill.DrillRepository;
-import com.fprochazka.drill.model.exceptions.DrillCodeNotUniqueException;
+import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,7 +70,7 @@ public class DrillController
 	@RequestMapping(value = "/drill", method = RequestMethod.POST)
 	public DrillResponse createDrill(
 		@RequestBody CreateDrillRequest createDrillRequest
-	) throws DrillCodeNotUniqueException
+	) throws NotUniqueException
 	{
 		Drill drill = drillFacade.createDrill("nemam", createDrillRequest.getName());
 

@@ -3,6 +3,7 @@ package com.fprochazka.drill.api.question;
 import com.fprochazka.drill.api.question.answer.AnswerFactory;
 import com.fprochazka.drill.model.drill.question.*;
 import com.fprochazka.drill.model.drill.question.Answer;
+import com.fprochazka.drill.model.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,7 @@ public class QuestionController
 		@PathVariable UUID drillId
 	)
 	{
-		Iterable<Question> questions = questionFacade.getAllQuestionsInDrill(drillId);
+		Iterable<Question> questions = questionRepository.getQuestionsByDrill(drillId);
 		return questionFactory.createQuestionsResponse(questions);
 	}
 
@@ -65,7 +66,7 @@ public class QuestionController
 		method = RequestMethod.POST)
 	public void createQuestion(
 		@PathVariable UUID drillId,
-		@RequestBody CreateQuestionRequest questionRequest)
+		@RequestBody CreateQuestionRequest questionRequest) throws NotFoundException
 	{
 
 		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
@@ -100,7 +101,7 @@ public class QuestionController
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
 		@RequestBody UpdateQuestionRequest questionRequest
-	)
+	) throws NotFoundException
 	{
 		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
 		Question question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);

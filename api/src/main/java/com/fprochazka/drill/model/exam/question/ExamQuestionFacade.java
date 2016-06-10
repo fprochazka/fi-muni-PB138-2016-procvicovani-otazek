@@ -1,11 +1,11 @@
 package com.fprochazka.drill.model.exam.question;
 
-import com.fprochazka.drill.model.drill.question.Question;
+import com.fprochazka.drill.model.drill.question.QuestionRepository;
+import com.fprochazka.drill.model.exam.ExamRepository;
+import com.fprochazka.drill.model.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -13,66 +13,53 @@ public class ExamQuestionFacade
 {
 
 	private ExamQuestionRepository examQuestionRepository;
+	private ExamRepository examRepository;
+	private QuestionRepository questionRepository;
 
 	@Autowired
-	public ExamQuestionFacade(ExamQuestionRepository examQuestionRepository)
+	public ExamQuestionFacade(ExamQuestionRepository examQuestionRepository, ExamRepository examRepository, QuestionRepository questionRepository)
 	{
 		this.examQuestionRepository = examQuestionRepository;
+		this.examRepository = examRepository;
+		this.questionRepository = questionRepository;
 	}
 
-
-	public ExamQuestion updateExamQuestion(Question question)
+	public ExamQuestion updateExamQuestionIncreaseCorrect(UUID examId, UUID questionId, int newCorrect) throws NotFoundException
 	{
-		ExamQuestion ExamQuestion = examQuestionRepository.findOne(question.getId());
+		if (examRepository.findOne(examId) == null) {
+			throw new NotFoundException();
+		}
+		if (questionRepository.findOne(questionId) == null) {
+			throw new NotFoundException();
+		}
 
-		//TODO
+		ExamQuestion examQuestion = examQuestionRepository.getExamquestionByQuestionAndExam(questionId, examId);
 
-		examQuestionRepository.save(ExamQuestion);
-		return ExamQuestion;
-	}
-
-	public List<ExamQuestion> getByExamId(UUID examId)
-	{
-		List<ExamQuestion> q = new ArrayList<>();
-		return q;
-	}
-	/*
-	public ExamQuestion getExamQuestionByExamAndQuestion(UUID questionId, UUID examId) {
-		//TODO
-
-
-
-		return
-	}
-
-	public ExamQuestion getExamQuestionByQuestion(UUID questionId) {
-		ExamQuestion examQuestion = examQuestionRepository.getExamQuestionByQuestion(questionId);
+		if (examQuestion == null) {
+			throw new NotFoundException();
+		}
+		examQuestion.increaseCorrect(newCorrect);
+		examQuestionRepository.save(examQuestion);
 		return examQuestion;
 	}
 
+	public ExamQuestion updateExamQuestionIncreaseWrong(UUID examId, UUID questionId, int newWrong) throws NotFoundException
+	{
+		if (examRepository.findOne(examId) == null) {
+			throw new NotFoundException();
+		}
+		if (questionRepository.findOne(questionId) == null) {
+			throw new NotFoundException();
+		}
 
+		ExamQuestion examQuestion = examQuestionRepository.getExamquestionByQuestionAndExam(questionId, examId);
 
-	/*
-	public ExamQuestion updateExamQuestion
-	 */
-
-	/*
-	public Exam updateExamIncreateCorrect(UUID examId, UUID questionId, int newCorrect) {
-		//
-		Exam exam =
-
-		examRepository.save(exam);
-		return exam;
+		if (examQuestion == null) {
+			throw new NotFoundException();
+		}
+		examQuestion.increaseWrong(newWrong);
+		examQuestionRepository.save(examQuestion);
+		return examQuestion;
 	}
-
-	public Exam updateExamIncreateWrong(UUID examId, UUID questionId, int newWrong) {
-
-		Exam exam =
-
-			examRepository.save(exam);
-		return exam;
-	}*/
-
-
 
 }
