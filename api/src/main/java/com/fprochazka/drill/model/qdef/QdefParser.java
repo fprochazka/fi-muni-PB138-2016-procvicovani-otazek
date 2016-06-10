@@ -6,7 +6,6 @@ import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class QdefParser
 {
@@ -53,32 +52,20 @@ public class QdefParser
 	private ArrayList<ArrayList<String>> readFile(File file) throws IOException
 	{
 		ArrayList<ArrayList<String>> result = new ArrayList<>();
-		ArrayList<String> block = new ArrayList<>();
-		BufferedReader in = null;
-
-		try {
-			in = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		Scanner scanner = new Scanner(file, "UTF-8");
-		String lastLine = null;
-		while (scanner.hasNextLine()) {
-			lastLine = scanner.nextLine();
-		}
 
 		String inputLine;
-		try {
+		try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+			ArrayList<String> block = new ArrayList<>();
+
 			while ((inputLine = in.readLine()) != null) {
-				if (inputLine.equals("--") || inputLine.equals(lastLine)) {
+				if (inputLine.equals("--")) {
 					result.add(new ArrayList<>(block));
 					block.clear();
 					continue;
 				}
 				block.add(inputLine);
 			}
-			if (in.readLine() == null) {
+			if (block.size() > 0) {
 				result.add(new ArrayList<>(block));
 				block.clear();
 			}
@@ -86,7 +73,6 @@ public class QdefParser
 			e.printStackTrace();
 		}
 
-		in.close();
 		return result;
 	}
 }
