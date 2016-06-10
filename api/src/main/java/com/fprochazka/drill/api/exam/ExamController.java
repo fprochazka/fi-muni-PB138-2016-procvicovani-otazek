@@ -32,11 +32,11 @@ public class ExamController {
 	/**
      * Function creates new exam for given user and drill. If exam already exists, does nothing.
      *
-     * @param drillId - ID of drill we want to create exam for
+     * @param request - ID of drill we want to create exam for
      */
     @RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
-    public void createExam(@PathVariable UUID userId, @RequestBody UUID drillId) {
-		examFacade.createExam( drillId, userId );
+    public void createExam(@PathVariable("userId") UUID userId, @RequestBody CreateExamRequest request ) {
+		examFacade.createExam( request.getDrillId(), userId );
     }
 
     /**
