@@ -55,7 +55,7 @@ public class DrillController {
     public DrillResponse createDrill(
 		@RequestBody CreateDrillRequest createDrillRequest
 	) {
-		Drill drill = drillFacade.createDrill("", createDrillRequest.getName());
+		Drill drill = drillFacade.createDrill("nemam", createDrillRequest.getName());
 		return drillResponseFactory.createDrillResponse(drill);
     }
 }
