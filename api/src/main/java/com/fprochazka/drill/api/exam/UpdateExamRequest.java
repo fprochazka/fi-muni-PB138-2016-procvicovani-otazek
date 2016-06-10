@@ -1,6 +1,6 @@
 package com.fprochazka.drill.api.exam;
 
-import com.sun.istack.internal.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.UUID;
 
@@ -9,10 +9,10 @@ import java.util.UUID;
  */
 public class UpdateExamRequest
 {
-	@NotNull
+	@NotEmpty
 	private UUID questionId;
 
-	@NotNull
+	@NotEmpty
 	private Boolean correct;
 
 

@@ -1,6 +1,7 @@
 package com.fprochazka.drill.api.exam;
 
-import com.sun.istack.internal.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.UUID;
 
@@ -9,7 +10,7 @@ import java.util.UUID;
  */
 public class CreateExamRequest
 {
-	@NotNull
+	@NotEmpty
 	private UUID drillId;
 
 	public CreateExamRequest(UUID drillId)

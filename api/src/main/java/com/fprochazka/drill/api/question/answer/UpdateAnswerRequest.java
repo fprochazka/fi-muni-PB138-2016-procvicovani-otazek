@@ -1,6 +1,5 @@
 package com.fprochazka.drill.api.question.answer;
 
-import com.sun.istack.internal.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -8,11 +7,10 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class UpdateAnswerRequest
 {
-	@NotNull
 	@NotEmpty
 	private String text;
 
-	@NotNull
+	@NotEmpty
 	private Boolean correct;
 
 	public UpdateAnswerRequest(String text, Boolean correct)
