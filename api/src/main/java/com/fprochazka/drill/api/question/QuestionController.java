@@ -7,6 +7,8 @@ import com.fprochazka.drill.model.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -61,16 +63,17 @@ public class QuestionController
 	 * @param drillId         - ID of the drill we want to add question to
 	 * @param questionRequest
 	 */
-	@RequestMapping(
-		value = "/drill/{drillId}/question",
-		method = RequestMethod.POST)
+	@RequestMapping( value = "/drill/{drillId}/question", method = RequestMethod.POST)
 	public void createQuestion(
 		@PathVariable UUID drillId,
-		@RequestBody CreateQuestionRequest questionRequest) throws NotFoundException
+		@Valid @RequestBody CreateQuestionRequest questionRequest)
 	{
-
 		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
-		questionFacade.createQuestion(questionRequest.getTitle(), answers, drillId);
+		try {
+			questionFacade.createQuestion(questionRequest.getTitle(), answers, drillId);
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -81,11 +84,14 @@ public class QuestionController
 	 * @return question with given ID
 	 */
 	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.GET)
-	public @ResponseBody QuestionResponse getQuestion(@PathVariable UUID drillId, @PathVariable UUID questionId)
+	public @ResponseBody QuestionResponse getQuestion(
+		@PathVariable UUID drillId,
+		@PathVariable UUID questionId,
+		HttpServletResponse response)
 	{
 		Question question = questionRepository.getQuestionById(questionId);
 		if (question == null) {
-			// TODO
+			response.setStatus( 404 );
 		}
 		return questionFactory.createQuestionResponse(question);
 	}
@@ -100,12 +106,17 @@ public class QuestionController
 	public @ResponseBody QuestionResponse updateQuestion(
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
-		@RequestBody UpdateQuestionRequest questionRequest
-	) throws NotFoundException
+		@Valid @RequestBody UpdateQuestionRequest questionRequest,
+		HttpServletResponse response
+	)
 	{
 		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
-		Question question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);
+		Question question = null;
+		try {
+			question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 		return questionFactory.createQuestionResponse(question);
-		//return null;
 	}
 }

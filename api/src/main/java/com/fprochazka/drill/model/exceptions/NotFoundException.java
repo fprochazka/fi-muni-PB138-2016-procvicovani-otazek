@@ -18,4 +18,5 @@ public class NotFoundException extends Exception
 	{
 		super(message, cause);
 	}
+
 }

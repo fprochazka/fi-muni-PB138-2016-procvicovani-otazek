@@ -1,7 +1,7 @@
 package com.fprochazka.drill.api.question;
 
 import com.fprochazka.drill.api.question.answer.CreateAnswerRequest;
-import com.fprochazka.drill.model.drill.question.Answer;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Collection;
 
@@ -10,7 +10,10 @@ import java.util.Collection;
  */
 public class CreateQuestionRequest
 {
+	@NotEmpty
 	private String title;
+
+	@NotEmpty
 	private Collection<CreateAnswerRequest> answers;
 
 	public CreateQuestionRequest(String title, Collection<CreateAnswerRequest> answers)
