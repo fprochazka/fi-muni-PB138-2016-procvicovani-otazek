@@ -3,6 +3,7 @@ package com.fprochazka.drill.model.drill.question;
 import com.fprochazka.drill.model.Identified;
 import com.fprochazka.drill.model.drill.Drill;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
@@ -17,6 +18,7 @@ public class Question extends Identified
 
 	private List<Answer> answers;
 
+	@DBRef
 	private Drill drill;
 
 	public Question(String title, List<Answer> answers, Drill drill)

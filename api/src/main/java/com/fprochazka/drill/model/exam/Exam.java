@@ -4,6 +4,7 @@ import com.fprochazka.drill.model.Identified;
 import com.fprochazka.drill.model.drill.Drill;
 import com.fprochazka.drill.model.student.Student;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "student_exams")
@@ -11,7 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Exam extends Identified
 {
 
+	@DBRef
 	private final Drill drill;
+
+	@DBRef
 	private final Student student;
 
 	public Exam(Drill drill, Student student)

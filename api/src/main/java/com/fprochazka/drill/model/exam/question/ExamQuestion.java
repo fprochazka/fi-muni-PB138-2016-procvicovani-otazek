@@ -4,6 +4,7 @@ import com.fprochazka.drill.model.Identified;
 import com.fprochazka.drill.model.exam.Exam;
 import com.fprochazka.drill.model.drill.question.Question;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "student_exam_questions")
@@ -11,8 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ExamQuestion extends Identified
 {
 
+	@DBRef
 	private Question question;
+
+	@DBRef
 	private Exam exam;
+
 	private int correct;
 	private int wrong;
 
