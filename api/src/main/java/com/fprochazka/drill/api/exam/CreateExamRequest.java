@@ -1,5 +1,7 @@
 package com.fprochazka.drill.api.exam;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.UUID;
 
 /**
@@ -7,7 +9,7 @@ import java.util.UUID;
  */
 public class CreateExamRequest
 {
-
+	@NotNull
 	private UUID drillId;
 
 	public CreateExamRequest(UUID drillId)

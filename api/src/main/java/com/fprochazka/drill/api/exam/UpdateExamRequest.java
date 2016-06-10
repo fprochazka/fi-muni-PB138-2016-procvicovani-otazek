@@ -1,5 +1,7 @@
 package com.fprochazka.drill.api.exam;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.UUID;
 
 /**
@@ -7,8 +9,10 @@ import java.util.UUID;
  */
 public class UpdateExamRequest
 {
-
+	@NotNull
 	private UUID questionId;
+
+	@NotNull
 	private Boolean correct;
 
 
