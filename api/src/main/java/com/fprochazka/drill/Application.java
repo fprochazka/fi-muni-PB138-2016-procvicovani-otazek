@@ -4,6 +4,8 @@ package com.fprochazka.drill;
 import com.fprochazka.drill.config.ApplicationConfig;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 public class Application

@@ -1,56 +1,110 @@
 package com.fprochazka.drill.api.question;
 
-import org.springframework.ui.Model;
+import com.fprochazka.drill.api.question.answer.AnswerFactory;
+import com.fprochazka.drill.model.drill.question.*;
+import com.fprochazka.drill.model.drill.question.Answer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-public class QuestionController {
+public class QuestionController
+{
 
-    /**
-     * Function returns all questions in database belonging to given drill.
-     *
-     * @return ArrayList of type Question, all question of the drill in database
-     */
-    @RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.GET)
-    public @ResponseBody Collection<Object> getAllQuestionsInDrill() {
-        List<Object> questions = new ArrayList<>();
-        // get all questions of the drill with given ID
-        return questions;
-    }
+	private QuestionFacade questionFacade;
+	private QuestionRepository questionRepository;
+	private QuestionFactory questionFactory;
+	private AnswerFactory answerFactory;
 
-    /**
-     * Function gets model of question (required parameters: text, answers, for each answer sign, whether it's correct). Then new ID is generated (on which level?) and new model is saved to DB.
-     *
-     * @param question - JSON object parsed to suitable Java object, preferably Question
-     */
-    @RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.POST)
-    public void createQuestion(@RequestBody QuestionRequest question) {
-        // parse Model to Question, then save it to database
-    }
+	@Autowired
+	public QuestionController(
+		QuestionFacade questionFacade,
+		QuestionRepository questionRepository,
+		QuestionFactory questionResponseFactory,
+		AnswerFactory answerFactory)
+	{
+		this.questionFacade = questionFacade;
+		this.questionRepository = questionRepository;
+		this.questionFactory = questionResponseFactory;
+		this.answerFactory = answerFactory;
+	}
 
-    /**
-     * Function finds question in database with given ID and returns it
-     *
-     * @return model of question with given ID
-     */
-    @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.GET)
-    public @ResponseBody QuestionRequest getQuestion() {
-        // find question in database by given ID and return it
-        return null;
-    }
+	/**
+	 * Find all questions in given drill and create response objects for each
+	 * found question. Return collection of created objects.
+	 *
+	 * @param drillId - ID of the drill we want to find questions in
+	 * @return collection of response objects for found questions
+	 */
+	@RequestMapping(
+		value = "/drill/{drillId}/question",
+		method = RequestMethod.GET,
+		headers = {"content-type=application/json", "accept=application/json"}
+	)
+	public @ResponseBody Collection<QuestionResponse> getAllQuestionsInDrill(
+		@PathVariable UUID drillId
+	)
+	{
+		Iterable<Question> questions = questionFacade.getAllQuestionsInDrill(drillId);
+		return questionFactory.createQuestionsResponse(questions);
+	}
 
-    /**
-     * Function updates identified question according to given model
-     *
-     * @param question - JSON object parsed to suitable Java object, preferably Question
-     */
-    @RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.PUT)
-    public @ResponseBody QuestionRequest updateQuestion(@RequestBody QuestionRequest question) {
-        // find question with given ID and update it
-        return question;
-    }
+	/**
+	 * Function gets model of question (required parameters: text, answers,
+	 * for each answer sign, whether it's correct). Then new ID is generated
+	 * and new model is saved to DB.
+	 *
+	 * @param drillId         - ID of the drill we want to add question to
+	 * @param questionRequest
+	 */
+	@RequestMapping(
+		value = "/drill/{drillId}/question",
+		method = RequestMethod.POST)
+	public void createQuestion(
+		@PathVariable UUID drillId,
+		@RequestBody CreateQuestionRequest questionRequest)
+	{
+
+		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
+		questionFacade.createQuestion(questionRequest.getTitle(), answers, drillId);
+	}
+
+	/**
+	 * Find question with given ID and return response object of it.
+	 *
+	 * @param drillId    - ID of the drill we want to find question in
+	 * @param questionId - ID of the question we want find
+	 * @return question with given ID
+	 */
+	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.GET)
+	public @ResponseBody QuestionResponse getQuestion(@PathVariable UUID drillId, @PathVariable UUID questionId)
+	{
+		Question question = questionRepository.getQuestionById(questionId);
+		if (question == null) {
+			// TODO
+		}
+		return questionFactory.createQuestionResponse(question);
+	}
+
+	/**
+	 * Update question
+	 *
+	 * @param questionId      - ID of the question we want to update
+	 * @param questionRequest - updated question
+	 */
+	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.POST)
+	public @ResponseBody QuestionResponse updateQuestion(
+		@PathVariable UUID drillId,
+		@PathVariable UUID questionId,
+		@RequestBody UpdateQuestionRequest questionRequest
+	)
+	{
+		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
+		Question question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);
+		return questionFactory.createQuestionResponse(question);
+		//return null;
+	}
 }

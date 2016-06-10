@@ -1,50 +1,109 @@
 package com.fprochazka.drill.api.exam;
 
+import com.fprochazka.drill.model.exam.Exam;
+import com.fprochazka.drill.model.exam.ExamFacade;
+import com.fprochazka.drill.model.exam.ExamRepository;
+import com.fprochazka.drill.model.exam.question.ExamQuestion;
+import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
+import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
-public class ExamController {
+public class ExamController
+{
 
-    /**
-     * Function creates new exam for given user and drill. If exam already exists, does nothing.
-     *
-     * @param drillId - ID of drill we want to create exam for
-     */
-    @RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
-    public void createExam(@RequestBody UUID drillId) {
+	private ExamFactory examFactory;
+	private ExamFacade examFacade;
+	private ExamQuestionFacade examQuestionFacade;
+	private ExamRepository examRepository;
 
-    }
+	@Autowired
+	public ExamController(
+		ExamFactory examFactory,
+		ExamFacade examFacade,
+		ExamQuestionFacade examQuestionFacade,
+		ExamRepository examRepository)
+	{
+		this.examFactory = examFactory;
+		this.examFacade = examFacade;
+		this.examQuestionFacade = examQuestionFacade;
+		this.examRepository = examRepository;
+	}
 
-    /**
-     * Function finds in DB all exams of the user and returns them. If there are no exams, returns empty list.
-     *
-     * @return exams - ArrayList of all exams of given user.
-     */
-    @RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.GET)
-    public @ResponseBody Collection<Object> getAllExams() {
-        return null;
-    }
+	/**
+	 * Function creates new exam for given user and drill. If exam already exists, does nothing.
+	 *
+	 * @param request - ID of drill we want to create exam for
+	 */
+	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
+	public void createExam(@PathVariable("userId") UUID userId, @RequestBody CreateExamRequest request)
+	{
+		examFacade.createExam(request.getDrillId(), userId);
+	}
 
-    /**
-     * Function finds in DB exam object corresponding to given ID. If doesn't exist, return null.
-     *
-     * @return exam - of type Exam, identified by examId
-     */
-    @RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
-    public @ResponseBody Object getExam() {
-        return null;
-    }
+	/**
+	 * Find all exams in database of given user.
+	 *
+	 * @return response objects for all found exams
+	 */
+	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.GET)
+	public @ResponseBody Collection<ExamResponse> getAllExams(@PathVariable UUID userId)
+	{
+		return null;
+	}
 
-    /**
-     * Function find exam by given ID and updates its statistics.
-     *
-     * @param answers - list of JSON objects, saying wheter user's answer was correct
-     */
-    @RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.PUT)
-    public void updateExam(@RequestBody Collection<Object> answers) {
-        // Find exam in database, then for each answer in list add counter whether the answer was correct or not
-    }
+	/**
+	 * Find exam with given ID in database, return it's response object.
+	 *
+	 * @return response object for found exam
+	 */
+	@RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
+	public @ResponseBody ExamResponse getExam(
+		@PathVariable UUID examId)
+	{
+		Exam exam = examRepository.getExamById(examId);
+
+		List<ExamQuestion> answers = examQuestionFacade.getByExamId(examId);
+
+		return examFactory.createExamResponse(exam, examFactory.createQuestionsStatistics(answers));
+	}
+
+	/**
+	 * Update questions of given exam with given answers.
+	 *
+	 * @param answers - list of user's answers to questions of exam
+	 */
+	@RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.PUT)
+	public void updateExam(
+		@PathVariable UUID userId,
+		@PathVariable UUID examId,
+		@RequestBody Collection<UpdateExamRequest> answers)
+	{
+
+		Map<UUID, Integer> correct = new HashMap<>();
+		Map<UUID, Integer> wrong = new HashMap<>();
+
+		for (UpdateExamRequest request : answers) {
+			if (request.getCorrect()) {
+				int count = correct.containsKey(request.getQuestionId()) ?
+					correct.get(request.getQuestionId()) : 0;
+				correct.put(request.getQuestionId(), count + 1);
+			} else {
+				int count = wrong.containsKey(request.getQuestionId()) ?
+					wrong.get(request.getQuestionId()) : 0;
+				wrong.put(request.getQuestionId(), count + 1);
+			}
+		}
+
+		for (Map.Entry<UUID, Integer> request : correct.entrySet()) {
+			// examQuestionFacade.updateExamIncreaseCorrect( examId, request.getKey(), request.getValue() );
+		}
+
+		for (Map.Entry<UUID, Integer> request : wrong.entrySet()) {
+			// examQuestionFacade.updateExamIncreaseWrong( examId, request.getKey(), request.getValue() );
+		}
+	}
 }
