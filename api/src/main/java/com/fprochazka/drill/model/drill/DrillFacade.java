@@ -20,7 +20,7 @@ public class DrillFacade
 	{
 		Drill drill = new Drill(code, name);
 		if (drillRepository.getDrillByCode(code) != null) {
-			throw new NotUniqueException();
+			throw new NotUniqueException( Drill.class, "code", code );
 		}
 		drillRepository.save(drill);
 
