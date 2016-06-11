@@ -1,5 +1,7 @@
 package com.fprochazka.drill.api.drill;
 
+import com.fprochazka.drill.model.api.BadRequestException;
+import com.fprochazka.drill.model.api.ResourceNotFoundException;
 import com.fprochazka.drill.model.drill.Drill;
 import com.fprochazka.drill.model.drill.DrillFacade;
 import com.fprochazka.drill.model.drill.DrillRepository;
@@ -54,11 +56,11 @@ public class DrillController
 	public @ResponseBody DrillResponse getDrillById(
 		@PathVariable("drillId") UUID drillId,
 		HttpServletResponse response
-	)
+	) throws ResourceNotFoundException
 	{
 		Drill drill = drillRepository.getDrillById(drillId);
 		if (drill == null) {
-			response.setStatus( 404 );
+			throw new ResourceNotFoundException( "drill-not-found", "Drill with given ID not found." );
 		}
 		return drillResponseFactory.createDrillResponse(drill);
 	}
@@ -71,10 +73,7 @@ public class DrillController
 	 * @return drill response of the new drill
 	 */
 	@RequestMapping(value = "/drill", method = RequestMethod.POST)
-	public DrillResponse createDrill(
-		@Valid @RequestBody CreateDrillRequest createDrillRequest,
-		HttpServletResponse response
-	)
+	public @ResponseBody DrillResponse createDrill(@Valid @RequestBody CreateDrillRequest createDrillRequest ) throws BadRequestException
 	{
 		try {
 			Drill drill = drillFacade.createDrill( createDrillRequest.getCode(), createDrillRequest.getName());
@@ -82,9 +81,7 @@ public class DrillController
 		}
 		catch( NotUniqueException ex )
 		{
-			response.setStatus( 400 );
+			throw new BadRequestException( "drill-code-not-unique", "Drill with code " + createDrillRequest.getCode() + " already exists." );
 		}
-
-		return null;
 	}
 }
