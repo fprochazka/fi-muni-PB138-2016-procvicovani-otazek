@@ -81,7 +81,7 @@ public class DrillController
 		}
 		catch( NotUniqueException ex )
 		{
-			throw new BadRequestException( "drill-code-not-unique", "Drill with code " + createDrillRequest.getCode() + " already exists." );
+			throw new BadRequestException( ex, "drill-code-not-unique", "Drill with code " + createDrillRequest.getCode() + " already exists.");
 		}
 	}
 }
