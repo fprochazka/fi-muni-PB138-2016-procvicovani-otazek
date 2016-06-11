@@ -3,13 +3,11 @@ package com.fprochazka.drill.api.error;
 import com.fprochazka.drill.model.api.*;
 import com.fprochazka.drill.model.api.authentication.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.rmi.UnexpectedException;
 import java.util.Collections;
 
 @RestController
@@ -19,16 +17,13 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
 	public final static String CODE_REQUEST_VALIDATION_ERROR = "request-validation-error";
 	public final static String CODE_INTERNAL_SERVER_ERROR = "internal-server-error";
 
-	private ErrorAttributes errorAttributes;
-
 	private ErrorResponseFactory errorResponseFactory;
 
 	private final static String ERROR_PATH = "/error";
 
 	@Autowired
-	public ErrorController(ErrorAttributes errorAttributes, ErrorResponseFactory errorResponseFactory)
+	public ErrorController(ErrorResponseFactory errorResponseFactory)
 	{
-		this.errorAttributes = errorAttributes;
 		this.errorResponseFactory = errorResponseFactory;
 	}
 
