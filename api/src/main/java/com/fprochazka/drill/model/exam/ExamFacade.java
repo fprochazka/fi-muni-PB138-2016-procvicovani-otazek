@@ -1,18 +1,14 @@
 package com.fprochazka.drill.model.exam;
 
 import com.fprochazka.drill.model.drill.Drill;
+import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.DrillRepository;
-import com.fprochazka.drill.model.drill.question.Question;
-import com.fprochazka.drill.model.drill.question.QuestionRepository;
-import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import com.fprochazka.drill.model.student.Student;
+import com.fprochazka.drill.model.student.StudentNotFoundException;
 import com.fprochazka.drill.model.student.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,21 +27,21 @@ public class ExamFacade
 		this.studentRepository = studentRepository;
 	}
 
-	public Exam createExam(UUID drillId, UUID studentId) throws NotUniqueException, NotFoundException
+	public Exam createExam(UUID drillId, UUID studentId) throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
 	{
 		Drill drill = drillRepository.findOne(drillId);
 		Student student = studentRepository.findOne(studentId);
 
 		if (drill == null) {
-			throw new NotFoundException();
+			throw new DrillNotFoundException();
 		}
 		if (student == null) {
-			throw new NotFoundException();
+			throw new StudentNotFoundException(  );
 		}
 		Exam studentExam = new Exam(drill, student);
 
 		if (examRepository.getExamByDrillAndStudent(studentExam.getDrill().getId(), studentExam.getStudent().getId()) != null) {
-			throw new NotUniqueException();
+			throw new ExamNotUniqueException();
 		}
 		examRepository.save(studentExam);
 

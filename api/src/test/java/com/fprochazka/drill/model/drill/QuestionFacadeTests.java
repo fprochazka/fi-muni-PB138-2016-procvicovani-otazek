@@ -5,8 +5,6 @@ import com.fprochazka.drill.config.ApplicationConfig;
 import com.fprochazka.drill.fixtures.DrillTestFixtures;
 import com.fprochazka.drill.model.drill.question.Answer;
 import com.fprochazka.drill.model.drill.question.QuestionFacade;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +25,23 @@ public class QuestionFacadeTests extends IntegrationTestCase
 	@Autowired
 	private QuestionFacade questionFacade;
 
-	@Test(expected = NotFoundException.class)
-	public void testCreateQuestionWithNullDrillThrowsException() throws NotFoundException
+	@Test(expected = DrillNotFoundException.class)
+	public void testCreateQuestionWithNullDrillThrowsException() throws DrillNotFoundException
 	{
 		List<Answer> answers = new ArrayList<>();
 		Drill drill = new Drill("PB", "drill name");
 		questionFacade.createQuestion("question 1", answers, drill.getId());
 	}
 
-	@Test(expected = NotFoundException.class)
-	public void testUpdateNullQuestionThrowsException() throws NotFoundException
+	@Test(expected = DrillNotFoundException.class)
+	public void testUpdateNullQuestionThrowsException() throws DrillNotFoundException
 	{
 
 		questionFacade.updateQuestion(null, "question 1", null);
 	}
 
 	@Test
-	public void testUpdateCorrectQuestion() throws NotFoundException
+	public void testUpdateCorrectQuestion() throws DrillNotFoundException
 	{
 		questionFacade.updateQuestion(DrillTestFixtures.drillMB104question1.getId(), "question 1", null);
 	}

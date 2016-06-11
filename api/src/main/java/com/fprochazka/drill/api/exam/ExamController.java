@@ -1,13 +1,12 @@
 package com.fprochazka.drill.api.exam;
 
-import com.fprochazka.drill.model.exam.Exam;
-import com.fprochazka.drill.model.exam.ExamFacade;
-import com.fprochazka.drill.model.exam.ExamRepository;
-import com.fprochazka.drill.model.exam.question.ExamQuestion;
-import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
-import com.fprochazka.drill.model.exam.question.ExamQuestionRepository;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
+import com.fprochazka.drill.model.api.BadRequestException;
+import com.fprochazka.drill.model.api.ResourceNotFoundException;
+import com.fprochazka.drill.model.drill.DrillNotFoundException;
+import com.fprochazka.drill.model.drill.question.QuestionNotFoundException;
+import com.fprochazka.drill.model.exam.*;
+import com.fprochazka.drill.model.exam.question.*;
+import com.fprochazka.drill.model.student.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,14 +48,16 @@ public class ExamController
 	public void createExam(
 		@PathVariable("userId") UUID userId,
 		@RequestBody CreateExamRequest request,
-		HttpServletResponse response)
+		HttpServletResponse response) throws BadRequestException, ResourceNotFoundException
 	{
 		try {
 			examFacade.createExam(request.getDrillId(), userId);
-		} catch (NotUniqueException e) {
-			e.printStackTrace();
-		} catch (NotFoundException e) {
-			e.printStackTrace();
+		} catch (ExamNotUniqueException e) {
+			throw new BadRequestException( e, "exam-not-unique", "Exam already created." );
+		} catch (DrillNotFoundException e) {
+			throw new ResourceNotFoundException( e, "drill-not-found", "Drill with given ID not found." );
+		} catch (StudentNotFoundException e) {
+			throw new ResourceNotFoundException( e, "student-not-found", "Student with given ID not found." );
 		}
 	}
 
@@ -96,7 +97,7 @@ public class ExamController
 	public void updateExam(
 		@PathVariable UUID userId,
 		@PathVariable UUID examId,
-		@Valid @RequestBody Collection<UpdateExamRequest> answers)
+		@Valid @RequestBody Collection<UpdateExamRequest> answers) throws ResourceNotFoundException, BadRequestException
 	{
 
 		Map<UUID, Integer> correct = new HashMap<>();
@@ -117,20 +118,26 @@ public class ExamController
 		for (Map.Entry<UUID, Integer> request : correct.entrySet()) {
 			try {
 				examQuestionFacade.updateExamQuestionIncreaseCorrect( examId, request.getKey(), request.getValue() );
-			} catch (NotFoundException e) {
-				e.printStackTrace();
-			} catch (NotUniqueException e) {
-				e.printStackTrace();
+
+			} catch ( ExamNotFoundException e) {
+				throw new ResourceNotFoundException( "exam-not-found", "Exam with given ID not found." );
+			} catch ( QuestionNotFoundException e ) {
+				throw new ResourceNotFoundException( "question-not-found", "Question with given ID not found." );
+			} catch (ExamQuestionNotUniqueException e) {
+				throw new BadRequestException( "examquestion-not-unique", "Question for given exam already exists." );
 			}
 		}
 
 		for (Map.Entry<UUID, Integer> request : wrong.entrySet()) {
 			try {
 				examQuestionFacade.updateExamQuestionIncreaseWrong( examId, request.getKey(), request.getValue() );
-			} catch (NotFoundException e) {
-				e.printStackTrace();
-			} catch (NotUniqueException e) {
-				e.printStackTrace();
+
+			} catch (QuestionNotFoundException e) {
+				throw new ResourceNotFoundException( e, "question-not-found", "Question with given ID not found." );
+			} catch (ExamNotFoundException e) {
+				throw new ResourceNotFoundException( e, "exam-not-found", "Exam with given ID not found." );
+			} catch (ExamQuestionNotUniqueException e) {
+				throw new BadRequestException( "examquestion-not-unique", "Question for given exam already exists." );
 			}
 		}
 	}

@@ -10,6 +10,10 @@ public class StudentNotFoundException extends Exception
 		this.username = username;
 	}
 
+	public StudentNotFoundException()
+	{
+	}
+
 	public String getUsername()
 	{
 		return username;
