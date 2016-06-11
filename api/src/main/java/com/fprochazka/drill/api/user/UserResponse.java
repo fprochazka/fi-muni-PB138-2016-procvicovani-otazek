@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.authentication;
+package com.fprochazka.drill.api.user;
 
 import java.util.UUID;
 

@@ -7,8 +7,8 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "student_exam_questions")
-@TypeAlias("student_exam_question")
+@Document(collection = "exam_questions")
+@TypeAlias("exam_question")
 public class ExamQuestion extends Identified
 {
 

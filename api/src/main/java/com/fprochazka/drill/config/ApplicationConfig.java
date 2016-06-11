@@ -2,8 +2,9 @@ package com.fprochazka.drill.config;
 
 import com.fprochazka.drill.model.api.JwtFilter;
 import com.fprochazka.drill.model.api.JwtProperties;
-import com.fprochazka.drill.model.api.authentication.AuthenticationFacade;
-import com.fprochazka.drill.model.api.authentication.PasswordEncoderProperties;
+import com.fprochazka.drill.model.authentication.password.PasswordAuthenticationFacade;
+import com.fprochazka.drill.model.authentication.password.PasswordAuthenticatorService;
+import com.fprochazka.drill.model.authentication.password.PasswordEncoderProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -52,10 +53,10 @@ public class ApplicationConfig
 
 	@Bean
 	@Autowired
-	public FilterRegistrationBean jwtFilter(AuthenticationFacade authenticationFacade)
+	public FilterRegistrationBean jwtFilter(PasswordAuthenticatorService passwordAuthenticatorService)
 	{
 		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-		registrationBean.setFilter(new JwtFilter(authenticationFacade));
+		registrationBean.setFilter(new JwtFilter(passwordAuthenticatorService));
 		registrationBean.addUrlPatterns("/*");
 		registrationBean.setName("jwt");
 		registrationBean.setDispatcherTypes(DispatcherType.REQUEST);

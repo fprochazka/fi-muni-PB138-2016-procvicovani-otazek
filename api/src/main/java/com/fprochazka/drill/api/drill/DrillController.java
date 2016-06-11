@@ -54,8 +54,7 @@ public class DrillController
 	 */
 	@RequestMapping(value = "/drill/{drillId}", method = RequestMethod.GET)
 	public @ResponseBody DrillResponse getDrillById(
-		@PathVariable("drillId") UUID drillId,
-		HttpServletResponse response
+		@PathVariable("drillId") UUID drillId
 	) throws ResourceNotFoundException
 	{
 		Drill drill = drillRepository.getDrillById(drillId);

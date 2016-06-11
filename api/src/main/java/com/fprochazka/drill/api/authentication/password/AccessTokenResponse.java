@@ -1,4 +1,6 @@
-package com.fprochazka.drill.api.authentication;
+package com.fprochazka.drill.api.authentication.password;
+
+import com.fprochazka.drill.api.user.UserResponse;
 
 public class AccessTokenResponse
 {
@@ -15,7 +17,7 @@ public class AccessTokenResponse
 		return accessToken;
 	}
 
-	private class AccessToken
+	public class AccessToken
 	{
 		private String token;
 		private String scope;
@@ -42,6 +44,7 @@ public class AccessTokenResponse
 		{
 			return user;
 		}
+
 	}
 
 }

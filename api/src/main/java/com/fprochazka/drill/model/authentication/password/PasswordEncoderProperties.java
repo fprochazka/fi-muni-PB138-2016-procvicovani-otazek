@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model.api.authentication;
+package com.fprochazka.drill.model.authentication.password;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

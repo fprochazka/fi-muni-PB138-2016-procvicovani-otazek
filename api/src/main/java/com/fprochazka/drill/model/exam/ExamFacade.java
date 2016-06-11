@@ -3,9 +3,9 @@ package com.fprochazka.drill.model.exam;
 import com.fprochazka.drill.model.drill.Drill;
 import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.DrillRepository;
-import com.fprochazka.drill.model.student.Student;
-import com.fprochazka.drill.model.student.StudentNotFoundException;
-import com.fprochazka.drill.model.student.StudentRepository;
+import com.fprochazka.drill.model.user.User;
+import com.fprochazka.drill.model.authentication.password.UserNotFoundException;
+import com.fprochazka.drill.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,35 +17,35 @@ public class ExamFacade
 
 	private ExamRepository examRepository;
 	private DrillRepository drillRepository;
-	private StudentRepository studentRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	public ExamFacade(ExamRepository examRepository, DrillRepository drillRepository, StudentRepository studentRepository)
+	public ExamFacade(ExamRepository examRepository, DrillRepository drillRepository, UserRepository userRepository)
 	{
 		this.examRepository = examRepository;
 		this.drillRepository = drillRepository;
-		this.studentRepository = studentRepository;
+		this.userRepository = userRepository;
 	}
 
-	public Exam createExam(UUID drillId, UUID studentId) throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
+	public Exam createExam(UUID drillId, UUID userId) throws ExamNotUniqueException, DrillNotFoundException, UserNotFoundException
 	{
 		Drill drill = drillRepository.findOne(drillId);
-		Student student = studentRepository.findOne(studentId);
+		User user = userRepository.findOne(userId);
 
 		if (drill == null) {
 			throw new DrillNotFoundException();
 		}
-		if (student == null) {
-			throw new StudentNotFoundException(  );
+		if (user == null) {
+			throw new UserNotFoundException(  );
 		}
-		Exam studentExam = new Exam(drill, student);
+		Exam userExam = new Exam(drill, user);
 
-		if (examRepository.getExamByDrillAndStudent(studentExam.getDrill().getId(), studentExam.getStudent().getId()) != null) {
+		if (examRepository.getExamByDrillAndUser(userExam.getDrill().getId(), userExam.getUser().getId()) != null) {
 			throw new ExamNotUniqueException();
 		}
-		examRepository.save(studentExam);
+		examRepository.save(userExam);
 
-		return studentExam;
+		return userExam;
 	}
 
 }
