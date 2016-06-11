@@ -45,13 +45,12 @@ public class ExamController
 	 * @param request - ID of drill we want to create exam for
 	 */
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
-	public void createExam(
+	public @ResponseBody ExamResponse createExam(
 		@PathVariable("userId") UUID userId,
-		@RequestBody CreateExamRequest request,
-		HttpServletResponse response) throws BadRequestException, ResourceNotFoundException
+		@RequestBody CreateExamRequest request) throws BadRequestException, ResourceNotFoundException
 	{
 		try {
-			examFacade.createExam(request.getDrillId(), userId);
+			return examFactory.createExamResponse( examFacade.createExam(request.getDrillId(), userId), new ArrayList<>() );
 		} catch (ExamNotUniqueException e) {
 			throw new BadRequestException( e, "exam-not-unique", "Exam already created." );
 		} catch (DrillNotFoundException e) {
@@ -70,7 +69,7 @@ public class ExamController
 	public @ResponseBody Collection<ExamResponse> getAllExams(@PathVariable UUID userId)
 	{
 		List<Exam> exams = examRepository.getExamsByStudent( userId );
-		return null;
+		return examFactory.createExamsResponse( exams );
 	}
 
 	/**
@@ -118,7 +117,6 @@ public class ExamController
 		for (Map.Entry<UUID, Integer> request : correct.entrySet()) {
 			try {
 				examQuestionFacade.updateExamQuestionIncreaseCorrect( examId, request.getKey(), request.getValue() );
-
 			} catch ( ExamNotFoundException e) {
 				throw new ResourceNotFoundException( "exam-not-found", "Exam with given ID not found." );
 			} catch ( QuestionNotFoundException e ) {
@@ -131,7 +129,6 @@ public class ExamController
 		for (Map.Entry<UUID, Integer> request : wrong.entrySet()) {
 			try {
 				examQuestionFacade.updateExamQuestionIncreaseWrong( examId, request.getKey(), request.getValue() );
-
 			} catch (QuestionNotFoundException e) {
 				throw new ResourceNotFoundException( e, "question-not-found", "Question with given ID not found." );
 			} catch (ExamNotFoundException e) {
