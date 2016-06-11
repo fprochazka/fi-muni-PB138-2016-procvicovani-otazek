@@ -33,6 +33,11 @@ public class Student extends Identified
 		return email;
 	}
 
+	public String getPasswordHash()
+	{
+		return passwordHash;
+	}
+
 	public void verifyPassword(PasswordEncoder passwordEncoder, String password) throws InvalidPasswordException
 	{
 		if (!passwordEncoder.matches(password, passwordHash)) {
