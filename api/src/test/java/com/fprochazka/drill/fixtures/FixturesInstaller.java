@@ -14,7 +14,7 @@ public class FixturesInstaller
 	private MongoTemplate mongoTemplate;
 
 	@Autowired
-	private StudentTestFixtures studentFixtures;
+	private UserTestFixtures userFixtures;
 
 	@Autowired
 	private DrillTestFixtures drillFixtures;
@@ -26,7 +26,7 @@ public class FixturesInstaller
 	{
 		clearDatabase();
 
-		studentFixtures.install();
+		userFixtures.install();
 		drillFixtures.install();
 		examFixtures.install();
 	}

@@ -1,24 +1,22 @@
-package com.fprochazka.drill.api.student;
+package com.fprochazka.drill.api.user;
 
 import java.util.UUID;
 
-/**
- * Created by viki on 11.06.16.
- */
-public class StudentResponse
+public class UserResponse
 {
+
 	private UUID id;
 	private int uco;
 	private String email;
 
-	public StudentResponse(UUID id, int uco, String email)
+	public UserResponse(UUID id, int uco, String email)
 	{
 		this.id = id;
 		this.uco = uco;
 		this.email = email;
 	}
 
-	public StudentResponse()
+	public UserResponse()
 	{
 	}
 
@@ -36,4 +34,5 @@ public class StudentResponse
 	{
 		return email;
 	}
+
 }

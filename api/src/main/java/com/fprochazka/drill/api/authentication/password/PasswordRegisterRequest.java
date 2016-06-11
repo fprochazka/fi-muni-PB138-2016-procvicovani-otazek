@@ -1,14 +1,11 @@
-package com.fprochazka.drill.api.student;
+package com.fprochazka.drill.api.authentication.password;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by viki on 11.06.16.
- */
-public class CreateStudentRequest
+public class PasswordRegisterRequest
 {
 	@NotNull
 	private Integer uco;
@@ -19,14 +16,14 @@ public class CreateStudentRequest
 	@NotEmpty
 	private String password;
 
-	public CreateStudentRequest(Integer uco, String email, String password)
+	public PasswordRegisterRequest(Integer uco, String email, String password)
 	{
 		this.uco = uco;
 		this.email = email;
 		this.password = password;
 	}
 
-	public CreateStudentRequest()
+	public PasswordRegisterRequest()
 	{
 	}
 

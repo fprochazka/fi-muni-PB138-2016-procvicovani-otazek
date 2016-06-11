@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model.api.authentication;
+package com.fprochazka.drill.model.authentication;
 
 import com.fprochazka.drill.model.api.ApiException;
 

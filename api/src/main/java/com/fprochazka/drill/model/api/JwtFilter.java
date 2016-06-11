@@ -8,7 +8,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.fprochazka.drill.model.api.authentication.AuthenticationFacade;
+import com.fprochazka.drill.model.authentication.password.PasswordAuthenticationFacade;
+import com.fprochazka.drill.model.authentication.password.PasswordAuthenticatorService;
 import org.springframework.web.filter.GenericFilterBean;
 
 import io.jsonwebtoken.Claims;
@@ -19,11 +20,11 @@ public class JwtFilter extends GenericFilterBean
 
 	public static final String AUTHORIZATION_TOKEN_HEADER = "X-Authorization-Token";
 
-	private AuthenticationFacade authenticationFacade;
+	private PasswordAuthenticatorService passwordAuthenticatorService;
 
-	public JwtFilter(AuthenticationFacade authenticationFacade)
+	public JwtFilter(PasswordAuthenticatorService passwordAuthenticatorService)
 	{
-		this.authenticationFacade = authenticationFacade;
+		this.passwordAuthenticatorService = passwordAuthenticatorService;
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class JwtFilter extends GenericFilterBean
 			final String token = authHeader.substring(7); // The part after "Bearer "
 
 			try {
-				final Claims claims = authenticationFacade.verifyAccessToken(token);
+				final Claims claims = passwordAuthenticatorService.verifyJwtToken(token);
 				request.setAttribute("claims", claims);
 
 			} catch (final SignatureException e) {

@@ -28,13 +28,13 @@ public class ExamFactory
 
 	public ExamResponse createExamResponse(Exam exam, List<QuestionStatistics> statistics)
 	{
-		return new ExamResponse(exam.getDrill().getId(), exam.getStudent().getId(), statistics);
+		return new ExamResponse(exam.getDrill().getId(), exam.getUser().getId(), statistics);
 	}
 
-	public ExamResponse createExamResponse( Exam exam )
+	public ExamResponse createExamResponse(Exam exam)
 	{
-		List< ExamQuestion > questions = examQuestionRepository.getExamQuestionsByExam( exam.getId() );
-		return createExamResponse( exam, createQuestionsStatistics( questions ) );
+		List<ExamQuestion> questions = examQuestionRepository.getExamQuestionsByExam(exam.getId());
+		return createExamResponse(exam, createQuestionsStatistics(questions));
 	}
 
 	public List<ExamResponse> createExamsResponse(Iterable<Exam> exams)

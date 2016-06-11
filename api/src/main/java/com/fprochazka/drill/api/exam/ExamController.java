@@ -6,11 +6,10 @@ import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.question.QuestionNotFoundException;
 import com.fprochazka.drill.model.exam.*;
 import com.fprochazka.drill.model.exam.question.*;
-import com.fprochazka.drill.model.student.StudentNotFoundException;
+import com.fprochazka.drill.model.authentication.password.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -55,8 +54,8 @@ public class ExamController
 			throw new BadRequestException( e, "exam-not-unique", "Exam already created." );
 		} catch (DrillNotFoundException e) {
 			throw new ResourceNotFoundException( e, "drill-not-found", "Drill with given ID not found." );
-		} catch (StudentNotFoundException e) {
-			throw new ResourceNotFoundException( e, "student-not-found", "Student with given ID not found." );
+		} catch (UserNotFoundException e) {
+			throw new ResourceNotFoundException( e, "user-not-found", "User with given ID not found." );
 		}
 	}
 
@@ -68,7 +67,7 @@ public class ExamController
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.GET)
 	public @ResponseBody Collection<ExamResponse> getAllExams(@PathVariable UUID userId)
 	{
-		List<Exam> exams = examRepository.getExamsByStudent( userId );
+		List<Exam> exams = examRepository.getExamsByUser( userId );
 		return examFactory.createExamsResponse( exams );
 	}
 

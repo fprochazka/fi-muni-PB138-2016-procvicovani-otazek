@@ -1,21 +1,21 @@
-package com.fprochazka.drill.model.student;
+package com.fprochazka.drill.model.user;
 
 import com.fprochazka.drill.model.Identified;
-import com.fprochazka.drill.model.api.authentication.InvalidPasswordException;
+import com.fprochazka.drill.model.authentication.password.InvalidPasswordException;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Document(collection = "students")
-@TypeAlias("student")
-public class Student extends Identified
+@Document(collection = "users")
+@TypeAlias("user")
+public class User extends Identified
 {
 
 	private final int uco;
 	private final String email;
 	private final String passwordHash;
 
-	public Student(int uco, String email, String passwordHash)
+	public User(int uco, String email, String passwordHash)
 	{
 		super();
 		this.uco = uco;
@@ -33,26 +33,18 @@ public class Student extends Identified
 		return email;
 	}
 
-	public String getPasswordHash()
+	public boolean verifyPassword(PasswordEncoder passwordEncoder, String password)
 	{
-		return passwordHash;
-	}
-
-	public void verifyPassword(PasswordEncoder passwordEncoder, String password) throws InvalidPasswordException
-	{
-		if (!passwordEncoder.matches(password, passwordHash)) {
-			throw new InvalidPasswordException();
-		}
+		return passwordEncoder.matches(password, passwordHash);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Student{" +
+		return "User{" +
 			"id='" + getId() + '\'' +
 			", uco=" + uco +
 			", email='" + email + '\'' +
-			", passwordHash='" + passwordHash + '\'' +
 			'}';
 	}
 }

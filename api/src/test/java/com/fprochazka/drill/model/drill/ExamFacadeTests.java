@@ -3,10 +3,10 @@ package com.fprochazka.drill.model.drill;
 import com.fprochazka.drill.IntegrationTestCase;
 import com.fprochazka.drill.config.ApplicationConfig;
 import com.fprochazka.drill.fixtures.DrillTestFixtures;
-import com.fprochazka.drill.fixtures.StudentTestFixtures;
+import com.fprochazka.drill.fixtures.UserTestFixtures;
 import com.fprochazka.drill.model.exam.ExamFacade;
 import com.fprochazka.drill.model.exam.ExamNotUniqueException;
-import com.fprochazka.drill.model.student.StudentNotFoundException;
+import com.fprochazka.drill.model.authentication.password.UserNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +24,21 @@ public class ExamFacadeTests extends IntegrationTestCase
 	public ExamFacade examFacade;
 
 	@Test(expected = DrillNotFoundException.class)
-	public void testCreateExamWithNoneExistingDrill() throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
+	public void testCreateExamWithNoneExistingDrill() throws ExamNotUniqueException, DrillNotFoundException, UserNotFoundException
 	{
 		Drill drill = new Drill("code", "name");
-		examFacade.createExam(drill.getId(), StudentTestFixtures.student123456.getId());
+		examFacade.createExam(drill.getId(), UserTestFixtures.user123456.getId());
 	}
 
 	@Test(expected = ExamNotUniqueException.class)
-	public void testCreateExistingExamThrowsException() throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
+	public void testCreateExistingExamThrowsException() throws ExamNotUniqueException, DrillNotFoundException, UserNotFoundException
 	{
-		examFacade.createExam(DrillTestFixtures.drillPB138.getId(), StudentTestFixtures.student123456.getId());
+		examFacade.createExam(DrillTestFixtures.drillPB138.getId(), UserTestFixtures.user123456.getId());
 	}
 
 	@Test
-	public void testCreateValidExam() throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
+	public void testCreateValidExam() throws ExamNotUniqueException, DrillNotFoundException, UserNotFoundException
 	{
-		examFacade.createExam(DrillTestFixtures.drillMB104.getId(), StudentTestFixtures.student123456.getId());
+		examFacade.createExam(DrillTestFixtures.drillMB104.getId(), UserTestFixtures.user123456.getId());
 	}
 }

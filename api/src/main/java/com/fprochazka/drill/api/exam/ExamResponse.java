@@ -1,7 +1,5 @@
 package com.fprochazka.drill.api.exam;
 
-import com.fprochazka.drill.model.drill.question.Question;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -12,14 +10,14 @@ public class ExamResponse
 {
 
 	private UUID drillId;
-	private UUID studentId;
+	private UUID userId;
 
 	private List<QuestionStatistics> statistics;
 
-	public ExamResponse(UUID drillId, UUID studentId, List<QuestionStatistics> statistics)
+	public ExamResponse(UUID drillId, UUID userId, List<QuestionStatistics> statistics)
 	{
 		this.drillId = drillId;
-		this.studentId = studentId;
+		this.userId = userId;
 		this.statistics = statistics;
 	}
 
@@ -32,8 +30,8 @@ public class ExamResponse
 		return drillId;
 	}
 
-	public UUID getStudentId()
+	public UUID getUserId()
 	{
-		return studentId;
+		return userId;
 	}
 }

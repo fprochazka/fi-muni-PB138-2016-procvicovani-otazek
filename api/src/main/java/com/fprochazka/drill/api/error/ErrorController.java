@@ -1,7 +1,7 @@
 package com.fprochazka.drill.api.error;
 
 import com.fprochazka.drill.model.api.*;
-import com.fprochazka.drill.model.api.authentication.AuthenticationException;
+import com.fprochazka.drill.model.authentication.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

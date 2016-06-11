@@ -1,14 +1,14 @@
-package com.fprochazka.drill.model.api.authentication;
+package com.fprochazka.drill.model.authentication;
 
-import com.fprochazka.drill.model.student.Student;
+import com.fprochazka.drill.model.user.User;
 
 public class AccessToken
 {
 	private final String token;
 	private final String scope;
-	private final Student user;
+	private final User user;
 
-	public AccessToken(String token, String scope, Student user)
+	public AccessToken(String token, String scope, User user)
 	{
 		this.token = token;
 		this.scope = scope;
@@ -25,7 +25,7 @@ public class AccessToken
 		return scope;
 	}
 
-	public Student getUser()
+	public User getUser()
 	{
 		return user;
 	}

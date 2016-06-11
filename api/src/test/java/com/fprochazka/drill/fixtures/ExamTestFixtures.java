@@ -23,7 +23,7 @@ public class ExamTestFixtures
 
 	public void install()
 	{
-		examWithDrillPB138 = new Exam(DrillTestFixtures.drillPB138, StudentTestFixtures.student123456);
+		examWithDrillPB138 = new Exam(DrillTestFixtures.drillPB138, UserTestFixtures.user123456);
 		examRepository.save(examWithDrillPB138);
 		examQuestion1 = new ExamQuestion(DrillTestFixtures.drillPB138question1, examWithDrillPB138, 2, 3);
 		examQuestionRepository.save(examQuestion1);
