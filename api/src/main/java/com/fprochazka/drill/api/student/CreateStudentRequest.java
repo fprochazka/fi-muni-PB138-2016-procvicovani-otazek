@@ -1,5 +1,6 @@
 package com.fprochazka.drill.api.student;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -14,13 +15,14 @@ public class CreateStudentRequest
 	private String email;
 
 	@NotEmpty
-	private String passwordHash;
+	@Email
+	private String password;
 
-	public CreateStudentRequest(int uco, String email, String passwordHash)
+	public CreateStudentRequest(int uco, String email, String password)
 	{
 		this.uco = uco;
 		this.email = email;
-		this.passwordHash = passwordHash;
+		this.password = password;
 	}
 
 	public CreateStudentRequest()
@@ -37,8 +39,8 @@ public class CreateStudentRequest
 		return email;
 	}
 
-	public String getPasswordHash()
+	public String getPassword()
 	{
-		return passwordHash;
+		return password;
 	}
 }
