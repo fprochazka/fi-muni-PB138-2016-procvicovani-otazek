@@ -8,7 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.fprochazka.drill.model.authentication.AuthenticationFacade;
+import com.fprochazka.drill.model.api.authentication.AuthenticationFacade;
 import org.springframework.web.filter.GenericFilterBean;
 
 import io.jsonwebtoken.Claims;
@@ -35,23 +35,17 @@ public class JwtFilter extends GenericFilterBean
 	{
 		final HttpServletRequest request = (HttpServletRequest) req;
 
-		if (request.getServletPath().startsWith("/authentication")) {
-			chain.doFilter(req, res);
-			return;
-		}
-
 		final String authHeader = request.getHeader(AUTHORIZATION_TOKEN_HEADER);
-		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-			throw new ServletException("Missing or invalid Authorization header.");
-		}
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			final String token = authHeader.substring(7); // The part after "Bearer "
 
-		final String token = authHeader.substring(7); // The part after "Bearer "
+			try {
+				final Claims claims = authenticationFacade.verifyAccessToken(token);
+				request.setAttribute("claims", claims);
 
-		try {
-			final Claims claims = authenticationFacade.verifyAccessToken(token);
-			request.setAttribute("claims", claims);
-		} catch (final SignatureException e) {
-			throw new ServletException("Invalid token.", e);
+			} catch (final SignatureException e) {
+				throw new ServletException("Invalid token.", e);
+			}
 		}
 
 		chain.doFilter(req, res);

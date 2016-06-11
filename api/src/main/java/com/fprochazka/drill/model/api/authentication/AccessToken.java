@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model.authentication;
+package com.fprochazka.drill.model.api.authentication;
 
 import com.fprochazka.drill.model.student.Student;
 

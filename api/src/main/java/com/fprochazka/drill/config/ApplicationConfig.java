@@ -2,8 +2,8 @@ package com.fprochazka.drill.config;
 
 import com.fprochazka.drill.model.api.JwtFilter;
 import com.fprochazka.drill.model.api.JwtProperties;
-import com.fprochazka.drill.model.authentication.AuthenticationFacade;
-import com.fprochazka.drill.model.authentication.PasswordEncoderProperties;
+import com.fprochazka.drill.model.api.authentication.AuthenticationFacade;
+import com.fprochazka.drill.model.api.authentication.PasswordEncoderProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
