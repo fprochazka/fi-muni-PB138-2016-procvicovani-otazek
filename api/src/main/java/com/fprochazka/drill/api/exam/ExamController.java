@@ -119,6 +119,8 @@ public class ExamController
 				examQuestionFacade.updateExamQuestionIncreaseCorrect( examId, request.getKey(), request.getValue() );
 			} catch (NotFoundException e) {
 				e.printStackTrace();
+			} catch (NotUniqueException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -126,6 +128,8 @@ public class ExamController
 			try {
 				examQuestionFacade.updateExamQuestionIncreaseWrong( examId, request.getKey(), request.getValue() );
 			} catch (NotFoundException e) {
+				e.printStackTrace();
+			} catch (NotUniqueException e) {
 				e.printStackTrace();
 			}
 		}

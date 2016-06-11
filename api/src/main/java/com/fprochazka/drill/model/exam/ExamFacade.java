@@ -2,6 +2,9 @@ package com.fprochazka.drill.model.exam;
 
 import com.fprochazka.drill.model.drill.Drill;
 import com.fprochazka.drill.model.drill.DrillRepository;
+import com.fprochazka.drill.model.drill.question.Question;
+import com.fprochazka.drill.model.drill.question.QuestionRepository;
+import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
 import com.fprochazka.drill.model.exceptions.NotFoundException;
 import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import com.fprochazka.drill.model.student.Student;
@@ -9,6 +12,7 @@ import com.fprochazka.drill.model.student.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
