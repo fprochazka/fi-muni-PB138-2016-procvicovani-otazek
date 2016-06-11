@@ -1,7 +1,7 @@
 package com.fprochazka.drill.model.student;
 
 import com.fprochazka.drill.model.Identified;
-import com.fprochazka.drill.model.authentication.InvalidPasswordException;
+import com.fprochazka.drill.model.api.authentication.InvalidPasswordException;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.password.PasswordEncoder;

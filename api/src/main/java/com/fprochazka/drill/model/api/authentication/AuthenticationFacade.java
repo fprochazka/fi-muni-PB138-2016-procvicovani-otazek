@@ -1,4 +1,4 @@
-package com.fprochazka.drill.model.authentication;
+package com.fprochazka.drill.model.api.authentication;
 
 import com.fprochazka.drill.model.student.Student;
 import com.fprochazka.drill.model.student.StudentNotFoundException;
@@ -33,7 +33,7 @@ public class AuthenticationFacade
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public AccessToken createAccessToken(String username, String password) throws StudentNotFoundException, InvalidPasswordException
+	public AccessToken login(String username, String password) throws StudentNotFoundException, InvalidPasswordException
 	{
 		Student student = studentRepository.getStudentByUco(Integer.valueOf(username));
 		if (student == null) {

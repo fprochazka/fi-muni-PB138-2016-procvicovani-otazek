@@ -1,6 +1,6 @@
 package com.fprochazka.drill.api.authentication;
 
-import com.fprochazka.drill.model.authentication.AccessToken;
+import com.fprochazka.drill.model.api.authentication.AccessToken;
 import com.fprochazka.drill.model.student.Student;
 import org.springframework.stereotype.Service;
 
