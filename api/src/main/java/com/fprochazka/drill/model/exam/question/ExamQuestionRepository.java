@@ -15,5 +15,5 @@ public interface ExamQuestionRepository extends CrudRepository<ExamQuestion, UUI
 
 	List<ExamQuestion> getExamQuestionsByExam(UUID examId);
 
-	ExamQuestion getExamquestionByQuestionAndExam(UUID questionId, UUID examId);
+	ExamQuestion getExamQuestionByQuestionAndExam(UUID questionId, UUID examId);
 }

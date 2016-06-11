@@ -21,10 +21,9 @@ public class DrillRepositoryTests extends IntegrationTestCase
 	@Autowired
 	private DrillRepository drillRepository;
 
-	@Test //(expected = com.fprochazka.drill.model.exceptions.DrillCodeNotUniqueException.class)
+	@Test
 	public void testFindDrillByCode()
 	{
-		// drillRepository.getDrillByCode(DrillTestFixtures.drillMB104.getCode());
 		assertEquals(DrillTestFixtures.drillMB104, drillRepository.getDrillByCode(DrillTestFixtures.drillMB104.getCode()));
 	}
 

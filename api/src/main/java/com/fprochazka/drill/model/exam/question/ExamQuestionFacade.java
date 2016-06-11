@@ -33,7 +33,7 @@ public class ExamQuestionFacade
 			throw new NotFoundException();
 		}
 
-		ExamQuestion examQuestion = examQuestionRepository.getExamquestionByQuestionAndExam(questionId, examId);
+		ExamQuestion examQuestion = examQuestionRepository.getExamQuestionByQuestionAndExam(questionId, examId);
 
 		if (examQuestion == null) {
 			throw new NotFoundException();
@@ -52,7 +52,7 @@ public class ExamQuestionFacade
 			throw new NotFoundException();
 		}
 
-		ExamQuestion examQuestion = examQuestionRepository.getExamquestionByQuestionAndExam(questionId, examId);
+		ExamQuestion examQuestion = examQuestionRepository.getExamQuestionByQuestionAndExam(questionId, examId);
 
 		if (examQuestion == null) {
 			throw new NotFoundException();

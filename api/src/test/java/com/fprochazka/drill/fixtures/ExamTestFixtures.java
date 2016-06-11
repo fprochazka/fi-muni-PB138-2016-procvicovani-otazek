@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 public class ExamTestFixtures
 {
 
-	public static Exam exam;
-
 	@Autowired
 	private ExamQuestionRepository examQuestionRepository;
 
