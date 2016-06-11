@@ -15,12 +15,17 @@ public class StudentFacade
 		this.studentRepository = studentRepository;
 	}
 
-	public Student createStudent(int uco, String email, String passwordHash) throws StudentUcoNotUniqueException
+	public Student createStudent(int uco, String email, String passwordHash) throws StudentUcoNotUniqueException, StudentEmailNotUniqueException
 	{
 		Student student = new Student(uco, email, passwordHash);
 
-		if (studentRepository.getStudentByUco(student.getUco()) != null) {
+		if (studentRepository.getStudentByUco(student.getUco()) != null)
+		{
 			throw new StudentUcoNotUniqueException();
+		}
+		if (studentRepository.getStudentByEmail(student.getEmail()) != null)
+		{
+			throw new StudentEmailNotUniqueException();
 		}
 		studentRepository.save(student);
 
