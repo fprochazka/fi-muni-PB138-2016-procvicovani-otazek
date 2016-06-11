@@ -1,14 +1,19 @@
 import React from 'react'
-import {Route} from 'react-router'
-import App from './containers/App'
-import UserPage from './containers/UserPage'
-import RepoPage from './containers/RepoPage'
+import {Route, IndexRoute, Redirect} from 'react-router'
+import App from './components/App.js'
+
+import PageHome from './components/PageHome/PageHome.js'
+import PageLogin from './components/PageLogin/PageLogin.js'
+import PageRegister from './components/PageRegister/PageRegister.js'
+import PageDrill from './components/PageDrill/PageDrill.js'
+import PageEditor from './components/PageEditor/PageEditor.js'
 
 export default (
 	<Route path="/" component={App}>
-		<Route path="/:login/:name"
-		       component={RepoPage}/>
-		<Route path="/:login"
-		       component={UserPage}/>
+		<IndexRoute component={PageHome}/>
+		<Route path='registrace' components={PageRegister}/>
+		<Route path='prihlaseni' components={PageLogin}/>
+		<Route path='odpovednik/:code' components={PageDrill}/>
+		<Route path='editor/:code' components={PageEditor}/>
 	</Route>
 )

@@ -63,19 +63,6 @@ html {
 	min-height: 100%;
 }
 
-body {
-	&.drill {
-		margin-bottom: 60px;
-		background-color: #efeff4 !important;
-	}
-
-	&.main,
-	&.editor {
-		padding-top: 1.5rem;
-		padding-bottom: 1.5rem;
-	}
-}
-
 /*!* Everything but the jumbotron gets side spacing for mobile first views *!*/
 .header,
 .drills,
@@ -215,7 +202,15 @@ body {
 	border-top: 1px solid #c4c4c4;
 }
 
+.main {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+
 .drill {
+	margin-bottom: 60px;
+	background-color: #efeff4 !important;
+
 	.question {
 		margin: 20px 15px 10px;
 		flex-grow: 1;

@@ -1,5 +1,5 @@
 import gutil from 'gulp-util';
-import makeWebpackConfig from './makeConfig';
+import makeWebpackConfig from './makeConfig.js';
 import webpack from 'webpack';
 
 export default function build(callback) {

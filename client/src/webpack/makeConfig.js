@@ -1,5 +1,5 @@
 import autoprefixer from 'autoprefixer';
-import constants from './constants';
+import constants from './constants.js';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
