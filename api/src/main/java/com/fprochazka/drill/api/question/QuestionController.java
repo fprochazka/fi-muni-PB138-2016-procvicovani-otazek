@@ -1,9 +1,10 @@
 package com.fprochazka.drill.api.question;
 
 import com.fprochazka.drill.api.question.answer.AnswerFactory;
+import com.fprochazka.drill.model.api.ResourceNotFoundException;
+import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.question.*;
 import com.fprochazka.drill.model.drill.question.Answer;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,13 +67,13 @@ public class QuestionController
 	@RequestMapping( value = "/drill/{drillId}/question", method = RequestMethod.POST)
 	public void createQuestion(
 		@PathVariable UUID drillId,
-		@Valid @RequestBody CreateQuestionRequest questionRequest)
+		@Valid @RequestBody CreateQuestionRequest questionRequest) throws ResourceNotFoundException
 	{
 		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
 		try {
 			questionFacade.createQuestion(questionRequest.getTitle(), answers, drillId);
-		} catch (NotFoundException e) {
-			e.printStackTrace();
+		} catch (DrillNotFoundException e) {
+			throw new ResourceNotFoundException( "drill-not-found", "Drill with given ID not found." );
 		}
 	}
 
@@ -87,11 +88,11 @@ public class QuestionController
 	public @ResponseBody QuestionResponse getQuestion(
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
-		HttpServletResponse response)
+		HttpServletResponse response) throws ResourceNotFoundException
 	{
 		Question question = questionRepository.getQuestionById(questionId);
 		if (question == null) {
-			response.setStatus( 404 );
+			throw new ResourceNotFoundException( "question-not-found", "Question with given ID not found" );
 		}
 		return questionFactory.createQuestionResponse(question);
 	}
@@ -108,14 +109,14 @@ public class QuestionController
 		@PathVariable UUID questionId,
 		@Valid @RequestBody UpdateQuestionRequest questionRequest,
 		HttpServletResponse response
-	)
+	) throws ResourceNotFoundException
 	{
 		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
 		Question question = null;
 		try {
 			question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);
-		} catch (NotFoundException e) {
-			e.printStackTrace();
+		} catch (DrillNotFoundException e) {
+			throw new ResourceNotFoundException( "drill-not-found", "" );
 		}
 		return questionFactory.createQuestionResponse(question);
 	}

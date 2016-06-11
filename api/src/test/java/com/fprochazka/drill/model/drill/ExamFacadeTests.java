@@ -5,8 +5,8 @@ import com.fprochazka.drill.config.ApplicationConfig;
 import com.fprochazka.drill.fixtures.DrillTestFixtures;
 import com.fprochazka.drill.fixtures.StudentTestFixtures;
 import com.fprochazka.drill.model.exam.ExamFacade;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
+import com.fprochazka.drill.model.exam.ExamNotUniqueException;
+import com.fprochazka.drill.model.student.StudentNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +23,21 @@ public class ExamFacadeTests extends IntegrationTestCase
 	@Autowired
 	public ExamFacade examFacade;
 
-	@Test(expected = NotFoundException.class)
-	public void testCreateExamWithNoneExistingDrill() throws NotFoundException, NotUniqueException
+	@Test(expected = DrillNotFoundException.class)
+	public void testCreateExamWithNoneExistingDrill() throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
 	{
 		Drill drill = new Drill("code", "name");
 		examFacade.createExam(drill.getId(), StudentTestFixtures.student123456.getId());
 	}
 
-	@Test(expected = NotUniqueException.class)
-	public void testCreateExistingExamThrowsException() throws NotFoundException, NotUniqueException
+	@Test(expected = ExamNotUniqueException.class)
+	public void testCreateExistingExamThrowsException() throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
 	{
 		examFacade.createExam(DrillTestFixtures.drillPB138.getId(), StudentTestFixtures.student123456.getId());
 	}
 
 	@Test
-	public void testCreateValidExam() throws NotFoundException, NotUniqueException
+	public void testCreateValidExam() throws ExamNotUniqueException, DrillNotFoundException, StudentNotFoundException
 	{
 		examFacade.createExam(DrillTestFixtures.drillMB104.getId(), StudentTestFixtures.student123456.getId());
 	}

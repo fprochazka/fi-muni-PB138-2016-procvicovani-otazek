@@ -3,10 +3,11 @@ package com.fprochazka.drill.model.drill;
 import com.fprochazka.drill.IntegrationTestCase;
 import com.fprochazka.drill.config.ApplicationConfig;
 import com.fprochazka.drill.fixtures.ExamTestFixtures;
+import com.fprochazka.drill.model.drill.question.QuestionNotFoundException;
 import com.fprochazka.drill.model.exam.Exam;
+import com.fprochazka.drill.model.exam.ExamNotFoundException;
 import com.fprochazka.drill.model.exam.question.ExamQuestionFacade;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
+import com.fprochazka.drill.model.exam.question.ExamQuestionNotUniqueException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class ExamQuestionFacadeTests extends IntegrationTestCase
 	private ExamQuestionFacade examQuestionFacade;
 
 	@Test
-	public void testUpdateExamQuestionIncreaseCorrect() throws NotFoundException, NotUniqueException
+	public void testUpdateExamQuestionIncreaseCorrect() throws ExamNotFoundException, QuestionNotFoundException, ExamQuestionNotUniqueException
 	{
 		examQuestionFacade.updateExamQuestionIncreaseCorrect(ExamTestFixtures.examQuestion1.getExam().getId(), ExamTestFixtures.examQuestion1.getQuestion().getId(), 4);
 	}
 
-	@Test(expected = NotFoundException.class)
-	public void testUpdateExamQuestionIncreaseCorrectWithNullExam() throws NotFoundException, NotUniqueException
+	@Test(expected = ExamNotFoundException.class)
+	public void testUpdateExamQuestionIncreaseCorrectWithNullExam() throws ExamNotFoundException, QuestionNotFoundException, ExamQuestionNotUniqueException
 	{
 		Exam exam = new Exam(null, null);
 		examQuestionFacade.updateExamQuestionIncreaseCorrect(exam.getId(), ExamTestFixtures.examQuestion1.getQuestion().getId(), 4);

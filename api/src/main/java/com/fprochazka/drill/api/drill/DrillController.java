@@ -3,9 +3,9 @@ package com.fprochazka.drill.api.drill;
 import com.fprochazka.drill.model.api.BadRequestException;
 import com.fprochazka.drill.model.api.ResourceNotFoundException;
 import com.fprochazka.drill.model.drill.Drill;
+import com.fprochazka.drill.model.drill.DrillCodeNotUniqueException;
 import com.fprochazka.drill.model.drill.DrillFacade;
 import com.fprochazka.drill.model.drill.DrillRepository;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,10 +78,8 @@ public class DrillController
 		try {
 			Drill drill = drillFacade.createDrill( createDrillRequest.getCode(), createDrillRequest.getName());
 			return drillResponseFactory.createDrillResponse(drill);
-		}
-		catch( NotUniqueException ex )
-		{
-			throw new BadRequestException( ex, "drill-code-not-unique", "Drill with code " + createDrillRequest.getCode() + " already exists.");
+		} catch (DrillCodeNotUniqueException e) {
+			throw new BadRequestException( e, "drill-code-not-unique", "Drill with given code already exists.");
 		}
 	}
 }

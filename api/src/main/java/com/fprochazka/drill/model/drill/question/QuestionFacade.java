@@ -1,8 +1,8 @@
 package com.fprochazka.drill.model.drill.question;
 
 import com.fprochazka.drill.model.drill.Drill;
+import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.DrillRepository;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +24,11 @@ public class QuestionFacade
 		this.drillRepository = drillRepository;
 	}
 
-	public Question createQuestion(String title, List<Answer> answers, UUID drillId) throws NotFoundException
+	public Question createQuestion(String title, List<Answer> answers, UUID drillId) throws DrillNotFoundException
 	{
 		Drill drill = drillRepository.findOne(drillId);
 		if (drill == null) {
-			throw new NotFoundException();
+			throw new DrillNotFoundException();
 		}
 		Question question = new Question(title, answers, drill);
 
@@ -37,11 +37,11 @@ public class QuestionFacade
 		return question;
 	}
 
-	public Question updateQuestion(UUID questionId, String title, List<Answer> answers) throws NotFoundException
+	public Question updateQuestion(UUID questionId, String title, List<Answer> answers) throws DrillNotFoundException
 	{
 		Question question = questionRepository.getQuestionById(questionId);
 		if (question == null) {
-			throw new NotFoundException();
+			throw new DrillNotFoundException();
 		}
 
 		question.setTitle(title);

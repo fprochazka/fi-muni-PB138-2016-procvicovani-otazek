@@ -1,11 +1,11 @@
 package com.fprochazka.drill.model.exam.question;
 
 import com.fprochazka.drill.model.drill.question.Question;
+import com.fprochazka.drill.model.drill.question.QuestionNotFoundException;
 import com.fprochazka.drill.model.drill.question.QuestionRepository;
 import com.fprochazka.drill.model.exam.Exam;
+import com.fprochazka.drill.model.exam.ExamNotFoundException;
 import com.fprochazka.drill.model.exam.ExamRepository;
-import com.fprochazka.drill.model.exceptions.NotFoundException;
-import com.fprochazka.drill.model.exceptions.NotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +27,21 @@ public class ExamQuestionFacade
 		this.questionRepository = questionRepository;
 	}
 
-	public ExamQuestion createExamQuestion(UUID examId, UUID questionId, int correct, int wrong) throws NotFoundException, NotUniqueException
+	public ExamQuestion createExamQuestion(UUID examId, UUID questionId, int correct, int wrong) throws QuestionNotFoundException, ExamNotFoundException, ExamQuestionNotUniqueException
 	{
 		Question question = questionRepository.getQuestionById(questionId);
 		Exam exam = examRepository.getExamById(examId);
 
 		if (question == null) {
-			throw new NotFoundException();
+			throw new QuestionNotFoundException();
 		}
 		if (exam == null) {
-			throw new NotFoundException();
+			throw new ExamNotFoundException();
 		}
 
 		ExamQuestion examQuestion = new ExamQuestion(question, exam, correct, wrong);
 		if (examQuestionRepository.findOne(examQuestion.getId()) != null) {
-			throw new NotUniqueException();
+			throw new ExamQuestionNotUniqueException();
 		}
 
 		examQuestionRepository.save(examQuestion);
@@ -49,19 +49,19 @@ public class ExamQuestionFacade
 
 	}
 
-	public ExamQuestion updateExamQuestionIncreaseCorrect(UUID examId, UUID questionId, int newCorrect) throws NotFoundException, NotUniqueException
+	public ExamQuestion updateExamQuestionIncreaseCorrect(UUID examId, UUID questionId, int newCorrect) throws ExamNotFoundException, QuestionNotFoundException, ExamQuestionNotUniqueException
 	{
 		if (examRepository.findOne(examId) == null) {
-			throw new NotFoundException();
+			throw new ExamNotFoundException();
 		}
 		if (questionRepository.findOne(questionId) == null) {
-			throw new NotFoundException();
+			throw new QuestionNotFoundException();
 		}
 
 		ExamQuestion examQuestion = examQuestionRepository.getExamQuestionByQuestionAndExam(questionId, examId);
 
 		if (examQuestion == null) {
-			createExamQuestion(examId, questionId, 0, 0);
+			examQuestion = createExamQuestion(examId, questionId, 0, 0);
 		}
 		examQuestion.increaseCorrect(newCorrect);
 
@@ -69,19 +69,19 @@ public class ExamQuestionFacade
 		return examQuestion;
 	}
 
-	public ExamQuestion updateExamQuestionIncreaseWrong(UUID examId, UUID questionId, int newWrong) throws NotFoundException, NotUniqueException
+	public ExamQuestion updateExamQuestionIncreaseWrong(UUID examId, UUID questionId, int newWrong) throws ExamNotFoundException, QuestionNotFoundException, ExamQuestionNotUniqueException
 	{
 		if (examRepository.findOne(examId) == null) {
-			throw new NotFoundException();
+			throw new ExamNotFoundException();
 		}
 		if (questionRepository.findOne(questionId) == null) {
-			throw new NotFoundException();
+			throw new QuestionNotFoundException();
 		}
 
 		ExamQuestion examQuestion = examQuestionRepository.getExamQuestionByQuestionAndExam(questionId, examId);
 
 		if (examQuestion == null) {
-			createExamQuestion(examId, questionId, 0, 0);
+			examQuestion = createExamQuestion(examId, questionId, 0, 0);
 		}
 		examQuestion.increaseWrong(newWrong);
 
