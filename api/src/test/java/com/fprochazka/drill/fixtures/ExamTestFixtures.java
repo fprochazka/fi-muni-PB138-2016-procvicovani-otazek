@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 public class ExamTestFixtures
 {
 
-	public static Exam exam;
+	public static Exam examWithDrillPB138;
+	public static ExamQuestion examQuestion1;
+	public static ExamQuestion examQuestion2;
 
 	@Autowired
 	private ExamQuestionRepository examQuestionRepository;
@@ -21,12 +23,13 @@ public class ExamTestFixtures
 
 	public void install()
 	{
-		Exam exam = new Exam(DrillTestFixtures.drillPB138, StudentTestFixtures.student123456);
-		examRepository.save(exam);
-		ExamQuestion examQuestion1 = new ExamQuestion(DrillTestFixtures.drillPB138question1, exam, 2, 3);
+		examWithDrillPB138 = new Exam(DrillTestFixtures.drillPB138, StudentTestFixtures.student123456);
+		examRepository.save(examWithDrillPB138);
+		examQuestion1 = new ExamQuestion(DrillTestFixtures.drillPB138question1, examWithDrillPB138, 2, 3);
 		examQuestionRepository.save(examQuestion1);
-		ExamQuestion examQuestion2 = new ExamQuestion(DrillTestFixtures.drillPB138question2, exam, 1, 0);
+		examQuestion2 = new ExamQuestion(DrillTestFixtures.drillPB138question2, examWithDrillPB138, 1, 0);
 		examQuestionRepository.save(examQuestion2);
 	}
 
 }
+
