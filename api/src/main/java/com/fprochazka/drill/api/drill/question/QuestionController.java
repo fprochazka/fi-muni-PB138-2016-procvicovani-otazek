@@ -64,16 +64,17 @@ public class QuestionController
 	 * @param drillId         - ID of the drill we want to add question to
 	 * @param questionRequest
 	 */
-	@RequestMapping( value = "/drill/{drillId}/question", method = RequestMethod.POST)
+	@RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.POST)
 	public void createQuestion(
 		@PathVariable UUID drillId,
-		@Valid @RequestBody CreateQuestionRequest questionRequest) throws ResourceNotFoundException
+		@Valid @RequestBody CreateQuestionRequest questionRequest
+	) throws ResourceNotFoundException
 	{
 		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
 		try {
 			questionFacade.createQuestion(questionRequest.getText(), answers, drillId);
 		} catch (DrillNotFoundException e) {
-			throw new ResourceNotFoundException( "drill-not-found", "Drill with given ID not found." );
+			throw new ResourceNotFoundException("drill-not-found", "Drill with given ID not found.");
 		}
 	}
 
@@ -88,11 +89,12 @@ public class QuestionController
 	public @ResponseBody QuestionResponse getQuestion(
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
-		HttpServletResponse response) throws ResourceNotFoundException
+		HttpServletResponse response
+	) throws ResourceNotFoundException
 	{
 		Question question = questionRepository.getQuestionById(questionId);
 		if (question == null) {
-			throw new ResourceNotFoundException( "question-not-found", "Question with given ID not found" );
+			throw new ResourceNotFoundException("question-not-found", "Question with given ID not found");
 		}
 		return questionFactory.createQuestionResponse(question);
 	}
@@ -116,7 +118,7 @@ public class QuestionController
 		try {
 			question = questionFacade.updateQuestion(questionId, questionRequest.getText(), answers);
 		} catch (DrillNotFoundException e) {
-			throw new ResourceNotFoundException( "drill-not-found", "" );
+			throw new ResourceNotFoundException("drill-not-found", "");
 		}
 		return questionFactory.createQuestionResponse(question);
 	}

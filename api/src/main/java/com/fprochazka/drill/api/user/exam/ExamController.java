@@ -46,16 +46,17 @@ public class ExamController
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
 	public @ResponseBody ExamResponse createExam(
 		@PathVariable("userId") UUID userId,
-		@RequestBody CreateExamRequest request) throws BadRequestException, ResourceNotFoundException
+		@RequestBody CreateExamRequest request
+	) throws BadRequestException, ResourceNotFoundException
 	{
 		try {
-			return examFactory.createExamResponse( examFacade.createExam(request.getDrillId(), userId), new ArrayList<>() );
+			return examFactory.createExamResponse(examFacade.createExam(request.getDrillId(), userId), new ArrayList<>());
 		} catch (ExamNotUniqueException e) {
-			throw new BadRequestException( e, "exam-not-unique", "Exam already created." );
+			throw new BadRequestException(e, "exam-not-unique", "Exam already created.");
 		} catch (DrillNotFoundException e) {
-			throw new ResourceNotFoundException( e, "drill-not-found", "Drill with given ID not found." );
+			throw new ResourceNotFoundException(e, "drill-not-found", "Drill with given ID not found.");
 		} catch (UserNotFoundException e) {
-			throw new ResourceNotFoundException( e, "user-not-found", "User with given ID not found." );
+			throw new ResourceNotFoundException(e, "user-not-found", "User with given ID not found.");
 		}
 	}
 
@@ -81,7 +82,7 @@ public class ExamController
 		@PathVariable UUID examId)
 	{
 		Exam exam = examRepository.getExamById(examId);
-		List<ExamQuestion> answers = examQuestionRepository.getExamQuestionsByExam( examId );
+		List<ExamQuestion> answers = examQuestionRepository.getExamQuestionsByExam(examId);
 
 		return examFactory.createExamResponse(exam, examFactory.createQuestionsStatistics(answers));
 	}
@@ -95,9 +96,9 @@ public class ExamController
 	public void updateExam(
 		@PathVariable UUID userId,
 		@PathVariable UUID examId,
-		@Valid @RequestBody Collection<UpdateExamRequest> answers) throws ResourceNotFoundException, BadRequestException
+		@Valid @RequestBody Collection<UpdateExamRequest> answers
+	) throws ResourceNotFoundException, BadRequestException
 	{
-
 		Map<UUID, Integer> correct = new HashMap<>();
 		Map<UUID, Integer> wrong = new HashMap<>();
 
@@ -115,25 +116,25 @@ public class ExamController
 
 		for (Map.Entry<UUID, Integer> request : correct.entrySet()) {
 			try {
-				examQuestionFacade.updateExamQuestionIncreaseCorrect( examId, request.getKey(), request.getValue() );
-			} catch ( ExamNotFoundException e) {
-				throw new ResourceNotFoundException( "exam-not-found", "Exam with given ID not found." );
-			} catch ( QuestionNotFoundException e ) {
-				throw new ResourceNotFoundException( "question-not-found", "Question with given ID not found." );
+				examQuestionFacade.updateExamQuestionIncreaseCorrect(examId, request.getKey(), request.getValue());
+			} catch (ExamNotFoundException e) {
+				throw new ResourceNotFoundException("exam-not-found", "Exam with given ID not found.");
+			} catch (QuestionNotFoundException e) {
+				throw new ResourceNotFoundException("question-not-found", "Question with given ID not found.");
 			} catch (ExamQuestionNotUniqueException e) {
-				throw new BadRequestException( "examquestion-not-unique", "Question for given exam already exists." );
+				throw new BadRequestException("examquestion-not-unique", "Question for given exam already exists.");
 			}
 		}
 
 		for (Map.Entry<UUID, Integer> request : wrong.entrySet()) {
 			try {
-				examQuestionFacade.updateExamQuestionIncreaseWrong( examId, request.getKey(), request.getValue() );
+				examQuestionFacade.updateExamQuestionIncreaseWrong(examId, request.getKey(), request.getValue());
 			} catch (QuestionNotFoundException e) {
-				throw new ResourceNotFoundException( e, "question-not-found", "Question with given ID not found." );
+				throw new ResourceNotFoundException(e, "question-not-found", "Question with given ID not found.");
 			} catch (ExamNotFoundException e) {
-				throw new ResourceNotFoundException( e, "exam-not-found", "Exam with given ID not found." );
+				throw new ResourceNotFoundException(e, "exam-not-found", "Exam with given ID not found.");
 			} catch (ExamQuestionNotUniqueException e) {
-				throw new BadRequestException( "examquestion-not-unique", "Question for given exam already exists." );
+				throw new BadRequestException("examquestion-not-unique", "Question for given exam already exists.");
 			}
 		}
 	}
