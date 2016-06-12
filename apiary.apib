@@ -171,9 +171,7 @@ HOST: https://drill.fprochazka.com/
 + Request (application/json)
 
             {
-                "drill": {
-                    "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
-                }
+                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
             }
 
 + Response 201 (application/json)
@@ -186,9 +184,7 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": 1,
-                "drill": {
-                    "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
-                },
+                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "answers": []
             }
             
@@ -202,9 +198,7 @@ HOST: https://drill.fprochazka.com/
                 "exams": [
                     {
                         "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
-                        "drill": {
-                            "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
-                        }
+                        "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
                     }
                 ]
             }
@@ -226,14 +220,10 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
-                "drill": {
-                    "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
-                },
+                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                 "answers": [ 
                     {
-                        "question": {
-                            "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
-                        },
+                        "questionId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
                         "correct": 0,
                         "wrong": 0
                     }
@@ -247,15 +237,11 @@ HOST: https://drill.fprochazka.com/
         {
             "answers": [
                 {
-                    "question": {
-                        "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75"
-                    },
+                    "questionId": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
                     "correct": true
                 }, 
                 {
-                    "question": {
-                        "id": "05017834-6be7-4046-a351-7d22d577efb3"
-                    },
+                    "questionId": "05017834-6be7-4046-a351-7d22d577efb3",
                     "correct": false
                 }
             ]
