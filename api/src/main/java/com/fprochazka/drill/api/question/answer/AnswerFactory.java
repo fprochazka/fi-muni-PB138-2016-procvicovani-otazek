@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-/**
- * Created by viki on 09.06.16.
- */
-
 @Service
 public class AnswerFactory
 {

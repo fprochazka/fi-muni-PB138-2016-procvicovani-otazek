@@ -4,9 +4,6 @@ import com.fprochazka.drill.model.drill.question.Question;
 
 import java.util.UUID;
 
-/**
- * Created by viki on 10.06.16.
- */
 public class QuestionStatistics
 {
 

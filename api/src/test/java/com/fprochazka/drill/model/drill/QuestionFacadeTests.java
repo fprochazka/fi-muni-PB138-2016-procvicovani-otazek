@@ -14,10 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Michaela Bamburová on 11.06.2016.
- */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ApplicationConfig.class)
 public class QuestionFacadeTests extends IntegrationTestCase

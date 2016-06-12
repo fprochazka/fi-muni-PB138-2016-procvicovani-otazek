@@ -1,9 +1,6 @@
 package com.fprochazka.drill.model.drill;
 
 
-/**
- * Created by viki on 11.06.16.
- */
 public class DrillCodeNotUniqueException extends Exception
 {
 	public DrillCodeNotUniqueException()

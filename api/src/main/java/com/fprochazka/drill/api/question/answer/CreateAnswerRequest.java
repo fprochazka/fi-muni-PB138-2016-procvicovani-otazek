@@ -2,9 +2,6 @@ package com.fprochazka.drill.api.question.answer;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- * Created by viki on 09.06.16.
- */
 public class CreateAnswerRequest
 {
 

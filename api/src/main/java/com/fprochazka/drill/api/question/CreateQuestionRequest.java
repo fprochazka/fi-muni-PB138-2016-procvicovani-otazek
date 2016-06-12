@@ -5,9 +5,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Collection;
 
-/**
- * Created by viki on 09.06.16.
- */
 public class CreateQuestionRequest
 {
 	@NotEmpty
