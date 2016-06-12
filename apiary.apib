@@ -67,12 +67,12 @@ HOST: https://drill.fprochazka.com/
 + Response 200 (application/json)
 
     + Body
-        
+
             {
                 "questions": [
                     {
                         "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                        "title": "Ako sa mas??"
+                        "text": "Ako sa mas??"
                         "answers": [
                             { "text": "Super!", "correct": true },
                             { "text": "Fakt naprd...", "correct": false }
@@ -88,7 +88,7 @@ HOST: https://drill.fprochazka.com/
     + Body
 
             {
-                "title": "Ako sa mas??"
+                "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": true },
                     { "text": "Fakt naprd...", "correct": false }
@@ -105,7 +105,7 @@ HOST: https://drill.fprochazka.com/
         
             {
                 "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                "title": "Ako sa mas??"
+                "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": true },
                     { "text": "Fakt naprd...", "correct": false }
@@ -138,7 +138,7 @@ HOST: https://drill.fprochazka.com/
 + Request (application/json)
 
         {
-            "title": "Ako sa mas??"
+            "text": "Ako sa mas??"
             "answers": [
                 { "text": "Super!", "correct": false },
                 { "text": "Fakt naprd...", "correct": true },
@@ -152,7 +152,7 @@ HOST: https://drill.fprochazka.com/
         
             {
                 "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                "title": "Ako sa mas??"
+                "text": "Ako sa mas??"
                 "answers": [
                     { "text": "Super!", "correct": false },
                     { "text": "Fakt naprd...", "correct": true },
@@ -171,7 +171,9 @@ HOST: https://drill.fprochazka.com/
 + Request (application/json)
 
             {
-                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                "drill": {
+                    "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                }
             }
 
 + Response 201 (application/json)
@@ -184,14 +186,10 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": 1,
-                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                "answers": [ 
-                    {
-                        "question_id": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                        "correct": 0,
-                        "wrong": 0
-                    }
-                ]
+                "drill": {
+                    "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                },
+                "answers": []
             }
             
 ### List all exams [GET]
@@ -204,14 +202,9 @@ HOST: https://drill.fprochazka.com/
                 "exams": [
                     {
                         "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
-                        "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                        "answers": [ 
-                            {
-                                "questionId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
-                                "correct": 0,
-                                "wrong": 0
-                            }
-                        ]
+                        "drill": {
+                            "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                        }
                     }
                 ]
             }
@@ -233,55 +226,39 @@ HOST: https://drill.fprochazka.com/
     
             {
                 "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
-                "drillId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                "drill": {
+                    "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                },
                 "answers": [ 
                     {
-                        "questionId": "0d58d80d-5616-4242-acd5-e75ede8cc0de",
+                        "question": {
+                            "id": "0d58d80d-5616-4242-acd5-e75ede8cc0de"
+                        },
                         "correct": 0,
                         "wrong": 0
                     }
                 ]
             }
-            
-### Update exam with answers [POST]
+
+### Answering questions [POST]
 
 + Request (application/json)
 
         {
             "answers": [
                 {
-                    "questionId": "6a7f2b1c-37fa-4674-9a9f-d005a131db75",
+                    "question": {
+                        "id": "6a7f2b1c-37fa-4674-9a9f-d005a131db75"
+                    },
                     "correct": true
                 }, 
                 {
-                    "questionId": "05017834-6be7-4046-a351-7d22d577efb3",
+                    "question": {
+                        "id": "05017834-6be7-4046-a351-7d22d577efb3"
+                    },
                     "correct": false
                 }
             ]
         }
         
 + Response 200 (application/json)
-
-## Answering question [/user/{userId}/exam/{examId}/question/{questionId}]
-
-+ Parameters
-
-    + userId (number) - ID of relevant user
-    + examId (number) - ID of relevant exam
-    + questionId (number) - ID of relevant question
-
-### Get question in exam [GET]
-
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "id": "05017834-6be7-4046-a351-7d22d577efb3",
-                "text": "Ako sa mas??"
-                "answers": [
-                    { "text": "Super!", "correct": false },
-                    { "text": "Fakt naprd...", "correct": true },
-                    { "text": "Idem na pivo.", "correct": true }
-                ]
-            }
