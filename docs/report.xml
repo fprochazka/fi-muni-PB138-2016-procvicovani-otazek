@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "docbook-xml-4.5/docbookx.dtd">
+<book lang="sk">
+	<title>Záverečná správa projektu </title>
+	<subtitle> Projekt: Procvičování otázek </subtitle>
+	<titleabbrev> Predmet: PB138 - Moderní značkovací jazyky a jejich aplikace</titleabbrev>
+	<bookinfo>
+		<authorgroup>
+			<author>
+				<firstname>
+					Filip
+				</firstname>
+				<surname>
+					Procházka
+				</surname>
+				<uco>
+					433457
+				</uco>
+			</author>
+			<author>
+				<firstname>
+					Michaela
+				</firstname>
+				<surname>
+					Bamburová
+				</surname>
+				<uco>
+					433732
+				</uco>
+			</author>
+			<author>
+				<firstname>
+					Viktória
+				</firstname>
+				<surname>
+					Vozárová
+				</surname>
+				<uco>
+					433334
+				</uco>
+			</author>
+			<author>
+                <firstname>
+                    Soňa
+                </firstname>
+                <surname>
+                    Leitmanová
+                </surname>
+                <uco>
+                    423191
+                </uco>
+            </author>
+		</authorgroup>
+		<pubdate>2016-06-12</pubdate>
+	</bookinfo>
+
+	<chapter>
+		<title>Popis projektu</title>
+		<section>
+			<title>Zadanie</title>
+			<para>Vytvořte webovou aplikaci pro procvičování otázek k předmětu.
+				Aplikace umožní vkládání a editaci otázek a odpovědí, propojení s odpovědníky v ISu.
+				Aplikace zajistí autentizaci a přístup k odpovědím uživatele, zobrazí statistiky odpovědí.
+			</para>
+		</section>
+	</chapter>
+
+	<chapter>
+		<title>Rozdelenie úloh</title>
+		<section>
+			<title>Filip</title>
+			<para>Uživateľské rozhranie psané v JavaScriptu pomocí ReactJS a Redux,
+				které bude využívat veřejné API poskytované Java aplikací.</para>
+		</section>
+		<section>
+			<title>Michaela</title>
+			<para>Modelová vrstva, která nebude závislá na Spring Frameworku.
+				Bude využívat MongoDB jako persistenční vrstvu.</para>
+		</section>
+		<section>
+			<title>Viktória</title>
+			<para>Veřejně přístupné HTTP RESTful API psané pomocí Spring Frameworku,
+				využívající modelovou vrstvu.</para>
+		</section>
+        <section>
+            <title>Soňa</title>
+            <para>Parser na spracovanie odpovedníkov vo formáte .qdef.</para>
+            <para>Správa dokumentácie projektu.</para>
+        </section>
+	</chapter>
+
+	<chapter>
+		<title>Záverečné správy</title>
+		<section>
+			<title>Filip</title>
+			<para>
+				V aplikaci jsem měl na starosti naimplementovat klienta do prohlížeče v javascriptu, který využívá Drill API.
+				Klient využívá Flux architekturu a je naprogramovaný mimo jiné pomocí knihoven Redux a ReactJS.
+			</para>
+			<para>
+				Ohledně organizace, pomáhal jsem aplikovat svoje znalosti z praxe s používáním Gitu, Githubu a dalších nástrojů na řízení a vývoj projektu.
+				Rozběhal jsem Travis, což je Continuouse Integration nástroj, ve kterém nám běží testy Drill API.
+				A pomáhal jsem Viktórii psát api dokumentaci v nástroji Apiary.
+			</para>
+			<para>
+				Při práci na klientu jsem se důkladně seznámil s architekturou Flux, kterou vyvinuli inženýři z Facebooku,
+				pro správu jednosměrného toku dat v aplikaci, což umožňuje psát dlouhodobě udržovatelné aplikace.
+				Flux je pouze architektura, použil jsem tedy rodinu knihoven Redux, která mi pomáhala architekturu v aplikaci dodržet.
+				Pro vykreslování HTML jsem použil ReactJS, což je velice rychlá a funkcionální knihovna pro psaní šablon a vykreslování dat.
+			</para>
+		</section>
+		<section>
+			<title>Michaela</title>
+			<para>
+			    Mojou úlohou na projekte bolo vytvoriť a naimplementovať funkčnú bussines logic ktorá na základe požiadaviek z vyššej vrstvy čítala dáta z databázy a ukladala ich do zvolených modelov. Navrhnutá modelová vrstva pracuje s dokumentovou databázou MongoDB.
+            </para>
+            <para>
+                V rámci práce na projekte som sa naučila pracovať so zvolenou databázou, dotazovať sa nad ňou a využívať niektoré možnosti ktoré ponúka. Veľmi som ocenila vstavané funkcie, ktoré výrazne uľahčili implementáciu niektorých dotazov. Kedže architektúra tejto vrsty je implementovaná do 5 vrstvového modelu, databáza je vhodne prenositeľná a pripravená na možné rožšírenie.
+            </para>
+		</section>
+		<section>
+			<title>Viktória</title>
+			<para>
+			    V aplikácii som mala na starosti rozhranie medzi webovým klientom a modelovou vrstou, reprezentujúcou objekty v databáze. Rozhranie je implementované v Jave pomocou frameworku Spring. Každá logická časť aplikácie má vlastný kontrolér prijímajúci HTTP požiadavky klienta na server. Kontrolér požiadavku korektne spracuje a odošle klientovi odpoveď. Obsah komunikácie prebieha v tvare JSON.  Dotazy na databázu sú posielané na modelovaciu vrstu. V prípade nekorektného dotazu kontroler odchytí výnimku a obalí ju do vhodnej HTTP odpovede.
+			</para>
+			<para>
+			    Rozhranie je pripravené prijímať požiadavky na vytvorenie drilu, vytvorenie a upravovanie otázok, registráciu nových uživateľov, prihlásenie a autentizáciu a ukladanie a vracanie štatistík odpovedania pre konkrétneho uživateľa.Implementácia je nezávislá na použitej databáze či typu klienta a je pripravená na rozšírenie o ďalšie funkcie.
+		    </para>
+		</section>
+        <section>
+            <title>Soňa</title>
+            <para>
+                Na tomto projekte som sa podieľala na vytváraní databáze, ktorá uchováva informácie o vytvorených drilloch, otázkach a registrovaných užívateľoch. Prvotný návrh využíva XML databázu, ku ktorej som vytvorila model vrátane všetkých potrebných XML schém. Pre jednoduchosť sme zvolili využitie inej NoSQL databázy, konkrétne MongoDB.
+            </para>
+            <para>
+                Mojou ďalšou úlohou bolo vytvorenie parsera, ktorý spracováva odpovedníky z ISu vo formáte .qdef. Parser ukladá prečítané údaje a ukladá ich do entít, s ktorými ďalej pracujú vyššie vrstvy aplikácie.
+            </para>
+            <para>
+                Okrem toho som sa postarala o záverečnú dokumentáciu projektu, doplnenie wiki, záverečnú správu v XML s vyjadreniami všetkých členov tímu a pripravila som slidy k obhajobe.
+            </para>
+        </section>
+	</chapter>
+</book>
