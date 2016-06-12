@@ -1,6 +1,6 @@
-package com.fprochazka.drill.api.question;
+package com.fprochazka.drill.api.drill.question;
 
-import com.fprochazka.drill.api.question.answer.AnswerResponse;
+import com.fprochazka.drill.api.drill.question.answer.AnswerResponse;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -8,13 +8,13 @@ import java.util.UUID;
 public class QuestionResponse
 {
 	private UUID id;
-	private String title;
+	private String text;
 	private Collection<AnswerResponse> answers;
 
-	public QuestionResponse(UUID id, String title, Collection<AnswerResponse> answers)
+	public QuestionResponse(UUID id, String text, Collection<AnswerResponse> answers)
 	{
 		this.id = id;
-		this.title = title;
+		this.text = text;
 		this.answers = answers;
 	}
 
@@ -27,9 +27,9 @@ public class QuestionResponse
 		return id;
 	}
 
-	public String getTitle()
+	public String getText()
 	{
-		return title;
+		return text;
 	}
 
 	public Collection<AnswerResponse> getAnswers()

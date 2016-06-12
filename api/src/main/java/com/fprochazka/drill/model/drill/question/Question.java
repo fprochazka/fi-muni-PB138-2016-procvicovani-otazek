@@ -14,24 +14,24 @@ import java.util.List;
 public class Question extends Identified
 {
 
-	private String title;
+	private String text;
 
 	private List<Answer> answers;
 
 	@DBRef
 	private Drill drill;
 
-	public Question(String title, List<Answer> answers, Drill drill)
+	public Question(String text, List<Answer> answers, Drill drill)
 	{
 		super();
-		this.title = title;
+		this.text = text;
 		this.answers = answers;
 		this.drill = drill;
 	}
 
-	public String getTitle()
+	public String getText()
 	{
-		return title;
+		return text;
 	}
 
 	public List<Answer> getAnswers()
@@ -44,9 +44,9 @@ public class Question extends Identified
 		return drill;
 	}
 
-	public void setTitle(String title)
+	public void setText(String text)
 	{
-		this.title = title;
+		this.text = text;
 	}
 
 	public void setAnswers(List<Answer> answers) {
@@ -56,12 +56,7 @@ public class Question extends Identified
 	@Override
 	public String toString()
 	{
-		return "Question{" +
-			"id=" + getId() +
-			", title='" + title + '\'' +
-			", answers=" + answers +
-			", drill=" + drill +
-			'}';
+		return "Question{id=" + getId() + ", text='" + text + "'}";
 	}
 
 }

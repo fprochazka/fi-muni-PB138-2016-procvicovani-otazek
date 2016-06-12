@@ -1,8 +1,7 @@
-package com.fprochazka.drill.api.question;
+package com.fprochazka.drill.api.drill.question;
 
-import com.fprochazka.drill.api.question.answer.AnswerFactory;
-import com.fprochazka.drill.api.question.answer.AnswerResponse;
-import com.fprochazka.drill.model.drill.question.Answer;
+import com.fprochazka.drill.api.drill.question.answer.AnswerFactory;
+import com.fprochazka.drill.api.drill.question.answer.AnswerResponse;
 import com.fprochazka.drill.model.drill.question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class QuestionFactory
 	public QuestionResponse createQuestionResponse(Question question)
 	{
 		Collection<AnswerResponse> answers = answerFactory.createAnswersResponse(question.getAnswers());
-		return new QuestionResponse(question.getId(), question.getTitle(), answers);
+		return new QuestionResponse(question.getId(), question.getText(), answers);
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class QuestionFactory
 	/*
 	public Question createQuestionFromCreateRequest( CreateQuestionRequest question ) {
 		Collection<Answer> answers = answerFactory.createAnswersFromCreateRequest( question.getAnswers() );
-		return new Question( question.getTitle(), answers );
+		return new Question( question.getText(), answers );
 	}
 
 	public List<Question> createQuestionsFromCreateRequest( Iterable<CreateQuestionRequest> questions ) {
@@ -66,7 +65,7 @@ public class QuestionFactory
 
 	public Question createQuestionFromUpdateRequest( UpdateQuestionRequest question ) {
 		Collection<Answer> answers = answerFactory.createAnswersFromUpdateRequest( question.getAnswers() );
-		return new Question( question.getTitle(), answers );
+		return new Question( question.getText(), answers );
 	}
 
 	public List<Question> createQuestionsFromUpdateRequest( Iterable<UpdateQuestionRequest> questions ) {

@@ -21,7 +21,7 @@
 
 	<xs:complexType name="questionType">
 		<xs:sequence>
-			<xs:element type="xs:string" name="title"/>
+			<xs:element type="xs:string" name="text"/>
 			<xs:element type="answersType" name="answers"/>
 		</xs:sequence>
 		<xs:attribute type="uuid" name="id"/>

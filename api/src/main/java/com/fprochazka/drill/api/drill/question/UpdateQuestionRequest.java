@@ -1,6 +1,6 @@
-package com.fprochazka.drill.api.question;
+package com.fprochazka.drill.api.drill.question;
 
-import com.fprochazka.drill.api.question.answer.UpdateAnswerRequest;
+import com.fprochazka.drill.api.drill.question.answer.UpdateAnswerRequest;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Collection;
@@ -8,14 +8,14 @@ import java.util.Collection;
 public class UpdateQuestionRequest
 {
 	@NotEmpty
-	private String title;
+	private String text;
 
 	@NotEmpty
 	private Collection<UpdateAnswerRequest> answers;
 
 	public UpdateQuestionRequest(String title, Collection<UpdateAnswerRequest> answers)
 	{
-		this.title = title;
+		this.text = title;
 		this.answers = answers;
 	}
 
@@ -23,9 +23,9 @@ public class UpdateQuestionRequest
 	{
 	}
 
-	public String getTitle()
+	public String getText()
 	{
-		return title;
+		return text;
 	}
 
 	public Collection<UpdateAnswerRequest> getAnswers()

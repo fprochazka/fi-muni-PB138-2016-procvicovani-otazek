@@ -1,6 +1,6 @@
-package com.fprochazka.drill.api.question;
+package com.fprochazka.drill.api.drill.question;
 
-import com.fprochazka.drill.api.question.answer.AnswerFactory;
+import com.fprochazka.drill.api.drill.question.answer.AnswerFactory;
 import com.fprochazka.drill.model.api.ResourceNotFoundException;
 import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.question.*;
@@ -71,7 +71,7 @@ public class QuestionController
 	{
 		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
 		try {
-			questionFacade.createQuestion(questionRequest.getTitle(), answers, drillId);
+			questionFacade.createQuestion(questionRequest.getText(), answers, drillId);
 		} catch (DrillNotFoundException e) {
 			throw new ResourceNotFoundException( "drill-not-found", "Drill with given ID not found." );
 		}
@@ -114,7 +114,7 @@ public class QuestionController
 		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
 		Question question = null;
 		try {
-			question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);
+			question = questionFacade.updateQuestion(questionId, questionRequest.getText(), answers);
 		} catch (DrillNotFoundException e) {
 			throw new ResourceNotFoundException( "drill-not-found", "" );
 		}

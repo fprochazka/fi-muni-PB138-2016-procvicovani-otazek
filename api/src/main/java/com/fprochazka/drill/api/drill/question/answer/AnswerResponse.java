@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.question.answer;
+package com.fprochazka.drill.api.drill.question.answer;
 
 public class AnswerResponse
 {
