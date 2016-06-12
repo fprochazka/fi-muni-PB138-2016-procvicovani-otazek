@@ -57,10 +57,49 @@ HOST: https://drill.fprochazka.com/
                 "name": "English II"
             }
 
+## Drill [/drill/{drill_id}]
+
++ Parameters
+
+    + drill_id (uuid) - ID of relevant user
+
+### Read drill [GET]
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": "e5ccce88-3bd1-4955-b128-b88dd8d4eb60",
+                "code": "PB138",
+                "name": "English II"
+            }
+
+### Update drill [PUT]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "code": "PB138",
+                "name": "English 2"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "id": "e5ccce88-3bd1-4955-b128-b88dd8d4eb60",
+                "code": "PB138",
+                "name": "English 2"
+            }
+
 ## Questions Collection [/drill/{drill_id}/question]
 
 + Parameters
-    + drill_id (number) - ID of the relevant drill
+    + drill_id (uuid) - ID of the relevant drill
 
 ### List questions in drill [GET]
 
@@ -133,8 +172,8 @@ HOST: https://drill.fprochazka.com/
 ## Question [/drill/{drill_id}/question/{question_id}]
 
 + Parameters
-    + drill_id (number) - ID of the relevant drill
-    + question_id (number) - ID of the question
+    + drill_id (uuid) - ID of the relevant drill
+    + question_id (uuid) - ID of the question
 
 ### Read question [GET]
 
@@ -182,7 +221,7 @@ HOST: https://drill.fprochazka.com/
 
 + Parameters
 
-    + user_id (number) - ID of relevant user
+    + user_id (uuid) - ID of relevant user
     
 ### Create new exam [POST]
 
@@ -227,8 +266,8 @@ HOST: https://drill.fprochazka.com/
 
 + Parameters
 
-    + userId (number) - ID of relevant user
-    + examId (number) - ID of relevant exam
+    + userId (uuid) - ID of relevant user
+    + examId (uuid) - ID of relevant exam
 
 ### Get exam details [GET]
 
