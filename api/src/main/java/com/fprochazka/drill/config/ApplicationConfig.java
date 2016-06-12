@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ImportResource(locations = "application-context.xml")
 @Import(WebSecurityConfiguration.class)
 @ServletComponentScan
+
 @EnableMongoRepositories(basePackages = "com.fprochazka.drill")
 @EnableConfigurationProperties({PasswordEncoderProperties.class, JwtProperties.class})
 public class ApplicationConfig
@@ -32,6 +33,7 @@ public class ApplicationConfig
 	{
 		return new WebMvcConfigurerAdapter()
 		{
+
 			@Override
 			public void addCorsMappings(CorsRegistry registry)
 			{
@@ -43,8 +45,6 @@ public class ApplicationConfig
 		};
 	}
 
-	@Bean
-	@Autowired
 	public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory)
 	{
 		return new MongoTemplate(mongoDbFactory);
