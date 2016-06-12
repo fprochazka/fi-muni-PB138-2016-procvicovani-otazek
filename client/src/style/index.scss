@@ -306,6 +306,25 @@ html {
 		}
 	}
 
+	&.show-result {
+		ul.answers {
+			li {
+				&.selected {
+					color: white;
+					background-color: #ff3b30;
+				}
+				&.correct {
+					color: white;
+					background-color: #ff7e2a;
+				}
+				&.selected.correct {
+					color: white;
+					background-color: green;
+				}
+			}
+		}
+	}
+
 	.controls {
 		flex-grow: 1;
 		text-align: center;

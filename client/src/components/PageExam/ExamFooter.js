@@ -1,32 +1,29 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 
-export default class DrillFooter extends Component {
+export default class ExamFooter extends Component {
 
 	static propTypes = {
+		drill: PropTypes.shape({
+			id: PropTypes.any.isRequired,
+			code: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+		}),
 	};
 
 	static defaultProps = {};
 
-	componentDidMount() {
-	}
-
-	componentWillUnmount() {
-
-	}
-
-	componentWillReceiveProps(nextProps) {
-	}
-
 	render() {
+		const {drill} = this.props;
+
 		return <div className="footer-fixed-fluid">
 			<div className="container">
 				<div className="row">
-				<span className="col-sm-4">
-					Otázka: <b>1</b> z 359
-				</span>
+				{drill
+					? <span className="col-sm-4">Otázka: <b>1</b> z 359</span>
+					: <span className="col-sm-4">Načítám...</span>}
 				<span className="col-sm-4 text-sm-center">
-					VB036
+					{drill ? drill.code : ''}
 				</span>
 				<span className="col-sm-4 text-sm-right">
 					<Link to={`/`}>Hlavní strana</Link>
@@ -34,10 +31,6 @@ export default class DrillFooter extends Component {
 				</div>
 			</div>
 		</div>;
-	}
-
-	handleSubmit() {
-		this.props.onSubmit(this.props);
 	}
 
 }
