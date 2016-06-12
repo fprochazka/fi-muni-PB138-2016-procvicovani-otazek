@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.exam;
+package com.fprochazka.drill.api.user.exam;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

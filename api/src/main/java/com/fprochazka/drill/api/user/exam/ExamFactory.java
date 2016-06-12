@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.exam;
+package com.fprochazka.drill.api.user.exam;
 
 import com.fprochazka.drill.model.exam.Exam;
 import com.fprochazka.drill.model.exam.question.ExamQuestion;

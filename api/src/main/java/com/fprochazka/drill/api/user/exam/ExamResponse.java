@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.exam;
+package com.fprochazka.drill.api.user.exam;
 
 import java.util.List;
 import java.util.UUID;

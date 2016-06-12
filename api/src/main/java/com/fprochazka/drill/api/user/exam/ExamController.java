@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.exam;
+package com.fprochazka.drill.api.user.exam;
 
 import com.fprochazka.drill.model.api.BadRequestException;
 import com.fprochazka.drill.model.api.ResourceNotFoundException;
