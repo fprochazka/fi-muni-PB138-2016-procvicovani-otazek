@@ -93,7 +93,7 @@ public class QuestionController
 		HttpServletResponse response
 	) throws ResourceNotFoundException
 	{
-		Question question = questionRepository.getQuestionById(questionId);
+		Question question = questionRepository.getQuestionByIdAndDrill(questionId, drillId);
 		if (question == null) {
 			throw new ResourceNotFoundException("question-not-found", "Question with given ID not found");
 		}

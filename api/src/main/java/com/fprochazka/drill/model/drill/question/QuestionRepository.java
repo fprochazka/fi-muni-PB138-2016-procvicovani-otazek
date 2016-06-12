@@ -11,6 +11,7 @@ public interface QuestionRepository extends CrudRepository<Question, UUID>
 {
 
 	Question getQuestionById(UUID questionId);
+	Question getQuestionByIdAndDrill(UUID questionId, UUID drillId);
 
 	List<Question> getQuestionsByDrill(UUID drillId);
 
