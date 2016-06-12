@@ -3,7 +3,7 @@
 	<description>Drill k predmetu PB138</description>
 	<questions>
 		<question id="1">
-			<title>otazka1?</title>
+			<text>otazka1?</text>
 			<answers>
 				<answer correct="true">aaa</answer>
 				<answer correct="false">bbb</answer>

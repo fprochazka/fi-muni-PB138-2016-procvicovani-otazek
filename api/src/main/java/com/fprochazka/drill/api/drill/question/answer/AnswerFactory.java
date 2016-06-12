@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.question.answer;
+package com.fprochazka.drill.api.drill.question.answer;
 
 import com.fprochazka.drill.model.drill.question.Answer;
 import org.springframework.stereotype.Service;
@@ -6,10 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-/**
- * Created by viki on 09.06.16.
- */
 
 @Service
 public class AnswerFactory

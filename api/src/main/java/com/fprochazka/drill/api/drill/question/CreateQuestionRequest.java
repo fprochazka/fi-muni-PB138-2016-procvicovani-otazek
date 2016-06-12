@@ -1,24 +1,21 @@
-package com.fprochazka.drill.api.question;
+package com.fprochazka.drill.api.drill.question;
 
-import com.fprochazka.drill.api.question.answer.CreateAnswerRequest;
+import com.fprochazka.drill.api.drill.question.answer.CreateAnswerRequest;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Collection;
 
-/**
- * Created by viki on 09.06.16.
- */
 public class CreateQuestionRequest
 {
 	@NotEmpty
-	private String title;
+	private String text;
 
 	@NotEmpty
 	private Collection<CreateAnswerRequest> answers;
 
 	public CreateQuestionRequest(String title, Collection<CreateAnswerRequest> answers)
 	{
-		this.title = title;
+		this.text = title;
 		this.answers = answers;
 	}
 
@@ -26,9 +23,9 @@ public class CreateQuestionRequest
 	{
 	}
 
-	public String getTitle()
+	public String getText()
 	{
-		return title;
+		return text;
 	}
 
 	public Collection<CreateAnswerRequest> getAnswers()

@@ -1,12 +1,7 @@
-package com.fprochazka.drill.api.exam;
-
-import com.fprochazka.drill.model.drill.question.Question;
+package com.fprochazka.drill.api.user.exam;
 
 import java.util.UUID;
 
-/**
- * Created by viki on 10.06.16.
- */
 public class QuestionStatistics
 {
 

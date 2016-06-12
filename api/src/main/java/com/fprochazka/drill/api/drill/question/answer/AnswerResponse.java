@@ -1,8 +1,5 @@
-package com.fprochazka.drill.api.question.answer;
+package com.fprochazka.drill.api.drill.question.answer;
 
-/**
- * Created by viki on 09.06.16.
- */
 public class AnswerResponse
 {
 

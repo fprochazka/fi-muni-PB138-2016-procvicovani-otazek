@@ -140,21 +140,21 @@ public class QdefParserTest
 	public void testTitles1() throws Exception
 	{
 		ArrayList<Question> result = parser.parse(threeQuestions);
-		assertEquals(result.get(0).getTitle(), "První verze UNIXu byla vytvořena v");
-		assertEquals(result.get(1).getTitle(), "Co vzniklo dříve? MS-DOS (předchůdce MS-Windows) nebo UNIX?");
-		assertEquals(result.get(2).getTitle(), "Kdo jsou autoři prvních verzí UNIXu?");
+		assertEquals(result.get(0).getText(), "První verze UNIXu byla vytvořena v");
+		assertEquals(result.get(1).getText(), "Co vzniklo dříve? MS-DOS (předchůdce MS-Windows) nebo UNIX?");
+		assertEquals(result.get(2).getText(), "Kdo jsou autoři prvních verzí UNIXu?");
 	}
 
 	@Test
 	public void testTitles2() throws Exception
 	{
 		ArrayList<Question> result = parser.parse(moreLineTitles);
-		assertEquals(result.get(0).getTitle(), "Po provedení příkazů\n" +
+		assertEquals(result.get(0).getText(), "Po provedení příkazů\n" +
 			"<PRE> $ echo 'mravenec' > a; ls -l a\n" +
 			" -rw-r--r--  1 brandejs staff 9 dub  8 23:23 a\n" +
 			" $ echo ferda >> a</PRE>\n" +
 			"bude mít soubor 'a' velikost");
-		assertEquals(result.get(1).getTitle(), "Posloupnost příkazů\n" +
+		assertEquals(result.get(1).getText(), "Posloupnost příkazů\n" +
 			"<PRE>cat &lt;&lt;ukazka\n" +
 			"ls -l ukazka\n" +
 			"ukazka</PRE>\n" +
@@ -165,19 +165,19 @@ public class QdefParserTest
 	public void testTitles3() throws Exception
 	{
 		ArrayList<Question> result = parser.parse(answerComments);
-		assertEquals(result.get(0).getTitle(), "V semestru podzim 2004 byl ustaven rekord v rychlosti rozebrání\n" +
+		assertEquals(result.get(0).getText(), "V semestru podzim 2004 byl ustaven rekord v rychlosti rozebrání\n" +
 			"(zaplnění) některých zkušebních termínů. Víte nebo tipnete jaký?");
-		assertEquals(result.get(1).getTitle(), "Hrajete kamenožrouta?");
+		assertEquals(result.get(1).getText(), "Hrajete kamenožrouta?");
 	}
 
 	@Test
 	public void testTitles4() throws Exception
 	{
 		ArrayList<Question> result = parser.parse(multipleCorrect);
-		assertEquals(result.get(0).getTitle(), "Optimální algoritmus, který pro livovolnou (neorientovanou) " +
+		assertEquals(result.get(0).getText(), "Optimální algoritmus, který pro livovolnou (neorientovanou) " +
 			"kružnici na <I>n</I> uzlech s kladně ohodnocenými hranami a její uzel <I>r</I> vypočte vzdálenost " +
 			"z uzlu <I>r</I> do všech ostatních uzlů, má složitost ležící v:");
-		assertEquals(result.get(1).getTitle(), "Máme libovolnou neorientovanou kružnici s kladně ohodnocenými " +
+		assertEquals(result.get(1).getText(), "Máme libovolnou neorientovanou kružnici s kladně ohodnocenými " +
 			"hranami a <I>n</I> uzly. Optimální algoritmus řešící výpočet matice vzdáleností mezi jejími uzly, " +
 			"má složitost v:");
 	}

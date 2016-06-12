@@ -1,25 +1,23 @@
-package com.fprochazka.drill.api.question.answer;
+package com.fprochazka.drill.api.drill.question.answer;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- * Created by viki on 09.06.16.
- */
-public class UpdateAnswerRequest
+public class CreateAnswerRequest
 {
+
 	@NotEmpty
 	private String text;
 
 	@NotEmpty
 	private Boolean correct;
 
-	public UpdateAnswerRequest(String text, Boolean correct)
+	public CreateAnswerRequest(String test, Boolean correct)
 	{
-		this.text = text;
+		this.text = test;
 		this.correct = correct;
 	}
 
-	public UpdateAnswerRequest()
+	public CreateAnswerRequest()
 	{
 	}
 

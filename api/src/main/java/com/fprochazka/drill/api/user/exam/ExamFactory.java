@@ -1,4 +1,4 @@
-package com.fprochazka.drill.api.exam;
+package com.fprochazka.drill.api.user.exam;
 
 import com.fprochazka.drill.model.exam.Exam;
 import com.fprochazka.drill.model.exam.question.ExamQuestion;
@@ -9,10 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-/**
- * Created by viki on 09.06.16.
- */
 
 @Service
 public class ExamFactory

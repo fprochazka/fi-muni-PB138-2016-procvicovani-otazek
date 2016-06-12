@@ -1,11 +1,8 @@
-package com.fprochazka.drill.api.exam;
+package com.fprochazka.drill.api.user.exam;
 
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by viki on 09.06.16.
- */
 public class ExamResponse
 {
 

@@ -1,6 +1,6 @@
-package com.fprochazka.drill.api.question;
+package com.fprochazka.drill.api.drill.question;
 
-import com.fprochazka.drill.api.question.answer.AnswerFactory;
+import com.fprochazka.drill.api.drill.question.answer.AnswerFactory;
 import com.fprochazka.drill.model.api.ResourceNotFoundException;
 import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.question.*;
@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class QuestionController
@@ -48,12 +46,15 @@ public class QuestionController
 		method = RequestMethod.GET,
 		headers = {"content-type=application/json", "accept=application/json"}
 	)
-	public @ResponseBody Collection<QuestionResponse> getAllQuestionsInDrill(
+	public @ResponseBody Map<String, Object> getAllQuestionsInDrill(
 		@PathVariable UUID drillId
 	)
 	{
 		Iterable<Question> questions = questionRepository.getQuestionsByDrill(drillId);
-		return questionFactory.createQuestionsResponse(questions);
+
+		return new HashMap<String, Object>() {{
+			put("questions", questionFactory.createQuestionsResponse(questions));
+		}};
 	}
 
 	/**
@@ -64,16 +65,17 @@ public class QuestionController
 	 * @param drillId         - ID of the drill we want to add question to
 	 * @param questionRequest
 	 */
-	@RequestMapping( value = "/drill/{drillId}/question", method = RequestMethod.POST)
+	@RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.POST)
 	public void createQuestion(
 		@PathVariable UUID drillId,
-		@Valid @RequestBody CreateQuestionRequest questionRequest) throws ResourceNotFoundException
+		@Valid @RequestBody CreateQuestionRequest questionRequest
+	) throws ResourceNotFoundException
 	{
 		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
 		try {
-			questionFacade.createQuestion(questionRequest.getTitle(), answers, drillId);
+			questionFacade.createQuestion(questionRequest.getText(), answers, drillId);
 		} catch (DrillNotFoundException e) {
-			throw new ResourceNotFoundException( "drill-not-found", "Drill with given ID not found." );
+			throw new ResourceNotFoundException("drill-not-found", "Drill with given ID not found.");
 		}
 	}
 
@@ -88,11 +90,12 @@ public class QuestionController
 	public @ResponseBody QuestionResponse getQuestion(
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
-		HttpServletResponse response) throws ResourceNotFoundException
+		HttpServletResponse response
+	) throws ResourceNotFoundException
 	{
-		Question question = questionRepository.getQuestionById(questionId);
+		Question question = questionRepository.getQuestionByIdAndDrill(questionId, drillId);
 		if (question == null) {
-			throw new ResourceNotFoundException( "question-not-found", "Question with given ID not found" );
+			throw new ResourceNotFoundException("question-not-found", "Question with given ID not found");
 		}
 		return questionFactory.createQuestionResponse(question);
 	}
@@ -114,9 +117,9 @@ public class QuestionController
 		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
 		Question question = null;
 		try {
-			question = questionFacade.updateQuestion(questionId, questionRequest.getTitle(), answers);
+			question = questionFacade.updateQuestion(questionId, questionRequest.getText(), answers);
 		} catch (DrillNotFoundException e) {
-			throw new ResourceNotFoundException( "drill-not-found", "" );
+			throw new ResourceNotFoundException("drill-not-found", "");
 		}
 		return questionFactory.createQuestionResponse(question);
 	}
