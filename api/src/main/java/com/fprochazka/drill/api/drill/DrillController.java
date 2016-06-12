@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -40,10 +42,13 @@ public class DrillController
 	 * @return response for all found drills
 	 */
 	@RequestMapping(value = "/drill", method = RequestMethod.GET)
-	public @ResponseBody Collection<DrillResponse> getAllDrills()
+	public @ResponseBody Map<String, Object> getAllDrills()
 	{
 		Iterable<Drill> drills = drillRepository.findAll();
-		return drillResponseFactory.createDrillsResponse(drills);
+
+		return new HashMap<String, Object>(){{
+			put("drills", drillResponseFactory.createDrillsResponse(drills));
+		}};
 	}
 
 	/**

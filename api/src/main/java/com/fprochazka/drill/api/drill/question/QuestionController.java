@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class QuestionController
@@ -48,12 +46,15 @@ public class QuestionController
 		method = RequestMethod.GET,
 		headers = {"content-type=application/json", "accept=application/json"}
 	)
-	public @ResponseBody Collection<QuestionResponse> getAllQuestionsInDrill(
+	public @ResponseBody Map<String, Object> getAllQuestionsInDrill(
 		@PathVariable UUID drillId
 	)
 	{
 		Iterable<Question> questions = questionRepository.getQuestionsByDrill(drillId);
-		return questionFactory.createQuestionsResponse(questions);
+
+		return new HashMap<String, Object>() {{
+			put("questions", questionFactory.createQuestionsResponse(questions));
+		}};
 	}
 
 	/**

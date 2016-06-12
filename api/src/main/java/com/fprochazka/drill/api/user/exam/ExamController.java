@@ -66,10 +66,13 @@ public class ExamController
 	 * @return response objects for all found exams
 	 */
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.GET)
-	public @ResponseBody Collection<ExamResponse> getAllExams(@PathVariable UUID userId)
+	public @ResponseBody Map<String, Object> getAllExams(@PathVariable UUID userId)
 	{
-		List<Exam> exams = examRepository.getExamsByUser( userId );
-		return examFactory.createExamsResponse( exams );
+		List<Exam> exams = examRepository.getExamsByUser(userId);
+
+		return new HashMap<String, Object>() {{
+			put("questions", examFactory.createExamsResponse(exams));
+		}};
 	}
 
 	/**
