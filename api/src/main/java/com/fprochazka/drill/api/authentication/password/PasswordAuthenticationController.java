@@ -4,7 +4,6 @@ import com.fprochazka.drill.model.api.BadRequestException;
 import com.fprochazka.drill.model.authentication.AccessToken;
 import com.fprochazka.drill.model.authentication.AuthenticationException;
 import com.fprochazka.drill.model.authentication.password.*;
-import com.fprochazka.drill.model.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +35,7 @@ public class PasswordAuthenticationController
 	{
 		try {
 			AccessToken accessToken = authenticationFacade.login(
-				passwordLoginRequest.getName(),
+				passwordLoginRequest.getUsername(),
 				passwordLoginRequest.getPassword()
 			);
 
