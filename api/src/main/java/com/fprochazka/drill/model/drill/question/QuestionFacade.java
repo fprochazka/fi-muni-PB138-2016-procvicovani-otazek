@@ -23,7 +23,7 @@ public class QuestionFacade
 		this.drillRepository = drillRepository;
 	}
 
-	public Question createQuestion(String text, List<Answer> answers, UUID drillId) throws DrillNotFoundException
+	public Question createQuestion(UUID drillId, String text, List<Answer> answers) throws DrillNotFoundException
 	{
 		Drill drill = drillRepository.findOne(drillId);
 		if (drill == null) {
@@ -36,9 +36,9 @@ public class QuestionFacade
 		return question;
 	}
 
-	public Question updateQuestion(UUID questionId, String text, List<Answer> answers) throws DrillNotFoundException
+	public Question updateQuestion(UUID drillId, UUID questionId, String text, List<Answer> answers) throws DrillNotFoundException
 	{
-		Question question = questionRepository.getQuestionById(questionId);
+		Question question = questionRepository.getQuestionByIdAndDrill(questionId, drillId);
 		if (question == null) {
 			throw new DrillNotFoundException();
 		}

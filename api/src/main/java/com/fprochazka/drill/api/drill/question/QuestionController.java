@@ -8,7 +8,6 @@ import com.fprochazka.drill.model.drill.question.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -41,11 +40,7 @@ public class QuestionController
 	 * @param drillId - ID of the drill we want to find questions in
 	 * @return collection of response objects for found questions
 	 */
-	@RequestMapping(
-		value = "/drill/{drillId}/question",
-		method = RequestMethod.GET,
-		headers = {"content-type=application/json", "accept=application/json"}
-	)
+	@RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getAllQuestionsInDrill(
 		@PathVariable UUID drillId
 	)
@@ -66,14 +61,17 @@ public class QuestionController
 	 * @param questionRequest
 	 */
 	@RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.POST)
-	public void createQuestion(
+	public QuestionResponse createQuestion(
 		@PathVariable UUID drillId,
 		@Valid @RequestBody CreateQuestionRequest questionRequest
 	) throws ResourceNotFoundException
 	{
-		List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
 		try {
-			questionFacade.createQuestion(questionRequest.getText(), answers, drillId);
+			List<Answer> answers = answerFactory.createAnswersFromCreateRequest(questionRequest.getAnswers());
+			Question question = questionFacade.createQuestion(drillId, questionRequest.getText(), answers);
+
+			return questionFactory.createQuestionResponse(question);
+
 		} catch (DrillNotFoundException e) {
 			throw new ResourceNotFoundException("drill-not-found", "Drill with given ID not found.");
 		}
@@ -89,8 +87,7 @@ public class QuestionController
 	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.GET)
 	public @ResponseBody QuestionResponse getQuestion(
 		@PathVariable UUID drillId,
-		@PathVariable UUID questionId,
-		HttpServletResponse response
+		@PathVariable UUID questionId
 	) throws ResourceNotFoundException
 	{
 		Question question = questionRepository.getQuestionByIdAndDrill(questionId, drillId);
@@ -110,17 +107,17 @@ public class QuestionController
 	public @ResponseBody QuestionResponse updateQuestion(
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,
-		@Valid @RequestBody UpdateQuestionRequest questionRequest,
-		HttpServletResponse response
+		@Valid @RequestBody UpdateQuestionRequest questionRequest
 	) throws ResourceNotFoundException
 	{
-		List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
-		Question question = null;
 		try {
-			question = questionFacade.updateQuestion(questionId, questionRequest.getText(), answers);
+			List<Answer> answers = answerFactory.createAnswersFromUpdateRequest(questionRequest.getAnswers());
+			Question question = questionFacade.updateQuestion(drillId, questionId, questionRequest.getText(), answers);
+
+			return questionFactory.createQuestionResponse(question);
+
 		} catch (DrillNotFoundException e) {
 			throw new ResourceNotFoundException("drill-not-found", "");
 		}
-		return questionFactory.createQuestionResponse(question);
 	}
 }

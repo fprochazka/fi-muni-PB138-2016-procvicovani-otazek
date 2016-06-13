@@ -26,19 +26,18 @@ public class QuestionFacadeTests extends IntegrationTestCase
 	{
 		List<Answer> answers = new ArrayList<>();
 		Drill drill = new Drill("PB", "drill name");
-		questionFacade.createQuestion("question 1", answers, drill.getId());
+		questionFacade.createQuestion(drill.getId(), "question 1", answers);
 	}
 
 	@Test(expected = DrillNotFoundException.class)
 	public void testUpdateNullQuestionThrowsException() throws DrillNotFoundException
 	{
-
-		questionFacade.updateQuestion(null, "question 1", null);
+		questionFacade.updateQuestion(DrillTestFixtures.drillMB104.getId(), null, "question 1", null);
 	}
 
 	@Test
 	public void testUpdateCorrectQuestion() throws DrillNotFoundException
 	{
-		questionFacade.updateQuestion(DrillTestFixtures.drillMB104question1.getId(), "question 1", null);
+		questionFacade.updateQuestion(DrillTestFixtures.drillMB104.getId(), DrillTestFixtures.drillMB104question1.getId(), "question 1", null);
 	}
 }

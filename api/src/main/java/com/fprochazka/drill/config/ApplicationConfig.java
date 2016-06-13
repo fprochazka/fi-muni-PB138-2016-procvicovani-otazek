@@ -37,7 +37,7 @@ public class ApplicationConfig
 			{
 				registry
 					.addMapping("/**")
-					.allowedOrigins("http://localhost:9000", "chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm");
+					.allowedOrigins("http://localhost:3000", "chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm");
 			}
 		};
 	}
