@@ -7,6 +7,7 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Service
 public class JSONQuestionParser
 {
 	public List< Question > parse( Drill drill, File file ) throws FileNotFoundException, ParseException

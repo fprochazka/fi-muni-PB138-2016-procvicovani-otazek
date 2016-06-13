@@ -1,16 +1,22 @@
 package com.fprochazka.drill.cli;
 
+import com.fprochazka.drill.config.WebSecurityConfiguration;
 import com.fprochazka.drill.model.drill.*;
 import com.fprochazka.drill.model.drill.question.Question;
 import com.fprochazka.drill.model.drill.question.QuestionFacade;
+import com.fprochazka.drill.model.json.JSONQuestionParser;
 import com.fprochazka.drill.model.qdef.QdefParser;
+import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,10 +26,15 @@ import java.util.List;
 
 @Component
 @ComponentScan(basePackages = "com.fprochazka.drill")
+@ImportResource(locations = "application-context.xml")
+
+@EnableMongoRepositories(basePackages = "com.fprochazka.drill")
 public class QuestionLoader implements CommandLineRunner
 {
 	@Autowired
 	private QdefParser qdefParser;
+	@Autowired
+	private JSONQuestionParser jsonParser;
 	@Autowired
 	private QuestionFacade questionFacade;
 	@Autowired
@@ -54,7 +65,6 @@ public class QuestionLoader implements CommandLineRunner
 		if ( drill == null ) {
 			System.out.println("Drill with given code '" + code + "' does not exist.\nCreating new drill.");
 			try
-
 			{
 				drill = drillFacade.createDrill(code, code);
 			} catch (DrillCodeNotUniqueException e) {
@@ -73,7 +83,7 @@ public class QuestionLoader implements CommandLineRunner
 				questions = qdefParser.parse( file );
 				for ( Question question: questions )
 				{
-					questionFacade.createQuestion( question.getText(), question.getAnswers(), drill.getId() );
+					questionFacade.createQuestion( drill.getId(), question.getText(), question.getAnswers() );
 				}
 				System.out.println( "Total " + questions.size() + " succesfully created questions and added to drill " + drill.getCode() + "." );
 			} catch (IOException e) {
@@ -87,8 +97,26 @@ public class QuestionLoader implements CommandLineRunner
 
 		if ( ext.equals("json") || ext.equals("JSON") )
 		{
-
+			try {
+				questions = jsonParser.parse( drill, file );
+				for ( Question question: questions )
+				{
+					questionFacade.createQuestion( drill.getId(), question.getText(), question.getAnswers() );
+				}
+				System.out.println( "Total " + questions.size() + " succesfully created questions and added to drill " + drill.getCode() + "." );
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} catch (DrillNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
+	}
+
+	public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory)
+	{
+		return new MongoTemplate(mongoDbFactory);
 	}
 
 	@Override
