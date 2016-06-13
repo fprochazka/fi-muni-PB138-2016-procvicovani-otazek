@@ -5,46 +5,30 @@ import com.fprochazka.drill.api.user.UserResponse;
 public class AccessTokenResponse
 {
 
-	private AccessToken accessToken;
+	private String token;
+	private String scope;
+	private UserResponse user;
 
-	public AccessTokenResponse(String token, String scope, UserResponse user)
+	AccessTokenResponse(String token, String scope, UserResponse user)
 	{
-		this.accessToken = new AccessToken(token, scope, user);
+		this.token = token;
+		this.scope = scope;
+		this.user = user;
 	}
 
-	public AccessToken getAccessToken()
+	public String getToken()
 	{
-		return accessToken;
+		return token;
 	}
 
-	public class AccessToken
+	public String getScope()
 	{
-		private String token;
-		private String scope;
-		private UserResponse user;
+		return scope;
+	}
 
-		AccessToken(String token, String scope, UserResponse user)
-		{
-			this.token = token;
-			this.scope = scope;
-			this.user = user;
-		}
-
-		public String getToken()
-		{
-			return token;
-		}
-
-		public String getScope()
-		{
-			return scope;
-		}
-
-		public UserResponse getUser()
-		{
-			return user;
-		}
-
+	public UserResponse getUser()
+	{
+		return user;
 	}
 
 }

@@ -3,13 +3,16 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	   xmlns:security="http://www.springframework.org/schema/security"
 	   xsi:schemaLocation=
 		   "http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context-3.0.xsd
           http://www.springframework.org/schema/data/mongo
           http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
           http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<context:property-placeholder location="application.properties"/>
 
@@ -21,5 +24,15 @@
 	</mongo:mongo>
 
 	<mongo:db-factory dbname="${spring.data.mongodb.database}" mongo-ref="mongo"/>
+
+	<bean id="authenticationEntryPoint" class="com.fprochazka.drill.model.authentication.AuthenticationEntryPoint">
+		<property name="realmName" value="Secure realm" />
+	</bean>
+
+	<bean id="restAuthenticationProvider" class="com.fprochazka.drill.model.authentication.AuthenticationProvider" />
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="restAuthenticationProvider" />
+	</security:authentication-manager>
 
 </beans>

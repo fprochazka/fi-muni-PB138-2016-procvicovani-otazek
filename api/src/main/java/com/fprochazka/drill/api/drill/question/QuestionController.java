@@ -106,7 +106,7 @@ public class QuestionController
 	 * @param questionId      - ID of the question we want to update
 	 * @param questionRequest - updated question
 	 */
-	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.PUT)
 	public @ResponseBody QuestionResponse updateQuestion(
 		@PathVariable UUID drillId,
 		@PathVariable UUID questionId,

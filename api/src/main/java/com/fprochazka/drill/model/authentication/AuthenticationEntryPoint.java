@@ -1,0 +1,25 @@
+package com.fprochazka.drill.model.authentication;
+
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint
+{
+
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response, org.springframework.security.core.AuthenticationException authException) throws IOException, ServletException
+	{
+		// response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		response.setContentType("application/json");
+
+		PrintWriter writer = response.getWriter();
+		writer.println("{\"errors\":[{\"code\":null,\"message\":\"" + authException.getMessage() + "\"}]}");
+	}
+
+}

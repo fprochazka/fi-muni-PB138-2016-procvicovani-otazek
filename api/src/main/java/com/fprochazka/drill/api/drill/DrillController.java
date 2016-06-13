@@ -7,9 +7,9 @@ import com.fprochazka.drill.model.drill.DrillCodeNotUniqueException;
 import com.fprochazka.drill.model.drill.DrillFacade;
 import com.fprochazka.drill.model.drill.DrillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.HashMap;
@@ -76,6 +76,7 @@ public class DrillController
 	 * @param createDrillRequest
 	 * @return drill response of the new drill
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/drill", method = RequestMethod.POST)
 	public @ResponseBody DrillResponse createDrill(@Valid @RequestBody CreateDrillRequest createDrillRequest ) throws BadRequestException
 	{
