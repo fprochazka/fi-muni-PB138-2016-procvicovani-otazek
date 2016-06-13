@@ -219,7 +219,62 @@ HOST: https://drill.fprochazka.com/
                     { "text": "Idem na pivo.", "correct": true }
                 ]
             }
-            
+
+## Registration [/authentication/password/register]
+
+### Update question [POST]
+
++ Request (application/json)
+
+        {
+            "uco": 123456,
+            "email": "filip@prochazka.su",
+            "password": "secret"
+        }
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "accessToken": {
+                    "token": "eyJhbGciOiJIUzI1NiJ6.eyJzdWIiOiI4ZWFmMGM1NS1hYmFjLTQ1YmQtYWJlNS04ZjlhI6IlJPTEVfVVNFUiIsImlhdCI6MTQ2NTg0NjUxNX1.vS6ZgbPsoYiQdBXVyZ93Chl5BCS5xoccPICIKhPckCh",
+                    "scope": "USER",
+                    "user": {
+                        "id": "0403e55b-5a56-4b71-b8e3-2fa4983705fc",
+                        "uco": 123456,
+                        "email": "filip@prochazka.su"
+                    }
+                }
+            }
+
+## Login [/authentication/password/login]
+
+### Update question [POST]
+
++ Request (application/json)
+
+        {
+            "username": 123456,
+            "password": "secret"
+        }
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "accessToken": {
+                    "token": "eyJhbGciOiJIUzI1NiJ6.eyJzdWIiOiI4ZWFmMGM1NS1hYmFjLTQ1YmQtYWJlNS04ZjlhI6IlJPTEVfVVNFUiIsImlhdCI6MTQ2NTg0NjUxNX1.vS6ZgbPsoYiQdBXVyZ93Chl5BCS5xoccPICIKhPckCh",
+                    "scope": "USER",
+                    "user": {
+                        "id": "0403e55b-5a56-4b71-b8e3-2fa4983705fc",
+                        "uco": 123456,
+                        "email": "filip@prochazka.su"
+                    }
+                }
+            }
+
 ## Exam Collection [/user/{user_id}/exam]
 
 + Parameters
@@ -264,7 +319,6 @@ HOST: https://drill.fprochazka.com/
             }
 
 
-            
 ## Exam [/user/{userId}/exam/{examId}]
 
 + Parameters
