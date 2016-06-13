@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {fetchCategories} from '../../actions/drill';
+import {fetchDrills} from '../../actions/drill.js';
 
 import Footer from '../Common/Footer.js';
 import Header from '../Common/Header.js';
@@ -15,7 +15,7 @@ class PageHome extends Component {
 			id: PropTypes.any.isRequired,
 			name: PropTypes.string.isRequired,
 		})).isRequired,
-		fetchCategories: PropTypes.func.isRequired,
+		fetchDrills: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
@@ -23,8 +23,8 @@ class PageHome extends Component {
 	};
 
 	componentDidMount() {
-		const {fetchCategories} = this.props;
-		fetchCategories();
+		const {fetchDrills} = this.props;
+		fetchDrills();
 	}
 
 	componentWillUnmount() {
@@ -67,5 +67,5 @@ export default connect((state, ownProps) => {
 		drills: state.drill.drills,
 	};
 }, {
-	fetchCategories,
+	fetchDrills,
 })(PageHome);

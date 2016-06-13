@@ -13,6 +13,10 @@ export function createDrill(name) {
 	});
 }
 
+export function getDrill(drillId) {
+	return fetch('/drill/' + encodeURIComponent(drillId))
+}
+
 export function getDrillQuestions(drillId) {
 	return fetch('/drill/' + encodeURIComponent(drillId) + '/question')
 }
