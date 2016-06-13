@@ -2,16 +2,16 @@ package com.fprochazka.drill.api.authentication.password;
 
 public class PasswordLoginRequest
 {
-	private String name;
+	private String username;
 	private String password;
 
 	public PasswordLoginRequest()
 	{
 	}
 
-	public String getName()
+	public String getUsername()
 	{
-		return name;
+		return username;
 	}
 
 	public String getPassword()
