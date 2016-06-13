@@ -8,6 +8,7 @@ import com.fprochazka.drill.model.exam.*;
 import com.fprochazka.drill.model.exam.question.*;
 import com.fprochazka.drill.model.authentication.password.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,6 +44,7 @@ public class ExamController
 	 *
 	 * @param request - ID of drill we want to create exam for
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.POST)
 	public @ResponseBody ExamResponse createExam(
 		@PathVariable("userId") UUID userId,
@@ -65,6 +67,7 @@ public class ExamController
 	 *
 	 * @return response objects for all found exams
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/user/{userId}/exam", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getAllExams(@PathVariable UUID userId)
 	{
@@ -80,6 +83,7 @@ public class ExamController
 	 *
 	 * @return response object for found exam
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.GET)
 	public @ResponseBody ExamResponse getExam(
 		@PathVariable UUID examId)
@@ -95,6 +99,7 @@ public class ExamController
 	 *
 	 * @param answers - list of user's answers to questions of exam
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/user/{userId}/exam/{examId}", method = RequestMethod.PUT)
 	public void updateExam(
 		@PathVariable UUID userId,
