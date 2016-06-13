@@ -6,7 +6,10 @@ import com.fprochazka.drill.Application;
 import com.fprochazka.drill.IntegrationTestCase;
 import com.fprochazka.drill.config.ApplicationConfig;
 import com.fprochazka.drill.fixtures.DrillTestFixtures;
-import com.fprochazka.drill.model.drill.*;
+import com.fprochazka.drill.model.drill.Drill;
+import com.fprochazka.drill.model.drill.DrillCodeNotUniqueException;
+import com.fprochazka.drill.model.drill.DrillFacade;
+import com.fprochazka.drill.model.drill.DrillRepository;
 import com.fprochazka.drill.model.drill.question.Question;
 import com.fprochazka.drill.model.drill.question.QuestionRepository;
 import org.hamcrest.Matchers;
@@ -32,35 +35,30 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
-/**
- * Created by viki on 11.06.16.
- */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ApplicationConfig.class)
 @WebIntegrationTest(randomPort=true)
-public class QuestionControllerTests extends IntegrationTestCase
+public class DrillControllerTests extends IntegrationTestCase
 {
 	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	@Autowired
 	private DrillFacade facade;
 	@Autowired
-	private DrillRepository repository;
-	@Autowired
 	private TestRequestFactory factory;
 
 	private RestTemplate restTemplate = new TestRestTemplate();
 
 	@Test
-	public void testCreateQuestion() throws JsonProcessingException
+	public void testCreateDrill() throws JsonProcessingException
 	{
-		Question question = DrillTestFixtures.drillMB104question1;
-		Drill drill = repository.getDrillByCode( question.getDrill().getCode() );
+		Drill drill = new Drill( "MB101", "Linearni modely" );
 
-
-		Map< String, Object > requestBody = factory.createCreateQuestionRequest( question );
+		Map< String, Object > requestBody = factory.createCreateDrillRequest( drill );
 
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(MediaType.APPLICATION_JSON );
@@ -69,11 +67,15 @@ public class QuestionControllerTests extends IntegrationTestCase
 
 
 		Map<String, Object> apiResponse =
-			restTemplate.postForObject( "http://localhost:8080/drill/" + drill.getId().toString() + "/question",
-			requestEntity, Map.class, Collections.EMPTY_MAP );
+			restTemplate.postForObject( "http://localhost:8080/drill",
+				requestEntity, Map.class, Collections.EMPTY_MAP );
 
 		System.out.println( apiResponse.toString() );
 		assertNotNull( apiResponse );
 
+		Drill responseDrill = (Drill) apiResponse.get( "drill" );/*
+		assertEquals( responseDrill.getId(), drill.getId() );
+		assertEquals( responseDrill.getCode(), drill.getCode() );
+		assertEquals( responseDrill.getName(), responseDrill.getName() );*/
 	}
 }
