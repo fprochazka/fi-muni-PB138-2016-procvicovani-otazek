@@ -1,6 +1,5 @@
 package com.fprochazka.drill.cli;
 
-import com.fprochazka.drill.config.WebSecurityConfiguration;
 import com.fprochazka.drill.model.drill.*;
 import com.fprochazka.drill.model.drill.question.Question;
 import com.fprochazka.drill.model.drill.question.QuestionFacade;
@@ -9,12 +8,8 @@ import com.fprochazka.drill.model.qdef.QdefParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +22,6 @@ import java.util.List;
 @Component
 @ComponentScan(basePackages = "com.fprochazka.drill")
 @ImportResource(locations = "application-context.xml")
-
 @EnableMongoRepositories(basePackages = "com.fprochazka.drill")
 public class QuestionLoader implements CommandLineRunner
 {
@@ -112,11 +106,6 @@ public class QuestionLoader implements CommandLineRunner
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory)
-	{
-		return new MongoTemplate(mongoDbFactory);
 	}
 
 	@Override

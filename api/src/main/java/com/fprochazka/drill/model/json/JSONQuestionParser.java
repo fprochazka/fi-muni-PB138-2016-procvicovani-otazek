@@ -19,25 +19,23 @@ import java.util.List;
 @Service
 public class JSONQuestionParser
 {
-	public List< Question > parse( Drill drill, File file ) throws FileNotFoundException, ParseException
+	public List<Question> parse(Drill drill, File file) throws FileNotFoundException, ParseException
 	{
 		JSONParser parser = new JSONParser(JSONParser.MODE_PERMISSIVE);
-		JSONArray a = (JSONArray) parser.parse(new FileReader( file ));
+		JSONArray a = (JSONArray) parser.parse(new FileReader(file));
 		List<Question> questions = new ArrayList<>();
 
-		for (Object o : a)
-		{
+		for (Object o : a) {
 			JSONObject question = (JSONObject) o;
 			String name = (String) question.get("name");
-			ArrayList< HashMap< String, Object > > answersMap = (ArrayList) question.get("answers");
+			ArrayList<HashMap<String, Object>> answersMap = (ArrayList) question.get("answers");
 			ArrayList<Answer> answers = new ArrayList<>();
-			for ( HashMap answerMap : answersMap )
-			{
+			for (HashMap answerMap : answersMap) {
 				String body = (String) answerMap.get("body");
 				Boolean right = (Boolean) answerMap.get("right");
-				answers.add( new Answer( right, body ) );
+				answers.add(new Answer(right, body));
 			}
-			questions.add( new Question( name, answers, drill ) );
+			questions.add(new Question(name, answers, drill));
 		}
 
 		return questions;
