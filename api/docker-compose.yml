@@ -1,0 +1,11 @@
+drill-api:
+  build: .
+  ports:
+    - "9005:8080"
+  links:
+    - drill-mongo
+  environment:
+    - JWT_SECRET=change-me
+    - API_CLIENT_ORIGIN="https://drill.fprochazka.com"
+drill-mongo:
+  image: mongo:3.0.12
