@@ -1,47 +1,52 @@
-import fetch from './fetch.js'
+import {post, get, put} from './fetch.js'
 
-export function getDrills() {
-	return fetch('/drill');
-}
-
-export function createDrill(name) {
-	return fetch('/drill', {
-		method: 'post',
-		body: JSON.stringify({
-			name: name
-		})
+export function getDrills(accessToken = null) {
+	return get('/drill', {
+		accessToken,
 	});
 }
 
-export function getDrill(drillId) {
-	return fetch('/drill/' + encodeURIComponent(drillId))
+export function createDrill(name, accessToken) {
+	return post('/drill', {
+		name: name
+	}, {
+		accessToken,
+	});
 }
 
-export function getDrillQuestions(drillId) {
-	return fetch('/drill/' + encodeURIComponent(drillId) + '/question')
-}
-
-export function createDrillQuestions(drillId, text, answers) {
-	return fetch('/drill/' + encodeURIComponent(drillId) + '/question', {
-		method: 'post',
-		body: JSON.stringify({
-			text: text,
-			answers: answers
-		})
+export function getDrill(drillId, accessToken = null) {
+	return get('/drill/' + encodeURIComponent(drillId), {
+		accessToken,
 	})
 }
 
-export function getDrillQuestion(drillId, questionId) {
-	return fetch('/drill/' + encodeURIComponent(drillId) + '/question/' + encodeURIComponent(questionId));
+export function getDrillQuestions(drillId, accessToken = null) {
+	return get('/drill/' + encodeURIComponent(drillId) + '/question', {
+		accessToken,
+	})
+}
+
+export function createDrillQuestions(drillId, text, answers, accessToken) {
+	return post('/drill/' + encodeURIComponent(drillId) + '/question', {
+		text: text,
+		answers: answers
+	}, {
+		accessToken,
+	})
+}
+
+export function getDrillQuestion(drillId, questionId, accessToken = null) {
+	return get('/drill/' + encodeURIComponent(drillId) + '/question/' + encodeURIComponent(questionId), {
+		accessToken,
+	});
 }
 
 
-export function updateDrillQuestion(drillId, questionId, text, answers) {
-	return fetch('/drill/' + encodeURIComponent(drillId) + '/question/' + encodeURIComponent(questionId), {
-		method: 'post',
-		body: JSON.stringify({
-			text: text,
-			answers: answers
-		})
+export function updateDrillQuestion(drillId, questionId, text, answers, accessToken) {
+	return post('/drill/' + encodeURIComponent(drillId) + '/question/' + encodeURIComponent(questionId), {
+		text: text,
+		answers: answers
+	}, {
+		accessToken,
 	});
 }

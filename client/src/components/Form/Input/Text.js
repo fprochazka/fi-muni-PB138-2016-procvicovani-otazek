@@ -30,7 +30,7 @@ export default class Text extends FormComponent {
 				id={this.props.name}
 				value={this.props.value}
 				defaultValue={this.props.defaultValue}
-				onKeyUp={this.onKeyUp.bind(this)}
+				onKeyUp={this.onKeyUp}
 				autofocus={this.props.autoFocus}
 				onBlur={this.handleBlur}
 				className={[this.props.className, (this.hasErrors() ? 'form-control-danger' : '')].join(' ')}
@@ -56,7 +56,7 @@ export default class Text extends FormComponent {
 		this.props.onBlur(this);
 	};
 
-	onKeyUp(e) {
+	onKeyUp = (e) => {
 		if (e.keyCode === ENTER) {
 			this.context.form.submit(this.props.name);
 		}

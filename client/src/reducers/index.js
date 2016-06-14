@@ -4,22 +4,26 @@ import reduceReducers from '../libs/reduceReducers.js'
 
 import drill from './drill.js';
 import exam from './exam.js';
+import authentication from './authentication.js';
 
 const namespacedReducers = combineReducers({
 	routing,
 	drill,
-	exam: function (state = {
-		drill: null,
-		examId: null,
-		answerStats: [],
-		question: null,
-		showResult: false,
-	}, action) {
-		return state;
-	}
+	authentication,
+	exam: (state = createExamInitialState(), action) => state,
 });
 
 export default reduceReducers(
 	namespacedReducers,
 	exam,
 );
+
+function createExamInitialState() {
+	return {
+		drill: null,
+		examId: null,
+		answerStats: [],
+		question: null,
+		showResult: false,
+	};
+}

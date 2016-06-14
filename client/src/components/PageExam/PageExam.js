@@ -83,11 +83,6 @@ class PageExam extends Component {
 		showResult: false,
 	};
 
-	constructor(props) {
-		super(props);
-		this.handleOpenNext = this.handleOpenNext.bind(this);
-	}
-
 	componentDidMount() {
 		const {loadData, drillCode} = this.props;
 		return loadData(drillCode);
@@ -101,13 +96,13 @@ class PageExam extends Component {
 				? <ExamQuestion question={question}
 				                onAnswerToggle={(i) => selectQuestionAnswer(i)}
 								onCheck={() => checkResultOfQuestion()}
-								onNext={() => this.handleOpenNext()} />
+								onNext={this.handleOpenNext} />
 				: ''}
 			<ExamFooter drill={drill}/>
 		</div>
 	}
 
-	handleOpenNext() {
+	handleOpenNext = () => {
 		const {showResult, selectQuestion, checkResultOfQuestion} = this.props;
 
 		if (showResult) {
