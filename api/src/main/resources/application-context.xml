@@ -35,6 +35,12 @@
 
 	<bean id="restAuthenticationProvider" class="com.fprochazka.drill.model.authentication.AuthenticationProvider" />
 
+	<bean id="corsConfigurer" class="com.fprochazka.drill.config.WebMvcConfiguration" />
+
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="${password-encoder.bcrypt.strength}"/>
+	</bean>
+
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider ref="restAuthenticationProvider" />
 	</security:authentication-manager>
