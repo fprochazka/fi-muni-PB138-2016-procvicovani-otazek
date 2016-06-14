@@ -6,6 +6,7 @@ import com.fprochazka.drill.model.drill.DrillNotFoundException;
 import com.fprochazka.drill.model.drill.question.*;
 import com.fprochazka.drill.model.drill.question.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -60,6 +61,7 @@ public class QuestionController
 	 * @param drillId         - ID of the drill we want to add question to
 	 * @param questionRequest
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/drill/{drillId}/question", method = RequestMethod.POST)
 	public QuestionResponse createQuestion(
 		@PathVariable UUID drillId,
@@ -103,6 +105,7 @@ public class QuestionController
 	 * @param questionId      - ID of the question we want to update
 	 * @param questionRequest - updated question
 	 */
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/drill/{drillId}/question/{questionId}", method = RequestMethod.PUT)
 	public @ResponseBody QuestionResponse updateQuestion(
 		@PathVariable UUID drillId,

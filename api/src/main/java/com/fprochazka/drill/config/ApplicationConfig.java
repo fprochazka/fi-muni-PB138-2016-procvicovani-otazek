@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.*;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,13 +38,6 @@ public class ApplicationConfig
 					.allowedOrigins("http://localhost:3000", "chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm");
 			}
 		};
-	}
-
-	@Bean
-	@Autowired
-	public MongoTemplate mongoTemplate(MongoDbFactory mongoDbFactory)
-	{
-		return new MongoTemplate(mongoDbFactory);
 	}
 
 	@Bean

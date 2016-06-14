@@ -2,11 +2,13 @@ package com.fprochazka.drill.model.qdef;
 
 import com.fprochazka.drill.model.drill.question.Answer;
 import com.fprochazka.drill.model.drill.question.Question;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
 import java.util.ArrayList;
 
+@Service
 public class QdefParser
 {
 

@@ -25,6 +25,10 @@
 
 	<mongo:db-factory dbname="${spring.data.mongodb.database}" mongo-ref="mongo"/>
 
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+	</bean>
+
 	<bean id="authenticationEntryPoint" class="com.fprochazka.drill.model.authentication.AuthenticationEntryPoint">
 		<property name="realmName" value="Secure realm" />
 	</bean>
