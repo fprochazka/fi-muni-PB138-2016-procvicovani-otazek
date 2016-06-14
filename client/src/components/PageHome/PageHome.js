@@ -16,6 +16,10 @@ class PageHome extends Component {
 			name: PropTypes.string.isRequired,
 		})).isRequired,
 		fetchDrills: PropTypes.func.isRequired,
+		user: PropTypes.shape({
+			id: PropTypes.string,
+			email: PropTypes.string,
+		}),
 	};
 
 	static defaultProps = {
@@ -50,10 +54,12 @@ class PageHome extends Component {
 		</div>;
 	}
 
-	renderDrillItem(drill, i) {
+	renderDrillItem = (drill, i) => {
 		return <div className="card card-block" key={i}>
 			<Link to={`/odpovednik/${drill.code}`} className="open btn btn-primary">Otevřít</Link>
-			<Link to={`/editor/${drill.code}`} className="edit btn btn-warning"><i className="fa fa-pencil" aria-hidden="true"/></Link>
+			{this.props.user
+				? <Link to={`/editor/${drill.code}`} className="edit btn btn-warning"><i className="fa fa-pencil" aria-hidden="true"/></Link>
+				: ''}
 			<h3 className="card-title">{drill.code}</h3>
 			<p className="card-text">{drill.name}</p>
 		</div>;
@@ -65,6 +71,7 @@ export default connect((state, ownProps) => {
 	return {
 		isFetching: state.drill.isFetching,
 		drills: state.drill.drills,
+		user: state.authentication.user,
 	};
 }, {
 	fetchDrills,

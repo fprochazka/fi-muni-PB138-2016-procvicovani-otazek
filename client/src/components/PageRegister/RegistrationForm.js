@@ -1,57 +1,83 @@
 import React, {Component, PropTypes} from 'react';
 
+import Form from '../Form/Form.js';
+import Email from '../Form/Input/Email.js';
+import Text from '../Form/Input/Text.js';
+import Password from '../Form/Input/Password.js';
+import Submit from '../Form/Input/Submit.js';
+
 export default class RegistrationForm extends Component {
 
 	static propTypes = {
 		onSubmit: PropTypes.func.isRequired,
-		ucoValue: PropTypes.string,
-		emailValue: PropTypes.string,
-		passwordValue: PropTypes.string,
 	};
 
 	static defaultProps = {};
 
-	constructor(props) {
-		super(props);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	componentDidMount() {
-	}
-
-	componentWillUnmount() {
-
-	}
-
-	componentWillReceiveProps(nextProps) {
-	}
+	errors = [];
+	errorsByControl = {};
 
 	render() {
-		return <form className="form-register">
+		return <Form className="form-register" onSubmit={this.handleSubmit}>
 			<h2 className="form-register-heading">Registrace</h2>
 
-			<fieldset className="form-group">
+			{this.errors.map((item, i) => {
+				return <div className="alert alert-danger" role="alert" key={i}>{item.error}</div>
+			})}
+
+			<fieldset className={["form-group", this.hasErrors('uco') ? 'has-danger' : ''].join(' ')}>
 				<label htmlFor="uco">UČO</label>
-				<input type="email" className="form-control" id="uco" placeholder="Vyplňte učo"/>
+				<Text isRequired
+				      name='uco'
+				      label="UČO"
+				      placeholder="Vyplňte učo"
+				      autoFocus={true} />
 			</fieldset>
-			<fieldset className="form-group">
+			<fieldset className={["form-group", this.hasErrors('email') ? 'has-danger' : ''].join(' ')}>
 				<label htmlFor="email">Email</label>
-				<input type="email" className="form-control" id="email" placeholder="Vyplňte email"/>
+				<Email isRequired
+				       name='email'
+				       label="Email"
+				       placeholder="Vyplňte email"/>
 				<small className="text-muted">Slouží pouze pro obnovení hesla, nezasíláme reklamní sdělení.</small>
 			</fieldset>
-			<fieldset className="form-group">
+			<fieldset className={["form-group", this.hasErrors('password') ? 'has-danger' : ''].join(' ')}>
 				<label htmlFor="password">Heslo</label>
-				<input type="password" className="form-control" id="password" placeholder="Heslo"/>
+				<Password isRequired
+				          name='password'
+				          label="Heslo"
+				          placeholder="Heslo"/>
 			</fieldset>
 
-			<button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleSubmit}>
-				Registrovat se
-			</button>
-		</form>;
+			<Submit name='submit' className="btn btn-lg btn-primary btn-block">Registrovat se</Submit>
+		</Form>;
 	}
 
-	handleSubmit() {
-		this.props.onSubmit(this.props);
+	hasErrors = (name) => typeof this.errorsByControl[name] != "undefined";
+
+	handleSubmit = (e) => {
+		this.errors = e.getErrors();
+		this.errorsByControl = e.getErrorsByControl();
+
+		if (e.hasErrors()) {
+			this.forceUpdate();
+		}
+
+		this.props.onSubmit(e)
+			.catch((data) => {
+				if (data.json && data.json.errors) {
+					data.json.errors.forEach((val) => {
+						e.addError({
+							name: null,
+							error: val.message,
+						});
+					});
+
+					this.errors = e.getErrors();
+					this.errorsByControl = e.getErrorsByControl();
+					this.forceUpdate();
+				}
+			});
 	}
 
 }

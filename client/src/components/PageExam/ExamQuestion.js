@@ -36,7 +36,10 @@ export default class ExamQuestion extends Component {
 			</div>
 			<div className="row">
 				<ul className="answers">
-					{question.answers.map(this.renderAnswerItem.bind(this))}
+					{question.answers.map((answer, i) => {
+						const {onAnswerToggle} = this.props;
+						return <ExamAnswer {...answer} onToggle={() => onAnswerToggle(i)} key={i}>{answer.text}</ExamAnswer>
+					})}
 				</ul>
 			</div>
 			<div className="row">
@@ -48,11 +51,6 @@ export default class ExamQuestion extends Component {
 				</div>
 			</div>
 		</div>;
-	}
-
-	renderAnswerItem(answer, i) {
-		const {onAnswerToggle} = this.props;
-		return <ExamAnswer {...answer} onToggle={() => onAnswerToggle(i)} key={i}>{answer.text}</ExamAnswer>
 	}
 
 }

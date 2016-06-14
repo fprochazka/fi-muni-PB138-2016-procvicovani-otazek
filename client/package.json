@@ -47,6 +47,7 @@
     "babel-runtime": "^6.3.19",
     "bootstrap": "^4.0.0-alpha.2",
     "concurrently": "^0.1.1",
+    "cookies-js": "^1.2.2",
     "copy-webpack-plugin": "0.2.0",
     "css-loader": "^0.23.0",
     "del": "^2.1.0",

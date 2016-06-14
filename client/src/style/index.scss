@@ -100,6 +100,16 @@ html {
 		}
 	}
 
+	.nav {
+		li.nav-item {
+			span.nav-link {
+				display: block;
+				padding: 0.5em 1em;
+				border-radius: 0.25rem;
+			}
+		}
+	}
+
 	@media screen and (min-width: 48em) {
 		margin-bottom: 2rem;
 	}

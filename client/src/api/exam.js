@@ -1,27 +1,29 @@
-import fetch from './fetch.js'
+import {get, post, put} from './fetch.js'
 
-export function getExams(userId) {
-	return fetch('/user/' + encodeURIComponent(userId) + '/exam');
-}
-
-export function createExam(userId, drillId) {
-	return fetch('/user/' + encodeURIComponent(userId) + '/exam', {
-		method: 'post',
-		body: JSON.stringify({
-			drillId: drillId
-		})
+export function getExamsList(userId, accessToken) {
+	return get('/user/' + encodeURIComponent(userId) + '/exam', {
+		accessToken,
 	});
 }
 
-export function getExam(userId, examId) {
-	return fetch('/user/' + encodeURIComponent(userId) + '/exam/' + encodeURIComponent(examId))
+export function createExam(userId, drillId, accessToken) {
+	return post('/user/' + encodeURIComponent(userId) + '/exam', {
+		drillId: drillId,
+	}, {
+		accessToken,
+	});
 }
 
-export function saveAnswers(userId, examId, answers) {
-	return fetch('/user/' + encodeURIComponent(userId) + '/exam/' + encodeURIComponent(examId), {
-		method: 'post',
-		body: JSON.stringify({
-			answers: answers,
-		})
+export function getExam(userId, examId, accessToken) {
+	return get('/user/' + encodeURIComponent(userId) + '/exam/' + encodeURIComponent(examId), {
+		accessToken,
+	})
+}
+
+export function saveAnswers(userId, examId, answers, accessToken) {
+	return post('/user/' + encodeURIComponent(userId) + '/exam/' + encodeURIComponent(examId), {
+		answers: answers,
+	}, {
+		accessToken,
 	})
 }

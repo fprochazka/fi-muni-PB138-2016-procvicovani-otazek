@@ -12,11 +12,6 @@ class EditorHeader extends Component {
 
 	static defaultProps = {};
 
-	constructor(props) {
-		super(props);
-		this.handleSave = this.handleSave.bind(this);
-	}
-
 	render() {
 		const {drill} = this.props;
 
@@ -37,7 +32,7 @@ class EditorHeader extends Component {
 		</div>;
 	}
 
-	handleSave() {
+	handleSave = () => {
 
 	}
 }

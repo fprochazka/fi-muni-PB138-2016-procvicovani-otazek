@@ -7,13 +7,13 @@ export const DRILLS_GET_REQUEST = 'DRILLS_GET_REQUEST';
 export const DRILLS_GET_RECEIVE = 'DRILLS_GET_RECEIVE';
 export const DRILLS_GET_FAIL = 'DRILLS_GET_FAIL';
 
-export function requestGetDrills() {
+function requestGetDrills() {
 	return {
 		type: DRILLS_GET_REQUEST,
 	};
 }
 
-export function receiveGetDrills(json) {
+function receiveGetDrills(json) {
 	var drills = json.drills.map(drill => {
 		return {
 			...drill,
@@ -33,7 +33,7 @@ export function receiveGetDrills(json) {
 	};
 }
 
-export function failGetDrills(data) {
+function failGetDrills(data) {
 	return {
 		type: DRILLS_GET_FAIL,
 		data,
@@ -42,14 +42,14 @@ export function failGetDrills(data) {
 
 export function fetchDrills() {
 	return (dispatch, getState) => {
-		const {drill} = getState();
+		const {drill, authentication} = getState();
 		if (drill.drillsLoaded) {
 			return Promise.resolve(drill.drillsByCode);
 		}
 
 		dispatch(requestGetDrills());
 
-		return getDrills()
+		return getDrills(authentication.accessToken)
 			.then(response => response.json())
 			.then(json => dispatch(receiveGetDrills(json)))
 			.then(action => action.drillsByCode)
@@ -64,14 +64,14 @@ export const DRILL_QUESTIONS_GET_REQUEST = 'DRILL_QUESTIONS_GET_REQUEST';
 export const DRILL_QUESTIONS_GET_RECEIVE = 'DRILL_QUESTIONS_GET_RECEIVE';
 export const DRILL_QUESTIONS_GET_FAIL = 'DRILL_QUESTIONS_GET_FAIL';
 
-export function requestGetDrillQuestions(drillId) {
+function requestGetDrillQuestions(drillId) {
 	return {
 		type: DRILL_QUESTIONS_GET_REQUEST,
 		drillId,
 	};
 }
 
-export function receiveGetDrillQuestions(json, drillId) {
+function receiveGetDrillQuestions(json, drillId) {
 	return {
 		type: DRILL_QUESTIONS_GET_RECEIVE,
 		drillId,
@@ -79,7 +79,7 @@ export function receiveGetDrillQuestions(json, drillId) {
 	};
 }
 
-export function failGetDrillQuestions(data, drillId) {
+function failGetDrillQuestions(data, drillId) {
 	return {
 		type: DRILL_QUESTIONS_GET_FAIL,
 		drillId,
@@ -88,10 +88,12 @@ export function failGetDrillQuestions(data, drillId) {
 }
 
 export function fetchQuestions(drillId) {
-	return (dispatch) => {
+	return (dispatch, getState) => {
+		const {authentication} = getState();
+
 		dispatch(requestGetDrillQuestions(drillId));
 
-		return getDrillQuestions(drillId)
+		return getDrillQuestions(drillId, authentication.accessToken)
 			.then(response => response.json())
 			.then(json => dispatch(receiveGetDrillQuestions(json, drillId)))
 			.catch((data) => {
