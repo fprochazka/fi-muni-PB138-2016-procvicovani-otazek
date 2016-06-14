@@ -1,0 +1,15 @@
+export const TAB = 9;
+export const ENTER = 13;
+export const SHIFT = 16;
+export const CTRL = 17;
+export const ALT = 18;
+export const CAPS_LOCK = 20;
+export const ESCAPE = 27;
+export const PAGE_UP = 33;
+export const PAGE_DOWN = 34;
+export const END = 35;
+export const HOME = 36;
+export const LEFT = 37;
+export const RIGHT = 39;
+export const UP = 38;
+export const DOWN = 40;
