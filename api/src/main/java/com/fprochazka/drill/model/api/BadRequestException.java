@@ -8,13 +8,14 @@ public class BadRequestException extends Exception implements ApiException
 
 	public BadRequestException(String textCode, String textMessage)
 	{
+		super(textMessage);
 		this.textCode = textCode;
 		this.textMessage = textMessage;
 	}
 
 	public BadRequestException(Throwable cause, String textCode, String textMessage)
 	{
-		super(cause);
+		super(textMessage, cause);
 		this.textCode = textCode;
 		this.textMessage = textMessage;
 	}

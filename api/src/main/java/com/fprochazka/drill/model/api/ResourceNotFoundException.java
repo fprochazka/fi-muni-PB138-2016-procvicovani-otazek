@@ -8,13 +8,14 @@ public class ResourceNotFoundException extends Exception implements ApiException
 
 	public ResourceNotFoundException(String textCode, String textMessage)
 	{
+		super(textMessage);
 		this.textCode = textCode;
 		this.textMessage = textMessage;
 	}
 
 	public ResourceNotFoundException(Throwable cause, String textCode, String textMessage)
 	{
-		super(cause);
+		super(textMessage, cause);
 		this.textCode = textCode;
 		this.textMessage = textMessage;
 	}
