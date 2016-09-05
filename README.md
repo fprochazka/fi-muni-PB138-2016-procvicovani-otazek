@@ -1,4 +1,4 @@
-# Projekt PB138: Procvičování otázek [![Build Status](https://travis-ci.org/fprochazka/fi-muni-PB138-2016.svg?branch=master)](https://travis-ci.org/fprochazka/fi-muni-PB138-2016)
+# Projekt PB138: Procvičování otázek [![Build Status](https://travis-ci.org/fprochazka/fi-muni-PB138-2016-procvicovani-otazek.svg?branch=master)](https://travis-ci.org/fprochazka/fi-muni-PB138-2016-procvicovani-otazek)
 
 * [Wiki/Dokumentace](https://github.com/fprochazka/fi-muni-PB138-2016/wiki)
 * [API dokumentace](http://docs.fimunipb1382016.apiary.io/#)
